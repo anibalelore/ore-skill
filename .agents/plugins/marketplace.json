@@ -1,0 +1,21 @@
+{
+  "name": "ore-skills",
+  "interface": {
+    "displayName": "ORE Skills"
+  },
+  "plugins": [
+    {
+      "name": "ore",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/anibalelore/ore-skill.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

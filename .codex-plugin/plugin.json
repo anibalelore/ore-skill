@@ -1,0 +1,29 @@
+{
+  "name": "ore",
+  "version": "1.4.0",
+  "description": "Adaptive agency-style software engineering workflow with focused specialist routing and evidence-based quality gates.",
+  "author": {
+    "name": "anibalelore",
+    "url": "https://github.com/anibalelore"
+  },
+  "homepage": "https://github.com/anibalelore/ore-skill",
+  "repository": "https://github.com/anibalelore/ore-skill",
+  "license": "Apache-2.0",
+  "keywords": ["agent-skill", "software-engineering", "orchestration", "quality-gates"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ORE",
+    "shortDescription": "Agency-style software engineering orchestration",
+    "longDescription": "Turn one engineering request into a scoped workflow with focused specialists, risk-based quality gates, targeted repair loops, and evidence-based completion.",
+    "developerName": "anibalelore",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/anibalelore/ore-skill",
+    "defaultPrompt": [
+      "Use ORE to build this feature with the right quality gates.",
+      "Use ORE to diagnose this bug and add regression coverage.",
+      "Use ORE to review this release and report readiness evidence."
+    ],
+    "brandColor": "#6F42C1"
+  }
+}
