@@ -4,7 +4,7 @@ description: Use ORE to build, change, audit, repair, improve, review, debug, se
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # ORE — Orchestrated Runtime Engineering

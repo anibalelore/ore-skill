@@ -4,7 +4,7 @@ description: Use ORE to build, change, audit, repair, improve, review, debug, se
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -48,6 +48,14 @@ For non-trivial work:
 10. Stop only when required gates pass, are defensibly not applicable, or an external blocker is clearly reported.
 
 Do not restart the full pipeline when only one gate failed. Do not repeat the same failed approach without new evidence.
+
+## Mandatory progress and token reporting
+
+For every substantial task, including audits and repair loops, read [`references/progress-and-token-reporting.md`](references/progress-and-token-reporting.md) before execution and follow its reporting contract.
+
+The user must see evidence-based progress during the work, not only in the final response. Publish an `ORE <percentage>% · <phase> · <evidence>` update after the baseline is established, at each phase transition, and whenever verified completion increases materially. Do not use elapsed time or tool-call count as progress, and never report 100% while a required gate is unresolved.
+
+Every substantial completion or blocker report must include a token-efficiency line. Report an exact value only from authoritative counters, an estimated range only from a disclosed reproducible method, or `0 tokens demonstrated` when no defensible comparison exists. Never omit the line and never invent precision.
 
 ## Repository-first rule
 
@@ -165,7 +173,7 @@ The completion summary should state:
 - completion/progress for substantial work;
 - meaningful risks or blockers;
 - deployment/release status when relevant;
-- exact token savings only when authoritative counters exist, otherwise a clearly labeled estimate or no claim;
+- token efficiency using the mandatory exact, estimated-range, or `0 tokens demonstrated` format;
 - files or artifacts the user needs.
 
 Do not say “done,” “production ready,” or equivalent unless every required gate passed or was explicitly marked not applicable with a defensible reason.

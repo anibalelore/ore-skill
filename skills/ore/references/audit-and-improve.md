@@ -14,11 +14,13 @@ If intent is unclear, default to audit only. A request to “fix,” “repair,�
 
 Before scoring or changing anything:
 
-1. Identify the stack, runtime, package manager, architecture, entry points, build/test commands, and deployment model.
-2. Inspect current version-control status and preserve unrelated user changes.
-3. Run the cheapest relevant existing checks to establish a baseline.
-4. Distinguish verified defects from risks, opportunities, preferences, and unverified suspicions.
-5. Record constraints that make a seemingly desirable change unsafe or incompatible.
+1. Initialize the weighted progress plan and token-efficiency ledger from `progress-and-token-reporting.md`.
+2. Identify the stack, runtime, package manager, architecture, entry points, build/test commands, and deployment model.
+3. Inspect current version-control status and preserve unrelated user changes.
+4. Run the cheapest relevant existing checks to establish a baseline.
+5. Distinguish verified defects from risks, opportunities, preferences, and unverified suspicions.
+6. Record constraints that make a seemingly desirable change unsafe or incompatible.
+7. Publish the first evidence-based ORE progress update.
 
 Do not mistake personal style preferences for audit findings. Do not recommend large rewrites when a smaller project-native repair addresses the evidence.
 
@@ -101,5 +103,7 @@ Report:
 - validation evidence and remaining uncertainty;
 - unresolved findings and prioritized next actions;
 - any external action awaiting approval.
+- weighted progress and gate completion;
+- token efficiency using the exact, estimated-range, or `0 tokens demonstrated` format.
 
 Do not claim that the project is secure, complete, production-ready, or fully audited beyond the dimensions and evidence actually examined.

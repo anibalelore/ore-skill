@@ -2,7 +2,7 @@
 
 > One request. The right engineering workflow. Evidence before completion.
 
-[![Version](https://img.shields.io/badge/version-1.5.0-6f42c1)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.5.1-6f42c1)](./CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-0a7ea4)](./SKILL.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97757)](https://code.claude.com/docs/en/skills)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
@@ -21,6 +21,7 @@ Use ORE when you want more than code generation: you want repository-aware execu
 - **Audit and improve mode** — assess the current project, rank verified findings, and iteratively repair the highest-value issues.
 - **Quality gates** — testing, build, security, data integrity, accessibility, release confidence, and other checks scale with risk.
 - **Project memory** — compact `.ore/` artifacts can preserve verified architecture, progress, workflows, and lessons.
+- **Visible delivery metrics** — substantial work reports evidence-based progress and a mandatory, auditable token-efficiency result.
 - **Flexible execution** — real subagents when supported; structured single-agent orchestration everywhere else.
 
 ## Install
@@ -134,6 +135,24 @@ Request
 
 Small tasks stay small. Complex or high-risk work receives deeper review and stronger validation.
 
+## Progress and token efficiency
+
+For substantial work, ORE reports progress at verified milestones using a compact status line:
+
+```text
+ORE 40% · Audit complete · 7 verified findings prioritized; beginning repair batch 1.
+```
+
+The percentage is calculated from weighted deliverables, not elapsed time or tool activity. ORE reports 100% only when all in-scope deliverables and required gates are complete.
+
+Every substantial final report includes token efficiency in one of three forms:
+
+- exact savings from authoritative comparable counters;
+- an explicitly labeled range from a disclosed reproducible estimate;
+- `0 tokens demonstrated` when no defensible comparison exists.
+
+ORE never silently omits token efficiency and never invents a savings number.
+
 ## Good use cases
 
 - Build a feature across frontend, backend, database, and integrations.
@@ -148,7 +167,7 @@ Small tasks stay small. Complex or high-risk work receives deeper review and str
 
 ## Core capabilities
 
-ORE v1.5 covers:
+ORE v1.5.1 covers:
 
 - product planning and specification fidelity;
 - architecture and domain-flow coherence;

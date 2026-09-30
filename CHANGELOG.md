@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.1 — Mandatory Progress & Token Reporting
+
+- Fixed substantial workflows that could finish without visible progress milestones.
+- Added weighted, evidence-based percentage updates at phase transitions and completed repair batches.
+- Made token-efficiency reporting mandatory in every substantial completion or blocker report.
+- Added exact, reproducible estimated-range, and `0 tokens demonstrated` reporting modes so savings are never silently omitted or fabricated.
+- Added explicit progress and token reporting requirements to audit-and-improve mode.
+
 ## 1.5.0 — Audit & Continuous Improvement
 
 - Added read-only audit and audit-and-improve modes for existing projects.

@@ -1,6 +1,6 @@
 {
   "name": "ore",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Adaptive software engineering workflow for building, auditing, repairing, and improving projects with evidence-based quality gates.",
   "author": {
     "name": "anibalelore",
