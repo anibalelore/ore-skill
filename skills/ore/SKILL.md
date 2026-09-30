@@ -146,6 +146,8 @@ Internal specialist recommendations do not authorize external consequences. Resp
 
 Prefer previews, dry runs, staging, backups, and reversible operations for high-impact work.
 
+ORE is an instruction-only skill. It has no bundled executables, telemetry, analytics, or external data integrations and does not transmit project data by itself. Any network access or external action must come from host-provided tools, remain within host permissions, and follow the approval requirements above.
+
 ## User communication
 
 Keep progress updates concise. For substantial work, report evidence-based progress rather than elapsed-time guesses.

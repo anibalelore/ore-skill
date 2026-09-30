@@ -87,6 +87,14 @@ Consult the host's documentation for its exact install directory, reload behavio
 
 > Review third-party skills before installation. Skills instruct an agent and operate within the tools, permissions, and approval boundaries provided by the host.
 
+## Safety and privacy
+
+ORE is an instruction-only skill. This package contains no executable scripts, background services, telemetry, analytics, or external data integrations. It does not send source code, project files, prompts, or usage data anywhere by itself.
+
+The host remains in control of every tool and permission. ORE requires user approval before actions with consequences outside the codebase, including production deployments, destructive data changes, deleting remote resources, rotating credentials, publishing releases, sending external communications, or incurring material costs.
+
+In short: **workflow instructions only, no built-in data transmission, and approval before external consequences.**
+
 ## Quick start
 
 ```text
