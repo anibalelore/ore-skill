@@ -2,7 +2,7 @@
 
 > One request. The right engineering workflow. Evidence before completion.
 
-[![Version](https://img.shields.io/badge/version-1.4.0-6f42c1)](./ORE-CHANGELOG-v1.3.0.md)
+[![Version](https://img.shields.io/badge/version-1.4.0-6f42c1)](./CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-0a7ea4)](./SKILL.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97757)](https://code.claude.com/docs/en/skills)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
@@ -145,7 +145,7 @@ ORE v1.4 covers:
 - learning from verified failures and user corrections;
 - progress tracking and defensible token-efficiency reporting.
 
-See the [extended product guide](./ORE-README-v1.3.0.md) and [changelog](./ORE-CHANGELOG-v1.3.0.md).
+See the [changelog](./CHANGELOG.md) for release details.
 
 ## Update
 
@@ -186,9 +186,7 @@ Removing the installed skill does not remove `.ore/` project-memory folders that
 | [`plugin.json`](./plugin.json) | Portable Agent Plugin manifest |
 | [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json) | OpenAI compatibility manifest |
 | [`.agents/plugins/marketplace.json`](./.agents/plugins/marketplace.json) | Git-backed marketplace catalog |
-| [`ORE-README-v1.3.0.md`](./ORE-README-v1.3.0.md) | Extended product and architecture guide |
-| [`ORE-CHANGELOG-v1.3.0.md`](./ORE-CHANGELOG-v1.3.0.md) | Release history, including v1.4 additions |
-| [`ORE-SKILL-v1.3.0.md`](./ORE-SKILL-v1.3.0.md) | Legacy versioned skill document |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Release history |
 
 ## Contributing
 
