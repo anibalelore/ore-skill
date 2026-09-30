@@ -4,7 +4,7 @@
 
 ORE is an Agent Skill that turns a coding assistant into an adaptive software-agency operating system. It uses an Agency Brain to classify work, route only necessary specialists, build compact context packs, generate an internal looping execution brief, enforce quality gates, and repeat only the failed parts of the workflow.
 
-**v1.3 catalog:** 77 directly routable Lead/specialist agents, 5 form micro-specialists (82 role cards total), and 17 workflows.
+**v1.4 catalog:** 78 directly routable Lead/specialist agents, 9 micro-specialists across Forms and Learning (87 role cards total), and 18 workflows.
 
 ## What makes ORE different
 
@@ -16,6 +16,7 @@ ORE is an Agent Skill that turns a coding assistant into an adaptive software-ag
 - Quality gates with veto authority for security, tests, build, data safety, and release readiness.
 - Subagent mode when available; deterministic single-agent fallback when not.
 - Persistent compact `.ore/` project memory plus Brain Memory Draft hot cache.
+- Continuous Learning & Failure Intelligence that records verified mistakes, recurrence patterns, and prevention rules without unsafe silent self-modification.
 - Evidence-based weighted progress percentage throughout substantial work.
 - Exact/estimated token-savings accounting with no fabricated precision.
 - Code Quality & Style Normalizer for clean project-native code without falsifying provenance.
@@ -49,6 +50,24 @@ For substantial work ORE maintains `.ore/progress.json` and reports weighted eng
 
 The Code Quality & Style Normalizer removes low-value conversational comments, dead scaffolding, and style inconsistencies from changed code while preserving licenses, generated-file markers required by tooling, audit data, and authorship/provenance metadata. It is a quality feature, not an authorship-concealment feature.
 
+
+
+## New in v1.4: Continuous Learning & Failure Intelligence
+
+ORE can now learn from **verified** failures, user corrections, regressions, incidents, rollbacks, repeated repair loops, and recurring known defects. The Learning & Failure Intelligence Lead can selectively invoke Root Cause Analyst, Lessons Memory Curator, Recurrence Detector, and Improvement Evaluator.
+
+Project-scoped learning is kept in:
+
+```text
+.ore/
+├── failure-ledger.jsonl
+├── lessons-learned.md
+├── prevention-rules.md
+├── recurring-patterns.md
+└── improvement-proposals.md
+```
+
+Future tasks receive only relevant prevention rules. A lesson must contain semantics, scope, exceptions, and verification evidence—ORE does not blindly memorize literal patches. If a known error recurs, ORE diagnoses why its prevention mechanism failed. General lessons may produce an ORE improvement proposal plus regression eval, but ORE does **not** silently rewrite `SKILL.md` or core policy.
 
 ## New in v1.3: Lead Agents + Form Intelligence
 
@@ -99,6 +118,7 @@ Useful helpers:
 python /path/to/ore/scripts/memory_status.py .
 python /path/to/ore/scripts/progress_report.py .
 python /path/to/ore/scripts/token_savings_report.py .
+python /path/to/ore/scripts/learning_report.py .
 ```
 
 ## Principles

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0 — Continuous Learning & Failure Intelligence
+
+- Added Learning & Failure Intelligence Lead plus Root Cause Analyst, Lessons Memory Curator, Recurrence Detector, and Improvement Evaluator micro-specialists.
+- Added `core/continuous-learning.md` with verified failure → root cause → lesson → prevention → recurrence → improvement-proposal pipeline.
+- Added project learning memory: `failure-ledger.jsonl`, `lessons-learned.md`, `prevention-rules.md`, `recurring-patterns.md`, and `improvement-proposals.md`.
+- Added selective prevention-rule reuse so future tasks do not load the full failure history.
+- Added recurrence handling that treats repeated known errors as prevention-system failures.
+- Added safe self-improvement boundary: ORE-level policy changes remain reviewable proposals with regression evals until maintainer approval.
+- Added `LEARNING_CAPTURE` gate, failure-learning workflow, learning report helper, bootstrap support, validation, and eval coverage.
+
 ## 1.3.0
 
 - Added shallow hierarchical delegation (Agency Brain → Lead Agent → selected child specialist) with a hard depth cap and micro-context packs.
