@@ -1,10 +1,10 @@
 ---
 name: ore
-description: Use ORE to build, change, review, debug, secure, test, deploy, release, or maintain software with an adaptive agency-style workflow, focused specialist routing, quality gates, and targeted repair loops. Use for substantial engineering work or when the user explicitly invokes ORE, /ore, /agency, or agency mode.
+description: Use ORE to build, change, audit, repair, improve, review, debug, secure, test, deploy, release, or maintain software with an adaptive agency-style workflow, focused specialist routing, quality gates, and targeted repair loops. Use for substantial engineering work or when the user explicitly invokes ORE, /ore, /agency, or agency mode.
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -63,6 +63,12 @@ Inspect enough of an existing project to understand:
 - canonical entities and cross-module workflows when business data moves between modules.
 
 Reuse appropriate existing systems. Do not casually introduce parallel authentication, state management, UI systems, data layers, duplicate master data, or disconnected module-local records.
+
+## Audit and continuous improvement mode
+
+When the user asks to audit, assess, repair, modernize, optimize, harden, clean up, or improve an existing project, read [`references/audit-and-improve.md`](references/audit-and-improve.md) and follow that mode.
+
+`audit` or `assess` alone is read-only by default. `audit and fix`, `repair`, `improve`, `modernize`, `harden`, or equivalent language authorizes appropriate repository changes within the requested scope, but never authorizes external consequences such as production deployment, remote deletion, publication, credential rotation, or spending.
 
 ## Risk levels
 

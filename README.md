@@ -2,7 +2,7 @@
 
 > One request. The right engineering workflow. Evidence before completion.
 
-[![Version](https://img.shields.io/badge/version-1.4.0-6f42c1)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.5.0-6f42c1)](./CHANGELOG.md)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-0a7ea4)](./SKILL.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97757)](https://code.claude.com/docs/en/skills)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
@@ -18,6 +18,7 @@ Use ORE when you want more than code generation: you want repository-aware execu
 - **Repository-first decisions** — ORE inspects existing architecture and conventions before changing them.
 - **Focused context** — specialists receive only the context they need.
 - **Targeted repair loops** — failed gates are repaired without restarting the entire pipeline.
+- **Audit and improve mode** — assess the current project, rank verified findings, and iteratively repair the highest-value issues.
 - **Quality gates** — testing, build, security, data integrity, accessibility, release confidence, and other checks scale with risk.
 - **Project memory** — compact `.ore/` artifacts can preserve verified architecture, progress, workflows, and lessons.
 - **Flexible execution** — real subagents when supported; structured single-agent orchestration everywhere else.
@@ -112,6 +113,11 @@ ORE: Review this release for security, data migration risk, test coverage, and
 rollback readiness.
 ```
 
+```text
+ORE: Audit this existing project, prioritize findings by severity and impact,
+then repair the highest-value issues in validated batches.
+```
+
 Invocation varies by host: Codex recognizes `$ore`; Claude Code exposes `/ore`; `ORE:` is a portable textual convention.
 
 ## How it works
@@ -137,11 +143,12 @@ Small tasks stay small. Complex or high-risk work receives deeper review and str
 - Improve security, accessibility, performance, or reliability.
 - Design role-aware forms and connected business workflows.
 - Investigate a production incident and prevent recurrence.
+- Audit an existing codebase and iteratively repair or improve what is already there.
 - Bootstrap a new application without skipping engineering foundations.
 
 ## Core capabilities
 
-ORE v1.4 covers:
+ORE v1.5 covers:
 
 - product planning and specification fidelity;
 - architecture and domain-flow coherence;
@@ -151,6 +158,7 @@ ORE v1.4 covers:
 - DevOps, deployment, release evidence, and rollback readiness;
 - form intelligence and controlled reference data;
 - learning from verified failures and user corrections;
+- evidence-based audits with prioritized repair and continuous-improvement loops;
 - progress tracking and defensible token-efficiency reporting.
 
 See the [changelog](./CHANGELOG.md) for release details.

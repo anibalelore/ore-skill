@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 — Audit & Continuous Improvement
+
+- Added read-only audit and audit-and-improve modes for existing projects.
+- Added evidence-based findings with severity, impact, confidence, repair guidance, and validation requirements.
+- Added prioritized repair batches and bounded improvement loops that preserve project architecture and unrelated user changes.
+- Added audit coverage for correctness, security, architecture, data integrity, testing, performance, reliability, accessibility, integrations, delivery, and maintainability.
+- Clarified that repair authorization applies to repository changes only; externally consequential actions retain separate approval boundaries.
+
 ## 1.4.0 — Continuous Learning & Failure Intelligence
 
 - Added Learning & Failure Intelligence Lead plus Root Cause Analyst, Lessons Memory Curator, Recurrence Detector, and Improvement Evaluator micro-specialists.

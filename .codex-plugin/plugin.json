@@ -1,7 +1,7 @@
 {
   "name": "ore",
-  "version": "1.4.0",
-  "description": "Adaptive agency-style software engineering workflow with focused specialist routing and evidence-based quality gates.",
+  "version": "1.5.0",
+  "description": "Adaptive software engineering workflow for building, auditing, repairing, and improving projects with evidence-based quality gates.",
   "author": {
     "name": "anibalelore",
     "url": "https://github.com/anibalelore"
@@ -14,7 +14,7 @@
   "interface": {
     "displayName": "ORE",
     "shortDescription": "Agency-style software engineering orchestration",
-    "longDescription": "Turn one engineering request into a scoped workflow with focused specialists, risk-based quality gates, targeted repair loops, and evidence-based completion.",
+    "longDescription": "Build, audit, repair, and improve software through scoped workflows, focused specialists, risk-based quality gates, and targeted repair loops.",
     "developerName": "anibalelore",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
@@ -22,7 +22,7 @@
     "defaultPrompt": [
       "Use ORE to build this feature with the right quality gates.",
       "Use ORE to diagnose this bug and add regression coverage.",
-      "Use ORE to review this release and report readiness evidence."
+      "Use ORE to audit this project and repair its highest-value issues."
     ],
     "brandColor": "#6F42C1"
   }
