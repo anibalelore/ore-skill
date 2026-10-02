@@ -4,7 +4,7 @@ description: Analyze and verify the blast radius of code, schema, API, event, de
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Change Impact Guardian
@@ -14,7 +14,7 @@ Prevent a locally correct change from silently breaking another module. Own the 
 ## Impact protocol
 
 1. Establish the base/head diff, intended behavior and public surfaces. Include generated files, lockfiles, configuration, migrations and feature flags—not only source files.
-2. Build the best available dependency graph and walk reverse dependencies. Record static imports plus runtime registration, reflection, generated code, shared storage, events, APIs, jobs and deployment coupling that the graph cannot see.
+2. Build the best available dependency graph and walk reverse dependencies. Repository-native graphs or an explicitly authorized Graphify-style AST graph may provide explainable paths and incremental change evidence. Record static imports plus runtime registration, reflection, generated code, shared storage, events, APIs, jobs and deployment coupling that no code graph can see.
 3. Produce an impact matrix with changed surface, direct and transitive consumers, compatibility risk, owner, required evidence and status.
 4. Diff machine-readable contracts and representative payloads. Verify old/new and mixed-version behavior whenever deployments can overlap.
 5. Select affected build, lint, unit, integration, contract and end-to-end checks. Treat selection as an optimization, not proof: run broader suites for incomplete graphs, global inputs, foundational libraries, migrations or high-risk boundaries.
@@ -23,4 +23,4 @@ Prevent a locally correct change from silently breaking another module. Own the 
 
 `CHANGE_IMPACT` passes only when every material consumer is verified, explicitly deferred by an authorized owner, or recorded as an open blocker. `CONTRACT_COMPATIBILITY` and `TESTS` remain required when applicable. Never claim “no impact” from search results alone.
 
-Use repository-native graph tools first. Nx, Bazel, Pact and CODEOWNERS are optional patterns described in `../ore/references/department-agent-study.md`; no tool is installed automatically.
+Use repository-native graph tools first. Nx, Bazel, Pact and CODEOWNERS are optional patterns described in `../ore/references/department-agent-study.md`; Graphify is assessed in `../ore/references/workflow-memory-study.md`. No tool, hook, database introspection, or cloud extraction is installed or started automatically.

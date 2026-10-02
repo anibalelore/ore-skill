@@ -47,12 +47,15 @@ Specialists return outcome and affected paths, evidence, assumptions and risks, 
 - **Creative web:** creative lead → narrative/art direction, motion/scroll/3D, performance/accessibility, graceful fallback.
 - **Discovery:** search lead → technical SEO, information architecture/content, structured data/entities, AEO/GEO evidence, analytics.
 - **Forms:** form lead → workflow/role, field validation, reference data, state/collaboration, accessibility/UX.
+- **Workflow continuity (`$ore-business-lifecycle`):** lifecycle lead → domain-specific stages, canonical identity, state/ownership, field continuity, durable handoffs, recovery/reconciliation, end-to-end evidence.
 - **Product/architecture (`$ore-product-architecture`):** product lead → specification, archaeology, domain/workflow, architecture, build-vs-buy, compatibility.
 - **Backend/data (`$ore-backend-data`):** backend lead → service/API, database/integrity, migration, messaging, integration, capacity/cost.
 - **Quality (`$ore-quality-engineering`):** quality lead → strategy, regression, contract/integration, synthetic user, accessibility/localization, performance/resilience.
 - **Security/privacy (`$ore-security-privacy`):** security lead → threat model, identity/access, application/API, privacy, supply chain, compliance evidence.
 - **Delivery/operations (`$ore-delivery-operations`):** operations lead → build/CI, infrastructure, observability/SRE, release, diagnosis, incident/learning.
 - **Code health (`$ore-code-health`):** health lead → maintainability, dependencies, documentation, decisions, root cause/recurrence, improvement evaluation.
+- **Organizational memory (`$ore-organizational-memory`):** memory curator → capture/provenance, typed relationships, promotion, contradiction/staleness, retention/forgetting, recovery.
+- **Context efficiency (`$ore-context-efficiency`):** efficiency lead → baseline, minimum context pack, output filtering, durable handoff, quality-preserving comparison.
 - **Change impact (`$ore-change-impact`):** impact guardian → diff/surfaces, dependency graph, runtime coupling, consumers/owners, affected tests, compatibility matrix.
 - **AI engineering (`$ore-ai-engineering`):** AI lead → evaluation/data, model/prompt, RAG, tools/agents, safety, operations/cost.
 - **Data/analytics (`$ore-data-analytics`):** analytics lead → instrumentation, metric semantics, transformations, quality, lineage, privacy/backfills.

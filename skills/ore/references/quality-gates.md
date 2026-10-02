@@ -7,6 +7,9 @@ Choose gates from scope and risk before implementation. A required gate is `pend
 - `TESTS`: targeted regression tests first, then the appropriate broader suite.
 - `SECURITY_PRIVACY`: authorization, secrets, dependency exposure, secure storage, tracking consent, and data minimization.
 - `DATA_CONTRACT`: migrations, transactions, idempotency, offline/conflict behavior, API compatibility, and rollback.
+- `BUSINESS_LIFECYCLE`: every material state and transition in the actual domain workflow has identity, owner, conditions, side effects, exceptions, observability, and end-to-end evidence; no sales/CRM sequence is assumed.
+- `ENTITY_CONTINUITY`: canonical identities and authoritative fields flow across stages without duplicate entry, silent overwrites, orphaning, or lost correction/deletion propagation.
+- `WORKFLOW_RECOVERY`: interrupted system/human handoffs resume or reconcile safely under retries, timeout-after-commit, partial failure, and mixed versions.
 - `FORM_INTELLIGENCE`: required for material forms; use `form-intelligence.md`.
 - `ACCESSIBILITY`: assistive technology, semantics, focus, contrast, text scaling, reduced motion, and errors.
 - `PERFORMANCE`: measured budgets for startup/render/network/bundle/media; avoid “feels fast” as evidence.
@@ -24,6 +27,10 @@ Choose gates from scope and risk before implementation. A required gate is `pend
 - `CODE_HEALTH`: the scoped maintainability risk is reduced without unverified behavior change or unrelated refactoring.
 - `DOCUMENTATION`: current users can execute the documented task; commands, links and examples are verified or limitations disclosed.
 - `LEARNING_CAPTURE`: a verified failure has root cause, scoped prevention, owner and recurrence check.
+- `MEMORY_INTEGRITY`: project scope, provenance, current/stale/conflicting state, sensitive-data handling, retention, export and recovery are verified.
+- `KNOWLEDGE_PROMOTION`: a promoted rule has recurring/strong evidence, scope, exceptions, owner approval, evaluation and removal path.
+- `CONTEXT_EFFICIENCY`: reduced context closes the same gates without increased error, rework, missed impact, or loss of reproducibility.
+- `TOKEN_ACCOUNTING`: baseline and candidate boundaries, counters/estimator, assumptions, uncertainty and result are explicit.
 - `CHANGE_IMPACT`: changed surfaces, direct/transitive consumers, hidden runtime coupling and affected verification are mapped with owners and status.
 - `AI_EVALUATION`: a versioned candidate beats or meets a meaningful baseline across representative, difficult and safety-critical slices.
 - `AI_SAFETY`: adversarial inputs, tool boundaries, sensitive data, abuse paths and human escalation are tested within the stated scope.

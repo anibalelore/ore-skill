@@ -4,7 +4,7 @@ description: Design, review, or operate CI/CD, infrastructure delivery, observab
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Delivery and Operations Lead

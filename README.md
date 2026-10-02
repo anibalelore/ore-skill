@@ -2,7 +2,7 @@
 
 > Durable state, visible progress, the right specialists, and evidence before completion.
 
-ORE is an installable company of Agent Skills for substantial product and software work. Version 2.2 combines repository-backed state, computed progress and 23 externally researched specialists organized into accountable departments.
+ORE is an installable company of Agent Skills for substantial product and software work. Version 2.3 combines repository-backed state, computed progress and 26 externally researched specialists organized into accountable departments.
 
 ## What is now enforceable
 
@@ -12,6 +12,9 @@ ORE is an installable company of Agent Skills for substantial product and softwa
 - **Form quality:** material forms require an authoritative field contract and tests for semantics, validation, reference lists, roles, accessibility, drafts and idempotency.
 - **Department routing:** ORE selects accountable specialists across product, experience, application engineering, AI/data, integration quality, security/governance, platform/operations and code health.
 - **Change-impact protection:** cross-module changes require a blast-radius map, affected-consumer verification and appropriately widened tests before completion.
+- **Workflow continuity:** any entity or work item keeps canonical identity, field provenance and durable progress across modules instead of duplicating entry at every stage.
+- **Governed memory:** project knowledge carries provenance, typed relationships, staleness and approval-based promotion rather than treating raw history as policy.
+- **Context efficiency:** working sets are reduced only when the same evidence gates still pass; token savings are never invented.
 - **Evidence gates:** completion is blocked by unfinished deliverables, unresolved blockers or required gates without evidence.
 
 The persistence guarantee applies only when windows share the same repository storage and load ORE. ORE does not claim invisible global memory across unrelated clients or workspaces.
@@ -25,6 +28,12 @@ The persistence guarantee applies only when windows share the same repository st
 | `$ore` | Accountable orchestration, durable progress, routing, gates and integration |
 | `$ore-product-discovery` | User problems, assumptions, prototypes, outcomes and controlled experiments |
 | `$ore-product-architecture` | Specification, repository archaeology, domain modeling and architecture decisions |
+
+### Business process and workflow continuity
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-business-lifecycle` | Canonical identity, data continuity, durable progress and reconciliation for any cross-module domain workflow |
 
 ### Experience, design and discovery
 
@@ -80,6 +89,8 @@ The persistence guarantee applies only when windows share the same repository st
 | Agent | Responsibility |
 | --- | --- |
 | `$ore-code-health` | Maintainability, documentation, dependencies, root cause and recurrence prevention |
+| `$ore-organizational-memory` | Project-scoped decisions, lessons, relationship graphs, promotion, staleness and forgetting |
+| `$ore-context-efficiency` | Minimum sufficient context, filtered evidence and defensible token accounting |
 
 ORE routes only the skills the task needs. The hierarchy is shallow: ORE lead → domain lead → bounded specialist. The ORE lead remains accountable for integration and overall progress.
 
@@ -136,7 +147,7 @@ Behavioral scenarios live in `evals/behavioral-scenarios.md`. The package valida
 
 ## External references
 
-ORE favors official platform documentation and curated open-source references. See `skills/ore/references/ecosystem-sources.md`, `skills/ore/references/legacy-agent-study.md` and `skills/ore/references/department-agent-study.md`. Repositories are not bundled or silently installed; license, version, attribution and ORE evaluations must be checked before adoption.
+ORE favors official platform documentation and curated open-source references. See `skills/ore/references/ecosystem-sources.md`, `skills/ore/references/legacy-agent-study.md`, `skills/ore/references/department-agent-study.md` and `skills/ore/references/workflow-memory-study.md`. The latter documents the requested self-improving-agent, MemoryGraph, token-optimization and Graphify review plus durable-workflow references. Repositories are not bundled or silently installed; license, version, attribution, data boundaries and ORE evaluations must be checked before adoption.
 
 For SEO/GEO/AEO, ORE improves eligibility, comprehension, authority, answerability and measurement. It never guarantees a ranking or recommendation by Google or an AI system.
 

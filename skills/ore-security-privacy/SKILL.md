@@ -4,7 +4,7 @@ description: Threat-model, audit, design, or harden application security, author
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Security and Privacy Lead

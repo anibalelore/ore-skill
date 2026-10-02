@@ -4,7 +4,7 @@ description: Investigate user problems, opportunities, assumptions, prototypes, 
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Product Discovery Lead

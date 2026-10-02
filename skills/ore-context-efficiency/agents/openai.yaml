@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Context Efficiency"
+  short_description: "Reduce context cost without losing required evidence"
+  default_prompt: "Use $ore-context-efficiency to optimize this agent workflow with measured evidence."

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 — Business Lifecycle, Governed Memory, and Context Efficiency
+
+- Added `$ore-business-lifecycle` as the accountable end-to-end process owner for canonical identity, data and progress continuity in any domain workflow; lead → customer → purchase is only one example.
+- Added durable transition, entity-resolution, field-lineage, retry/idempotency, reconciliation, privacy, correction/deletion propagation and workflow-recovery contracts.
+- Added `$ore-organizational-memory` with project isolation, provenance, typed relationships, contradiction/staleness, retention and approval-based rule promotion.
+- Added `$ore-context-efficiency` with minimum sufficient context packs and evidence-based token accounting that preserves all quality gates.
+- Assessed the requested self-improving-agent, MemoryGraph, token-optimization and Graphify projects, adopting useful patterns while excluding blind installation, unsupported savings claims and graph-as-truth assumptions.
+- Extended change-impact analysis with optional explainable graph evidence and added four behavioral evaluation scenarios plus catalog integrity tests.
+
 ## 2.2.0 — Department Agents and Change-Impact Protection
 
 - Added eight installable department skills: change impact, AI engineering, data/analytics, platform/cloud, developer experience, product discovery, compliance/governance, and independent release certification.

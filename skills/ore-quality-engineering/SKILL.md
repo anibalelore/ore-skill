@@ -4,7 +4,7 @@ description: Design and execute risk-based software quality work across unit, in
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Quality Engineering Lead

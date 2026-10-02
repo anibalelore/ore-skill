@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Organizational Memory"
+  short_description: "Curate durable project knowledge with provenance"
+  default_prompt: "Use $ore-organizational-memory to capture and govern durable project knowledge."

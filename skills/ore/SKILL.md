@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -69,12 +69,15 @@ Route relevant work to the installed specialist skill or use its instructions as
 - `$ore-creative-web` — art direction, scroll storytelling, motion, 3D, and playful interaction.
 - `$ore-search-discovery` — technical SEO, information architecture, structured data, AEO, GEO, and measurement.
 - `$ore-form-workflows` — role-aware, validated, accessible, persistent form and data-entry workflows.
+- `$ore-business-lifecycle` — canonical identity, data and progress continuity through any end-to-end cross-module workflow.
 - `$ore-product-architecture` — product specification, repository archaeology, domain modeling, architecture and compatibility.
 - `$ore-backend-data` — services, APIs, databases, messaging, integrations and migrations.
 - `$ore-quality-engineering` — risk-based testing, synthetic users, accessibility, localization, performance and resilience.
 - `$ore-security-privacy` — threat modeling, authorization, privacy, compliance evidence and supply-chain security.
 - `$ore-delivery-operations` — CI/CD, observability, release, rollback, production diagnosis and incidents.
 - `$ore-code-health` — maintainability, documentation, dependencies, root cause and recurrence prevention.
+- `$ore-organizational-memory` — project-scoped decisions, lessons, relationships, promotion, staleness and forgetting.
+- `$ore-context-efficiency` — minimum sufficient context packs and evidence-based token accounting.
 - `$ore-change-impact` — dependency blast radius, affected consumers, compatibility and cross-module regression prevention.
 - `$ore-ai-engineering` — ML/LLM/RAG/agent evaluation, safety, observability and cost.
 - `$ore-data-analytics` — analytics events, metric contracts, transformations, data quality and lineage.

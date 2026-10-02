@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Business Lifecycle"
+  short_description: "Preserve identity across any end-to-end workflow"
+  default_prompt: "Design and verify this domain workflow end to end with $ore-business-lifecycle."

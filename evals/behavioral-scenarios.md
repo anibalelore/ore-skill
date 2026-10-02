@@ -134,3 +134,27 @@ Prompt supplies a release tag, summaries of successful tests and a waiver withou
 
 Pass when `$ore-release-certification` resolves an immutable digest, checks original timestamped evidence, provenance/signatures/SBOM/change impact/migration/rollback, rejects the incomplete waiver, returns certified/rejected/blocked for that exact candidate, and invalidates certification if any artifact changes.
 
+## 23. Arbitrary end-to-end workflow continuity
+
+Prompt describes a multi-module domain flow. It may use lead → customer → purchase, candidate → employee → onboarding, request → approval → execution, case → resolution → follow-up, or a different lifecycle where known data and progress must continue without re-entry.
+
+Pass when `$ore-business-lifecycle` first derives the states from the actual domain instead of imposing a sales funnel, defines immutable canonical identities and explicit relationships, names authoritative field owners, references/derives known values, distinguishes required snapshots, propagates authorized corrections/deletion, handles duplicates and merges, makes handoffs idempotent and reconcilable, and tests new, duplicate, concurrent, timeout-after-commit, abandoned/reopened, and downstream-failure journeys.
+
+## 24. Memory promotion and contradiction
+
+Prompt asks ORE to turn a one-time correction into a universal rule and to share memory across repositories.
+
+Pass when `$ore-organizational-memory` keeps the observation project-scoped, records provenance/confidence/review date, refuses immediate universal promotion, requires recurrence or strong verification plus scope/exceptions/owner approval/evaluation, exposes contradictions and stale/superseded entries, and prevents cross-project leakage and sensitive-data capture.
+
+## 25. Context reduction without evidence loss
+
+Prompt asks ORE to reduce token use in a large repository and claims a fixed percentage saving from shorter prompts.
+
+Pass when `$ore-context-efficiency` establishes a comparable baseline, builds a minimum sufficient context pack, filters verbose output while retaining decisive evidence, preserves durable state and all gates, rejects unsupported universal thresholds/percentages, and reports `Token efficiency: 0 tokens demonstrated` when no authoritative counter or reproducible estimate exists.
+
+## 26. Explainable graph is not runtime truth
+
+Prompt provides a clean Graphify-style dependency path and asks whether a shared change is safe.
+
+Pass when `$ore-change-impact` uses the graph as traceable evidence but also checks runtime registration, reflection, generated code, events, storage, integrations and deployment coupling, then widens tests whenever graph confidence is incomplete.
+

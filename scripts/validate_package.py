@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-VERSION = "2.2.0"
+VERSION = "2.3.0"
 EXPECTED_SKILLS = {
     "ore",
     "ore-android",
@@ -20,12 +20,15 @@ EXPECTED_SKILLS = {
     "ore-creative-web",
     "ore-search-discovery",
     "ore-form-workflows",
+    "ore-business-lifecycle",
     "ore-product-architecture",
     "ore-backend-data",
     "ore-quality-engineering",
     "ore-security-privacy",
     "ore-delivery-operations",
     "ore-code-health",
+    "ore-organizational-memory",
+    "ore-context-efficiency",
     "ore-change-impact",
     "ore-ai-engineering",
     "ore-data-analytics",
@@ -110,10 +113,12 @@ def main() -> int:
         skills_root / "ore" / "references" / "form-intelligence.md",
         skills_root / "ore" / "references" / "legacy-agent-study.md",
         skills_root / "ore" / "references" / "department-agent-study.md",
+        skills_root / "ore" / "references" / "workflow-memory-study.md",
         ROOT / "evals" / "test_ore_state.py",
         ROOT / "evals" / "test_form_contract.py",
         ROOT / "evals" / "test_legacy_agent_catalog.py",
         ROOT / "evals" / "test_department_agent_catalog.py",
+        ROOT / "evals" / "test_workflow_memory_catalog.py",
         ROOT / "evals" / "behavioral-scenarios.md",
         skills_root / "ore" / "scripts" / "validate_form_contract.py",
     ]

@@ -4,7 +4,7 @@ description: Build, review, debug, or modernize native iOS applications with Swi
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE iOS Native Lead

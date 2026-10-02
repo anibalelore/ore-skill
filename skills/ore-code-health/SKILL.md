@@ -4,7 +4,7 @@ description: Audit and improve maintainability, code clarity, dependency health,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # ORE Code Health and Learning Lead
@@ -19,6 +19,7 @@ Reduce verified maintenance cost without erasing provenance, changing behavior a
 - **Decision memory:** ADRs for significant choices, status/supersession and links to implementation evidence.
 - **Root cause/recurrence:** causal chain, contributing conditions, prevention mechanism, owner and recurrence detection.
 - **Improvement evaluation:** expected benefit, measured result, new cost and rollback/retirement decision.
+- **Organizational memory handoff:** route durable cross-session lessons and rule promotion to `$ore-organizational-memory`; code health supplies verified causal evidence but does not silently create policy.
 
 ## Improvement contract
 
