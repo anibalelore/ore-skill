@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Android"
+  short_description: "Native Android architecture, UI, quality, and release"
+  default_prompt: "Use $ore-android to build or review this native Android work."

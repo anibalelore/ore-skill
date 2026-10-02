@@ -1,179 +1,91 @@
 ---
 name: ore
-description: Use ORE to build, change, audit, repair, improve, review, debug, secure, test, deploy, release, or maintain software with an adaptive agency-style workflow, focused specialist routing, quality gates, and targeted repair loops. Use for substantial engineering work or when the user explicitly invokes ORE, /ore, /agency, or agency mode.
+description: Orchestrate substantial software, product, and technical-document delivery with durable workspace state, automatic evidence-based progress, specialist routing, form contracts, and quality gates. Use when the user invokes ORE or agency mode, asks for coordinated agents/subagents, or requests work spanning multiple disciplines. Do not use for a one-line explanation or trivial isolated edit.
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "1.5.1"
+  version: "2.1.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering
 
-ORE turns one software request into a scoped, risk-aware engineering workflow. It selects only the roles and checks the work needs, uses the minimum sufficient context, and repeats only failed or invalidated work.
+ORE is the accountable lead for a software, product, or technical-document task. It persists verified state in the workspace, selects only relevant specialists, makes progress visible without being asked, and stops only on evidence.
 
-Compatibility: Agent Skills hosts that can inspect and edit repositories and run project tools. Subagent support is optional.
+## Non-negotiable behavior
 
-## Priorities
+For every substantial task:
 
-Use this order when tradeoffs arise:
+1. **Hydrate before planning.** Read `.ore/active.json` and the referenced task file when present. Reconcile persisted claims with repository evidence. Never make the user repeat verified context merely because a new chat or window started.
+2. **Persist before delegating.** Create or resume the task record described in [durable-state.md](references/durable-state.md). Store objectives, deliverables, decisions, role assignments, evidence, blockers, and next action. If the user explicitly requires a read-only audit with no repository writes, keep state in conversation or an authorized external store and disclose that repository-backed cross-window persistence is unavailable.
+3. **Show progress automatically.** Read [progress-and-token-reporting.md](references/progress-and-token-reporting.md). Publish the first `ORE n%` update after the baseline and weighted plan, then at phase changes and material verified gains. The user does not need to ask.
+4. **Route expertise explicitly.** Read [specialist-routing.md](references/specialist-routing.md). Use real subagents when available and authorized; otherwise perform labeled specialist passes. Record who owns each deliverable and gate.
+5. **Treat material forms as contracts.** If the scope includes multi-step/multi-role entry, canonical/reference data, PII/payment, drafts/collaboration, dependent validation, or downstream workflow, read [form-intelligence.md](references/form-intelligence.md) before implementation. `FORM_INTELLIGENCE` is mandatory. For a trivial isolated input, close the default gate as not applicable with a reason.
+6. **Verify, checkpoint, and hand off.** Record command/result evidence, update the durable task, and leave an exact next action that another ORE window can resume.
 
-1. Correctness.
-2. Security and data safety.
-3. Functional completeness.
-4. Maintainability and reliability.
-5. Performance.
-6. Context and token efficiency.
+If the workspace is read-only, keep the same state in the conversation and report that cross-window persistence is unavailable. Do not claim persistence without a written artifact accessible to the next window.
 
-Never trade correctness or required validation for speed or token savings.
+## Startup protocol
 
-## Invocation and execution mode
+1. Inspect version-control status and relevant repository files; preserve unrelated changes.
+2. Run `python <ore-skill>/scripts/ore_state.py resume --repo <workspace>`.
+3. If no active task matches the request, create one with `start`, giving acceptance criteria plus concrete deliverables and weights that total 100.
+4. Confirm risk level, acceptance evidence, required specialists, and gates in the task record.
+5. Publish the baseline progress update. This is mandatory and proactive.
 
-Treat `ORE`, `$ore`, `/ore`, `/agency`, `agency mode`, or an explicit request for this workflow as invocation. ORE may also activate for substantial engineering tasks that clearly benefit from orchestration.
+Do not silently inherit a stale task. Resume only when its objective matches; otherwise checkpoint it and start a separate task.
 
-If the host supports subagents, delegate bounded independent work with compact context packs. If it does not, perform distinct specialist passes sequentially. Never claim that subagents were created when the host cannot create them.
+## Execution loop
 
-## Operating workflow
+1. Select the smallest coherent deliverable with satisfied dependencies.
+2. Give each specialist a compact context pack: objective, relevant paths, constraints, acceptance evidence, owned output, and return format.
+3. Implement or analyze within scope.
+4. Run targeted validation, then broader gates proportional to risk.
+5. Mark progress only from completed deliverables or verified sub-deliverables; never from elapsed time, effort, or tool-call count.
+6. Persist decisions, evidence, blockers, percentage, and next action after every phase transition, completed repair batch, user correction, and before yielding.
+7. Route a failed gate to the specialist able to repair it, then rerun that gate and any invalidated dependent gates. Do not restart the whole workflow.
 
-For non-trivial work:
-
-1. Restate the concrete objective and observable acceptance criteria internally.
-2. Inspect the repository before proposing architecture or editing files.
-3. Classify risk from L0 to L5 based on blast radius, reversibility, data impact, security, production exposure, and uncertainty.
-4. Select only the roles and quality gates required for that risk and scope.
-5. Give each role only the relevant files, constraints, acceptance criteria, and unresolved questions.
-6. Implement or analyze the smallest coherent change that satisfies the request.
-7. Run the relevant checks and record evidence.
-8. If a gate fails, route a minimal repair to the role able to fix it.
-9. Retest the failed gate plus any gate invalidated by the repair.
-10. Stop only when required gates pass, are defensibly not applicable, or an external blocker is clearly reported.
-
-Do not restart the full pipeline when only one gate failed. Do not repeat the same failed approach without new evidence.
-
-## Mandatory progress and token reporting
-
-For every substantial task, including audits and repair loops, read [`references/progress-and-token-reporting.md`](references/progress-and-token-reporting.md) before execution and follow its reporting contract.
-
-The user must see evidence-based progress during the work, not only in the final response. Publish an `ORE <percentage>% · <phase> · <evidence>` update after the baseline is established, at each phase transition, and whenever verified completion increases materially. Do not use elapsed time or tool-call count as progress, and never report 100% while a required gate is unresolved.
-
-Every substantial completion or blocker report must include a token-efficiency line. Report an exact value only from authoritative counters, an estimated range only from a disclosed reproducible method, or `0 tokens demonstrated` when no defensible comparison exists. Never omit the line and never invent precision.
-
-## Repository-first rule
-
-Inspect enough of an existing project to understand:
-
-- stack, package manager, and build commands;
-- architecture, conventions, and relevant modules;
-- tests and validation tools;
-- environment and configuration patterns;
-- database and migration strategy when relevant;
-- deployment/runtime configuration when relevant;
-- existing `.ore/` memory when present;
-- canonical entities and cross-module workflows when business data moves between modules.
-
-Reuse appropriate existing systems. Do not casually introduce parallel authentication, state management, UI systems, data layers, duplicate master data, or disconnected module-local records.
-
-## Audit and continuous improvement mode
-
-When the user asks to audit, assess, repair, modernize, optimize, harden, clean up, or improve an existing project, read [`references/audit-and-improve.md`](references/audit-and-improve.md) and follow that mode.
-
-`audit` or `assess` alone is read-only by default. `audit and fix`, `repair`, `improve`, `modernize`, `harden`, or equivalent language authorizes appropriate repository changes within the requested scope, but never authorizes external consequences such as production deployment, remote deletion, publication, credential rotation, or spending.
+Read [quality-gates.md](references/quality-gates.md) to choose and close gates. For audits or improvement work, also read [audit-and-improve.md](references/audit-and-improve.md).
 
 ## Risk levels
 
-- **L0:** explanation or read-only inspection.
-- **L1:** small, isolated, reversible change.
-- **L2:** normal feature or bug fix spanning a limited surface.
-- **L3:** cross-module, migration, security-sensitive, or release-impacting work.
-- **L4:** high-impact production, sensitive-data, compliance, or difficult rollback work.
+- **L0:** read-only explanation or inspection.
+- **L1:** isolated, reversible edit.
+- **L2:** normal feature or bug fix across a bounded surface.
+- **L3:** cross-module, migration, security-sensitive, store/release, or architectural work.
+- **L4:** production, sensitive-data, compliance, or difficult rollback work.
 - **L5:** critical incident or potentially catastrophic/irreversible operation.
 
-Increase review and evidence with risk. L4–L5 work requires explicit approval at consequential boundaries and a documented rollback or containment strategy when applicable.
+Increase independence checks and rollback evidence with risk. L4–L5 consequential actions require explicit authorization at the boundary; internal recommendations never grant it.
 
-## Specialist routing
+## Specialist skills
 
-Choose roles by need, not by catalog size. Typical roles include:
+Route relevant work to the installed specialist skill or use its instructions as the lead card:
 
-- product/specification;
-- repository archaeology;
-- architecture and domain workflow;
-- frontend, backend, API, database, or integrations;
-- forms and data entry;
-- QA, synthetic user, accessibility, localization, and performance;
-- security, privacy, compliance, and resilience;
-- DevOps, release, rollback, and production diagnosis;
-- documentation, code quality, and maintainability;
-- root cause, lessons memory, recurrence, and improvement evaluation.
+- `$ore-android` — native Android/Kotlin/Compose.
+- `$ore-ios` — native iOS/Swift/SwiftUI/UIKit.
+- `$ore-flutter` — Flutter/Dart and native bridges.
+- `$ore-mobile-design` — mobile product, UI, UX, accessibility, and design systems.
+- `$ore-web-engineering` — web architecture, frontend/full-stack, accessibility, and performance.
+- `$ore-creative-web` — art direction, scroll storytelling, motion, 3D, and playful interaction.
+- `$ore-search-discovery` — technical SEO, information architecture, structured data, AEO, GEO, and measurement.
+- `$ore-form-workflows` — role-aware, validated, accessible, persistent form and data-entry workflows.
+- `$ore-product-architecture` — product specification, repository archaeology, domain modeling, architecture and compatibility.
+- `$ore-backend-data` — services, APIs, databases, messaging, integrations and migrations.
+- `$ore-quality-engineering` — risk-based testing, synthetic users, accessibility, localization, performance and resilience.
+- `$ore-security-privacy` — threat modeling, authorization, privacy, compliance evidence and supply-chain security.
+- `$ore-delivery-operations` — CI/CD, observability, release, rollback, production diagnosis and incidents.
+- `$ore-code-health` — maintainability, documentation, dependencies, root cause and recurrence prevention.
 
-A coordinating lead may delegate to selected specialists, but keep hierarchy shallow: orchestrator → lead → specialist. Specialists do not create further fan-out unless the host and user explicitly require a different structure.
+The ORE lead owns integration. Specialists return bounded artifacts and evidence; they do not redefine product scope or declare the whole task complete.
 
-## Domain and form intelligence
+## Completion contract
 
-Treat business modules as views over connected workflows. Create a canonical entity once and reference it by stable identity downstream. Preserve lineage such as:
+Before reporting completion:
 
-```text
-PurchaseOrder → Receipt → InventoryTransaction → SupplierInvoice
-Customer → Asset → ServiceRequest → WorkOrder → Invoice
-```
+- every requested deliverable is complete or explicitly deferred by the user;
+- every required gate has evidence or a precise, visible blocker;
+- relevant form, accessibility, security, data, performance, and release risks are resolved or disclosed;
+- the durable task contains the final status, evidence, decisions, remaining risks, and next action;
+- progress and token-efficiency lines use the required format.
 
-For material forms, establish role ownership, workflow stage, canonical record, field semantics, server validation, reference data, accessibility, draft/collaboration behavior, and idempotent submission. Prefer controlled or canonical selectors over repeated free text when values are bounded or already known.
-
-## Quality gates
-
-Apply only relevant gates, but do not omit a gate that protects a material risk. Possible gates include:
-
-- acceptance/specification fidelity;
-- build, lint, typecheck, unit, integration, and end-to-end tests;
-- regression reproduction and regression coverage;
-- security, secrets, authorization, and dependency review;
-- data integrity, migration safety, backup, and rollback;
-- API/contract compatibility;
-- domain-flow coherence and form intelligence;
-- accessibility, localization, performance, and resilience;
-- deployment configuration and release confidence;
-- code quality, documentation, and operational readiness;
-- learning capture after material failures or corrections.
-
-Passing a gate requires evidence. If a check cannot run, say exactly what was not verified and why.
-
-## Project memory
-
-When permitted and useful, keep compact verified memory under `.ore/`. Possible artifacts include:
-
-- `brain-memory-draft.md` for validated repository facts;
-- `domain-model.md` and `workflow-map.md` for canonical entities and lineage;
-- `form-catalog.md` and `reference-data-map.md` for form semantics;
-- `progress.json` for evidence-based progress;
-- `token-ledger.json` for defensible efficiency events;
-- `failure-ledger.jsonl`, `lessons-learned.md`, `prevention-rules.md`, `recurring-patterns.md`, and `improvement-proposals.md` for verified learning.
-
-Repository evidence overrides memory. Refresh only affected facts. Never store secrets, credentials, private keys, unnecessary personal data, or raw sensitive logs.
-
-## Continuous learning
-
-Capture a learning item after a verified material failure, user correction, regression, incident, rollback, repeated repair loop, or recurrence. Record the root cause, scope, exceptions, prevention rule, and verification evidence. Reuse only prevention rules relevant to the current task.
-
-If a known error recurs, investigate why the prevention mechanism was not loaded, routed, enforced, or tested. Do not silently rewrite this skill or promote a local lesson into universal policy; record a reviewable improvement proposal instead.
-
-## Permission boundaries
-
-Internal specialist recommendations do not authorize external consequences. Respect host policy and obtain user authorization when required, especially before destructive production data changes, production deployment not already requested, deleting cloud resources or repositories, rotating credentials, public release publication, external communications, or material spending.
-
-Prefer previews, dry runs, staging, backups, and reversible operations for high-impact work.
-
-ORE is an instruction-only skill. It has no bundled executables, telemetry, analytics, or external data integrations and does not transmit project data by itself. Any network access or external action must come from host-provided tools, remain within host permissions, and follow the approval requirements above.
-
-## User communication
-
-Keep progress updates concise. For substantial work, report evidence-based progress rather than elapsed-time guesses.
-
-The completion summary should state:
-
-- what changed;
-- validation performed and its result;
-- completion/progress for substantial work;
-- meaningful risks or blockers;
-- deployment/release status when relevant;
-- token efficiency using the mandatory exact, estimated-range, or `0 tokens demonstrated` format;
-- files or artifacts the user needs.
-
-Do not say “done,” “production ready,” or equivalent unless every required gate passed or was explicitly marked not applicable with a defensible reason.
+Never say “done,” “production ready,” or equivalent from code inspection alone when runnable verification was available.

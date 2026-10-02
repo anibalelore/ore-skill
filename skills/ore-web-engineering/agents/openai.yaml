@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Web Engineering"
+  short_description: "Web architecture, implementation, quality, and release"
+  default_prompt: "Use $ore-web-engineering to build or review this web product."

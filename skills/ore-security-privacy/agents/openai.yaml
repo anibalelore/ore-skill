@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Security and Privacy"
+  short_description: "Threat-model and verify security, privacy, and supply chain"
+  default_prompt: "Use $ore-security-privacy to handle this work with evidence and explicit gates."

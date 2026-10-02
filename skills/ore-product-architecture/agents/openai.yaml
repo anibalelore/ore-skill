@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Product Architecture"
+  short_description: "Specify products and make evidence-based architecture decisions"
+  default_prompt: "Use $ore-product-architecture to handle this work with evidence and explicit gates."

@@ -1,0 +1,5 @@
+interface:
+  display_name: "ORE Code Health"
+  short_description: "Maintainable code, docs, dependencies, and learning"
+  default_prompt: "Use $ore-code-health to improve this codebase without unrelated refactoring."
+

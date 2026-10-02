@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Search Discovery"
+  short_description: "Technical SEO, structured data, AEO, GEO, and measurement"
+  default_prompt: "Use $ore-search-discovery to improve and verify organic discoverability."

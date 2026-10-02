@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Creative Web"
+  short_description: "Accessible scroll stories, motion, WebGL, and playful UI"
+  default_prompt: "Use $ore-creative-web to create this expressive web experience."

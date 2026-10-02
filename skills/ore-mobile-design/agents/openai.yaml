@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Mobile Design"
+  short_description: "Mobile product design, UI, UX, and accessibility"
+  default_prompt: "Use $ore-mobile-design to design or review this mobile experience."

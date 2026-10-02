@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.1.0 — Historical Agent Research and Hardening
+
+- Audited the capabilities promised by the historical ORE agent catalog and replaced changelog-only roles with six installable, discriminating skills.
+- Added product/architecture, backend/data, quality engineering, security/privacy, delivery/operations, and code-health/learning leads with bounded specialist passes and evidence gates.
+- Evaluated maintained primary repositories from GitHub, Microsoft, OpenAPI, AsyncAPI, Pact, OWASP, OpenSSF, CNCF, OpenTelemetry, OpenFeature, Argo, PagerDuty, SPDX, CycloneDX, Deque and Mozilla.
+- Added an explicit keep/merge/exclude decision matrix plus license-aware integration guidance; no external repository is silently installed or copied.
+- Expanded ORE routing and gates for architecture fit, compatibility, migration safety, localization, resilience, dependency health, observability, rollback and learning capture.
+
+## 2.0.0 — Durable Workflows and Domain Specialists
+
+- Replaced optional project memory with a mandatory hydrate/persist/checkpoint protocol for explicit ORE work.
+- Added an atomic, revision-aware state helper that computes progress from weighted deliverables, creates cross-window handoffs, and refuses false completion.
+- Made visible progress proactive for every explicit ORE invocation.
+- Added a mandatory form contract and `FORM_INTELLIGENCE` validation matrix, including exact preservation of user-supplied lists and business rules.
+- Added specialist skills for native Android, native iOS, Flutter, mobile UI/UX, web engineering, creative web, SEO/GEO/AEO, and form workflows.
+- Added platform-specific routing and quality gates plus a vetted external-source registry.
+- Added behavioral state tests and package-integrity validation.
+
 ## 1.5.1 — Mandatory Progress & Token Reporting
 
 - Fixed substantial workflows that could finish without visible progress milestones.

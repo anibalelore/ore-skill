@@ -1,7 +1,7 @@
 {
   "name": "ore",
-  "version": "1.5.1",
-  "description": "Adaptive software engineering workflow for building, auditing, repairing, and improving projects with evidence-based quality gates.",
+  "version": "2.1.0",
+  "description": "Persistent software orchestration with automatic progress, focused specialists, form contracts, and evidence-based quality gates.",
   "author": {
     "name": "anibalelore",
     "url": "https://github.com/anibalelore"
@@ -13,8 +13,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "ORE",
-    "shortDescription": "Agency-style software engineering orchestration",
-    "longDescription": "Build, audit, repair, and improve software through scoped workflows, focused specialists, risk-based quality gates, and targeted repair loops.",
+    "shortDescription": "Persistent evidence-driven software orchestration",
+    "longDescription": "Build, audit, repair, and improve software with durable task state, automatic progress, product, architecture, backend, quality, security, operations, mobile, web and search specialists, form contracts, and evidence-based gates.",
     "developerName": "anibalelore",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],

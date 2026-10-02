@@ -1,0 +1,7 @@
+interface:
+  display_name: "ORE"
+  short_description: "Persistent, evidence-driven engineering orchestration"
+  brand_color: "#6F42C1"
+  default_prompt: "Use $ore to orchestrate this task with durable progress, specialists, and verified gates."
+policy:
+  allow_implicit_invocation: true

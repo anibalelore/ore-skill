@@ -1,96 +1,61 @@
-# Progress and Token Reporting Contract
+# Automatic Progress and Token Reporting
 
-Use this contract for every substantial ORE task. A task is substantial when it has multiple deliverables or phases, requires repository discovery plus implementation/audit, uses repair loops, or takes long enough that the user benefits from status updates.
+Progress is a user-visible invariant, not an optional courtesy.
 
-## Evidence-based progress
+## When required
 
-At startup, create a private weighted plan whose deliverables total 100%. Choose weights from the actual scope; do not equate progress with elapsed time, number of tool calls, files opened, or lines changed.
+- For every explicit invocation of ORE, publish progress without waiting for the user to request it.
+- For implicit ORE activation, do so for any task with multiple deliverables/phases, delegation, repair loops, or meaningful validation.
+- A tiny isolated task may use one start and one completion update, but must not silently omit progress when ORE was explicitly requested.
 
-Typical audit-and-improve weighting:
+## Deterministic calculation
 
-| Deliverable | Default weight |
-| --- | ---: |
-| Repository discovery and baseline | 15% |
-| Evidence-backed audit and prioritization | 25% |
-| Authorized repair/improvement batches | 35% |
-| Validation and regression checks | 20% |
-| Final report and remaining backlog | 5% |
-
-Typical audit-only weighting:
-
-| Deliverable | Default weight |
-| --- | ---: |
-| Repository discovery and baseline | 20% |
-| Evidence-backed audit | 55% |
-| Verification and prioritization | 20% |
-| Final report | 5% |
-
-Adjust weights before work when the task is clearly different. If scope changes materially, explain the reweighting; do not silently move the percentage backward or inflate completed work.
-
-Count a deliverable as complete only when its observable exit condition is met. Partial credit inside the active deliverable must be tied to concrete completed sub-deliverables.
-
-## Visible update cadence
-
-For substantial work, publish progress:
-
-1. after discovery establishes the baseline and weighted plan;
-2. at every phase transition;
-3. after each completed repair batch;
-4. when verified progress increases by at least 10 percentage points;
-5. before asking for information or approval that blocks continued work;
-6. in the final completion or blocker report.
-
-Use this compact format:
+Create weighted deliverables totaling 100 in the durable task record. The state helper calculates:
 
 ```text
-ORE 40% · Audit complete · 7 verified findings prioritized; beginning repair batch 1.
+progress = sum(deliverable weight × verified completion / 100)
 ```
 
-Do not issue empty percentage updates. Every update must name the completed evidence and the next active phase or blocker.
+Completion is evidence-based. Time elapsed, effort, tool calls, lines changed, confident language, and specialist self-reports are not completion evidence.
 
-Use 100% only when every in-scope deliverable and required gate is complete. If work stops with a blocker or deferred scope, report the actual weighted percentage and identify what remains.
+Default plans may be adapted before execution:
 
-## Token-efficiency ledger
+| Work type | Baseline | Analysis/design | Implementation | Validation | Handoff |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Build/repair | 10 | 15 | 45 | 25 | 5 |
+| Audit and improve | 10 | 30 | 30 | 25 | 5 |
+| Audit only | 15 | 55 | 0 | 25 | 5 |
 
-Track only defensible efficiency events during the task, such as:
+If scope changes materially, update weights transparently and record why. Never reduce the displayed percentage merely to hide rework; record invalidated gates/deliverables and explain the recalculation.
 
-- reusing validated project memory instead of rereading known material;
-- sending compact context packs instead of broadcasting the same corpus to multiple roles;
-- rerunning only failed gates instead of the full validated suite;
-- avoiding repeated file reads whose size is known;
-- eliminating a planned specialist pass because existing evidence made it unnecessary.
+## Visible cadence
 
-Do not count ordinary brevity, hypothetical future work, cached computation you cannot observe, or a guessed “full repository” baseline.
+Publish `ORE <n>% · <phase> · <evidence and next action>`:
 
-For each event, record the baseline, actual path, measurement source, and saved tokens or estimated range.
+1. after the repository baseline and weighted plan exist, or immediately after resuming persisted state;
+2. at every phase transition;
+3. after a verified increase of at least 10 percentage points;
+4. after each completed repair batch;
+5. before yielding, asking a blocking question, or awaiting authorization;
+6. in the final completion or blocker report.
 
-## Calculation hierarchy
+Write the durable state before publishing the matching percentage. Never show 100% while a deliverable, required gate, blocker, handoff, or requested artifact remains open.
 
-Use the strongest available method:
+## Token-efficiency reporting
 
-1. **Exact:** authoritative host token counters or deterministic tokenizer counts exist for both the baseline and actual comparable inputs. Report the difference as an integer.
-2. **Estimated range:** concrete text sizes or token counts exist, but tokenization or baseline has limited uncertainty. For plain text without a tokenizer, estimate `characters ÷ 4` and report a range of ±25%, rounded to sensible precision. State the baseline being compared.
-3. **No demonstrated savings:** no comparable baseline or measurable avoided context exists. Report `0 tokens demonstrated`; clarify that actual savings are unknown, not necessarily zero.
+Track savings only when a comparable baseline exists:
 
-Never report a percentage reduction unless both baseline and actual token quantities are defensible. Never label a character-based estimate as exact.
+- exact from authoritative counters for both paths;
+- estimated range from measured avoided text using characters ÷ 4, ±25%;
+- otherwise `0 tokens demonstrated` and state that actual savings are unknown.
 
-## Mandatory final format
+Never fabricate precision or count hypothetical savings.
 
-Every substantial final response must contain one of these forms:
+## Final lines
 
 ```text
 Progress: 100% · 5/5 deliverables complete · all required gates passed.
-Token efficiency: 3,284 tokens saved (exact; host counters, 12,940 baseline vs 9,656 actual).
+Token efficiency: 0 tokens demonstrated · no comparable counters or measurable avoided-context baseline were available.
 ```
 
-```text
-Progress: 85% · implementation complete; production validation remains blocked.
-Token efficiency: approximately 2,400–4,000 tokens saved (estimated from 12,800 characters of avoided repeated context, characters ÷ 4 ±25%).
-```
-
-```text
-Progress: 100% · audit and requested repairs complete.
-Token efficiency: 0 tokens demonstrated · this host exposed no comparable counters or measurable avoided-context baseline; actual savings are unknown.
-```
-
-The line is mandatory even when savings are zero or unavailable. Accuracy takes priority over presenting ORE as efficient.
+If blocked, use the actual computed percentage and name the remaining deliverables/gates.

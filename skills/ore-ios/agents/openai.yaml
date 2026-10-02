@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE iOS"
+  short_description: "Native iOS architecture, UI, quality, and release"
+  default_prompt: "Use $ore-ios to build or review this native iOS work."

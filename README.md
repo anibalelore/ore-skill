@@ -1,238 +1,101 @@
 # ORE — Orchestrated Runtime Engineering
 
-> One request. The right engineering workflow. Evidence before completion.
+> Durable state, visible progress, the right specialists, and evidence before completion.
 
-[![Version](https://img.shields.io/badge/version-1.5.1-6f42c1)](./CHANGELOG.md)
-[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-0a7ea4)](./SKILL.md)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-D97757)](https://code.claude.com/docs/en/skills)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+ORE is an installable collection of Agent Skills for substantial software work. Version 2.1 combines repository-backed state and computed progress with externally researched specialists for mobile, web, product architecture, backend/data, quality, security/privacy, delivery/operations, code health and discovery.
 
-ORE is an installable Agent Skill that turns a coding agent into an adaptive software-engineering agency. It scopes the request, selects only the specialists the work needs, keeps context focused, applies risk-based quality gates, and repeats only failed or invalidated work.
+## What is now enforceable
 
-Use ORE when you want more than code generation: you want repository-aware execution, disciplined verification, and a defensible definition of done.
+- **Cross-window continuation:** ORE writes `.ore/active.json`, task state and a resumption handoff. Another ORE-enabled window in the same workspace reloads it before planning.
+- **Automatic percentage:** explicit ORE work reports evidence-based progress without the user asking. The percentage is computed from persisted weighted deliverables.
+- **Concurrency protection:** state writes can require the last observed revision so a stale window cannot silently overwrite a newer one.
+- **Form quality:** material forms require an authoritative field contract and tests for semantics, validation, reference lists, roles, accessibility, drafts and idempotency.
+- **Real specialist routing:** dedicated skills cover native Android, native iOS, Flutter, mobile UI/UX, web engineering, creative web, SEO/GEO/AEO and form workflows.
+- **Evidence gates:** completion is blocked by unfinished deliverables, unresolved blockers or required gates without evidence.
 
-## Why ORE?
+The persistence guarantee applies only when windows share the same repository storage and load ORE. ORE does not claim invisible global memory across unrelated clients or workspaces.
 
-- **One-command execution** — describe the outcome once; ORE builds the workflow.
-- **Adaptive specialist routing** — architecture, frontend, backend, QA, security, release, forms, and other roles are selected only when relevant.
-- **Repository-first decisions** — ORE inspects existing architecture and conventions before changing them.
-- **Focused context** — specialists receive only the context they need.
-- **Targeted repair loops** — failed gates are repaired without restarting the entire pipeline.
-- **Audit and improve mode** — assess the current project, rank verified findings, and iteratively repair the highest-value issues.
-- **Quality gates** — testing, build, security, data integrity, accessibility, release confidence, and other checks scale with risk.
-- **Project memory** — compact `.ore/` artifacts can preserve verified architecture, progress, workflows, and lessons.
-- **Visible delivery metrics** — substantial work reports evidence-based progress and a mandatory, auditable token-efficiency result.
-- **Flexible execution** — real subagents when supported; structured single-agent orchestration everywhere else.
+## Included skills
+
+| Skill | Responsibility |
+| --- | --- |
+| `$ore` | Durable orchestration, progress, handoffs, gates and integration |
+| `$ore-android` | Native Kotlin/Compose Android engineering |
+| `$ore-ios` | Native Swift/SwiftUI/UIKit engineering |
+| `$ore-flutter` | Flutter/Dart and native integration |
+| `$ore-mobile-design` | Mobile product, UI, UX, accessibility and design systems |
+| `$ore-web-engineering` | Web architecture, implementation, quality and release |
+| `$ore-creative-web` | Scroll stories, motion, WebGL/3D and playful interaction |
+| `$ore-search-discovery` | Technical SEO, information architecture, structured data, AEO/GEO and measurement |
+| `$ore-form-workflows` | Role-aware, validated and accessible data-entry workflows |
+| `$ore-product-architecture` | Product specification, repository archaeology, domain and architecture decisions |
+| `$ore-backend-data` | APIs, services, databases, messaging, integrations and migrations |
+| `$ore-quality-engineering` | Risk-based testing, accessibility, localization, performance and resilience |
+| `$ore-security-privacy` | Threat modeling, authorization, privacy, compliance evidence and supply chain |
+| `$ore-delivery-operations` | CI/CD, observability, release, rollback and incident response |
+| `$ore-code-health` | Maintainability, documentation, dependencies and recurrence prevention |
+
+ORE routes only the skills the task needs. The hierarchy is shallow: ORE lead → domain lead → bounded specialist. The ORE lead remains accountable for integration and overall progress.
 
 ## Install
 
-ORE includes a canonical root `SKILL.md`, a portable plugin manifest, an OpenAI compatibility manifest, and a packaged skill under `skills/ore/`.
-
-### Codex CLI or Codex coding agent
-
-macOS or Linux:
-
-```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/anibalelore/ore-skill.git ~/.codex/skills/ore
-```
-
-Windows PowerShell:
+### Codex CLI / coding agent
 
 ```powershell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
 git clone https://github.com/anibalelore/ore-skill.git "$env:USERPROFILE\.codex\skills\ore"
 ```
 
-Start a new Codex session, then invoke the skill with `$ore` or a request beginning with `ORE:`.
+Start a new session and invoke `$ore`.
 
-### Claude Code
+### Plugin marketplace
 
-macOS or Linux:
-
-```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/anibalelore/ore-skill.git ~/.claude/skills/ore
+```text
+codex plugin marketplace add anibalelore/ore-skill
 ```
 
-Windows PowerShell:
-
-```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
-git clone https://github.com/anibalelore/ore-skill.git "$env:USERPROFILE\.claude\skills\ore"
-```
-
-Start a new Claude Code session, then invoke `/ore` or describe a matching engineering task. Claude Code supports personal skills at `~/.claude/skills/<skill-name>/SKILL.md` and can load them automatically when relevant.
-
-### ChatGPT and Codex Desktop
-
-ORE is packaged as a skills-only plugin and includes a Git-backed marketplace catalog.
-
-1. Add the marketplace from a terminal with Codex installed:
-
-   ```bash
-   codex plugin marketplace add anibalelore/ore-skill
-   ```
-
-2. Restart the ChatGPT desktop app.
-3. Open the **Plugins Directory**.
-4. Select the **ORE Skills** marketplace and install **ORE**.
-5. Start a new conversation with the plugin enabled.
-
-Local plugin availability can depend on the ChatGPT/Codex client, account, workspace policy, and developer settings. Public discovery in the universal Plugins Directory requires a separate OpenAI submission and review; publishing the GitHub repository alone does not create a public directory listing.
+Restart the client, select **ORE Skills**, install **ORE**, and start a new conversation.
 
 ### Other Agent Skills hosts
 
-Download or clone the complete repository into the directory where the host discovers Agent Skills. The host must support a folder containing `SKILL.md`; plugin-aware hosts may instead use `plugin.json` and `skills/ore/SKILL.md`.
+Clone the repository where the host discovers Agent Skills. Direct-skill hosts read the root `SKILL.md`; plugin-aware hosts discover all folders under `skills/`.
 
-Consult the host's documentation for its exact install directory, reload behavior, permissions, and invocation syntax. ORE does not claim compatibility with a host that does not support Agent Skills or equivalent instruction bundles.
+## Example
 
-> Review third-party skills before installation. Skills instruct an agent and operate within the tools, permissions, and approval boundaries provided by the host.
+```text
+$ore Build the customer onboarding flow for Android, iOS and web. Persist the
+workflow, show progress automatically, use the supplied industry list exactly,
+and close accessibility, form, security and release gates with evidence.
+```
+
+## Durable state lifecycle
+
+ORE uses `skills/ore/scripts/ore_state.py`:
+
+```text
+python skills/ore/scripts/ore_state.py resume --repo .
+python skills/ore/scripts/ore_state.py start --repo . --title "Feature" --objective "..." --kind general --acceptance "observable result" --deliverable "Baseline:10" --deliverable "Build:55" --deliverable "Verify:30" --deliverable "Handoff:5"
+```
+
+Writes use atomic replacement. Updates accept `--expect-revision` and reject stale writers. State contains no secrets by design; teams decide whether `.ore/` belongs in version control.
+
+## Validation
+
+```text
+python -m unittest discover -s evals -p "test_*.py" -v
+python scripts/validate_package.py
+```
+
+Behavioral scenarios live in `evals/behavioral-scenarios.md`. The package validator checks structure, references, versions and unfinished scaffolding; the state tests cover resume, computed progress, stale-window conflicts and completion blockers.
+
+## External references
+
+ORE favors official platform documentation and curated open-source references. See `skills/ore/references/ecosystem-sources.md` and the historical-agent study in `skills/ore/references/legacy-agent-study.md`. Repositories are not bundled or silently installed; license, version, attribution and ORE evaluations must be checked before adoption.
+
+For SEO/GEO/AEO, ORE improves eligibility, comprehension, authority, answerability and measurement. It never guarantees a ranking or recommendation by Google or an AI system.
 
 ## Safety and privacy
 
-ORE is an instruction-only skill. This package contains no executable scripts, background services, telemetry, analytics, or external data integrations. It does not send source code, project files, prompts, or usage data anywhere by itself.
+ORE operates within host permissions. Repository-edit authorization does not authorize production deployment, destructive data changes, credential rotation, publication, external communication or spending. High-impact boundaries still require explicit approval.
 
-The host remains in control of every tool and permission. ORE requires user approval before actions with consequences outside the codebase, including production deployments, destructive data changes, deleting remote resources, rotating credentials, publishing releases, sending external communications, or incurring material costs.
-
-In short: **workflow instructions only, no built-in data transmission, and approval before external consequences.**
-
-## Quick start
-
-```text
-$ore Add Stripe subscriptions with monthly and annual plans, a customer portal,
-webhook reconciliation, persistence, regression tests, and deployment checks.
-```
-
-```text
-/ore Diagnose the checkout regression. Reproduce it first, preserve the current
-architecture, add regression coverage, and report validation evidence.
-```
-
-```text
-ORE: Review this release for security, data migration risk, test coverage, and
-rollback readiness.
-```
-
-```text
-ORE: Audit this existing project, prioritize findings by severity and impact,
-then repair the highest-value issues in validated batches.
-```
-
-Invocation varies by host: Codex recognizes `$ore`; Claude Code exposes `/ore`; `ORE:` is a portable textual convention.
-
-## How it works
-
-```text
-Request
-  → scope and risk classification
-  → relevant specialists + minimum sufficient context
-  → implementation or analysis
-  → risk-based quality gates
-  → targeted repair loop when needed
-  → evidence-based completion report
-```
-
-Small tasks stay small. Complex or high-risk work receives deeper review and stronger validation.
-
-## Progress and token efficiency
-
-For substantial work, ORE reports progress at verified milestones using a compact status line:
-
-```text
-ORE 40% · Audit complete · 7 verified findings prioritized; beginning repair batch 1.
-```
-
-The percentage is calculated from weighted deliverables, not elapsed time or tool activity. ORE reports 100% only when all in-scope deliverables and required gates are complete.
-
-Every substantial final report includes token efficiency in one of three forms:
-
-- exact savings from authoritative comparable counters;
-- an explicitly labeled range from a disclosed reproducible estimate;
-- `0 tokens demonstrated` when no defensible comparison exists.
-
-ORE never silently omits token efficiency and never invents a savings number.
-
-## Good use cases
-
-- Build a feature across frontend, backend, database, and integrations.
-- Diagnose and repair a difficult regression.
-- Review a pull request or release candidate.
-- Plan and execute a migration with rollback protection.
-- Improve security, accessibility, performance, or reliability.
-- Design role-aware forms and connected business workflows.
-- Investigate a production incident and prevent recurrence.
-- Audit an existing codebase and iteratively repair or improve what is already there.
-- Bootstrap a new application without skipping engineering foundations.
-
-## Core capabilities
-
-ORE v1.5.1 covers:
-
-- product planning and specification fidelity;
-- architecture and domain-flow coherence;
-- frontend, backend, API, database, and integrations;
-- testing, synthetic-user validation, and proactive bug discovery;
-- security, compliance, resilience, accessibility, and localization;
-- DevOps, deployment, release evidence, and rollback readiness;
-- form intelligence and controlled reference data;
-- learning from verified failures and user corrections;
-- evidence-based audits with prioritized repair and continuous-improvement loops;
-- progress tracking and defensible token-efficiency reporting.
-
-See the [changelog](./CHANGELOG.md) for release details.
-
-## Update
-
-Codex on macOS or Linux:
-
-```bash
-git -C ~/.codex/skills/ore pull --ff-only
-```
-
-Claude Code on macOS or Linux:
-
-```bash
-git -C ~/.claude/skills/ore pull --ff-only
-```
-
-Windows PowerShell:
-
-```powershell
-git -C "$env:USERPROFILE\.codex\skills\ore" pull --ff-only
-# Or, for Claude Code:
-git -C "$env:USERPROFILE\.claude\skills\ore" pull --ff-only
-```
-
-For the ChatGPT/Codex plugin route, refresh or upgrade the `ore-skills` marketplace, reinstall/update ORE when prompted, and start a new conversation.
-
-## Uninstall
-
-Remove the installed `ore` directory from the host's skills folder, then start a new session. In ChatGPT/Codex Desktop, uninstall ORE from the Plugins Directory.
-
-Removing the installed skill does not remove `.ore/` project-memory folders that may exist inside software projects.
-
-## Repository contents
-
-| Path | Purpose |
-| --- | --- |
-| [`SKILL.md`](./SKILL.md) | Canonical entry point for direct skill installation |
-| [`skills/ore/SKILL.md`](./skills/ore/SKILL.md) | Self-contained ORE workflow packaged for plugin hosts |
-| [`plugin.json`](./plugin.json) | Portable Agent Plugin manifest |
-| [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json) | OpenAI compatibility manifest |
-| [`.agents/plugins/marketplace.json`](./.agents/plugins/marketplace.json) | Git-backed marketplace catalog |
-| [`CHANGELOG.md`](./CHANGELOG.md) | Release history |
-
-## Contributing
-
-Issues and pull requests are welcome. Particularly useful contributions include realistic workflow evaluations, reproducible failures, stack-specific guidance, routing improvements, and documentation fixes.
-
-When reporting a problem, include the host, request, expected behavior, observed behavior, and enough non-sensitive evidence to reproduce it.
-
-## License
-
-Licensed under the [Apache License 2.0](./LICENSE).
-
----
-
-**ORE brings agency-style engineering discipline to the coding agent you already use.**
+Licensed under Apache-2.0.

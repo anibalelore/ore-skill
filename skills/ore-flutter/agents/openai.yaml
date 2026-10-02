@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Flutter"
+  short_description: "Flutter architecture, adaptive UI, quality, and release"
+  default_prompt: "Use $ore-flutter to build or review this Flutter work."

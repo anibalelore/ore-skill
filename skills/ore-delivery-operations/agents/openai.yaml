@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Delivery Operations"
+  short_description: "Deliver, observe, release, rollback, and respond safely"
+  default_prompt: "Use $ore-delivery-operations to handle this work with evidence and explicit gates."

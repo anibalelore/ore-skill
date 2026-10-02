@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Backend and Data"
+  short_description: "Build reliable APIs, services, integrations, and data changes"
+  default_prompt: "Use $ore-backend-data to handle this work with evidence and explicit gates."

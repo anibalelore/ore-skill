@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Form Workflows"
+  short_description: "Design and verify reliable form workflows"
+  default_prompt: "Use $ore-form-workflows to design or repair this form end to end."

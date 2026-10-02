@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Quality Engineering"
+  short_description: "Design layered tests and verify real user quality"
+  default_prompt: "Use $ore-quality-engineering to handle this work with evidence and explicit gates."

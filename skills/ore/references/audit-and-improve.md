@@ -10,6 +10,8 @@ Use this mode to evaluate an existing project, produce evidence-backed findings,
 
 If intent is unclear, default to audit only. A request to “fix,” “repair,” “improve,” “clean up,” “modernize,” “harden,” or “optimize” is sufficient authorization for relevant repository edits, not for external actions.
 
+An explicit no-write or strictly read-only audit also forbids creating `.ore/` in the target repository. Keep task state in conversation or another already-authorized store and state that repository-backed cross-window resume is unavailable for that run.
+
 ## Establish the baseline
 
 Before scoring or changing anything:
