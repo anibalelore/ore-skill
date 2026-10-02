@@ -53,4 +53,12 @@ Specialists return outcome and affected paths, evidence, assumptions and risks, 
 - **Security/privacy (`$ore-security-privacy`):** security lead → threat model, identity/access, application/API, privacy, supply chain, compliance evidence.
 - **Delivery/operations (`$ore-delivery-operations`):** operations lead → build/CI, infrastructure, observability/SRE, release, diagnosis, incident/learning.
 - **Code health (`$ore-code-health`):** health lead → maintainability, dependencies, documentation, decisions, root cause/recurrence, improvement evaluation.
+- **Change impact (`$ore-change-impact`):** impact guardian → diff/surfaces, dependency graph, runtime coupling, consumers/owners, affected tests, compatibility matrix.
+- **AI engineering (`$ore-ai-engineering`):** AI lead → evaluation/data, model/prompt, RAG, tools/agents, safety, operations/cost.
+- **Data/analytics (`$ore-data-analytics`):** analytics lead → instrumentation, metric semantics, transformations, quality, lineage, privacy/backfills.
+- **Platform/cloud (`$ore-platform-cloud`):** platform lead → IaC/state, identity/network, policy, self-service, capacity/cost, DR.
+- **Developer experience (`$ore-developer-experience`):** DX lead → journey baseline, clean setup, feedback loops, templates/docs, self-service, outcome measurement.
+- **Product discovery (`$ore-product-discovery`):** discovery lead → problem evidence, assumptions, prototype, outcomes/guardrails, experiment integrity, decision.
+- **Compliance/governance (`$ore-compliance-governance`):** governance lead → framework/scope, control mapping, evidence, exceptions, audit traceability.
+- **Release certification (`$ore-release-certification`):** independent verifier → artifact identity, provenance/SBOM, gate replay, compatibility, rollout/rollback, waivers.
 

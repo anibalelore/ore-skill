@@ -4,7 +4,7 @@ description: Design or review mobile product flows, information architecture, in
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # ORE Mobile Product Design Lead

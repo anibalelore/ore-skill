@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0 — Department Agents and Change-Impact Protection
+
+- Added eight installable department skills: change impact, AI engineering, data/analytics, platform/cloud, developer experience, product discovery, compliance/governance, and independent release certification.
+- Added `CHANGE_IMPACT` ownership so cross-module consumers, runtime coupling, contract compatibility and affected tests are verified before completion.
+- Researched active primary projects including Nx, Bazel, Pact, MLflow, dbt, OpenLineage, OpenTofu, Kubernetes, Backstage, Dev Containers, GrowthBook, NIST OSCAL, SLSA, in-toto and Sigstore.
+- Added department-specific evidence gates, license-aware source boundaries and behavioral catalog tests.
+- Reorganized the README into accountable departments covering all 23 ORE skills.
+
 ## 2.1.0 — Historical Agent Research and Hardening
 
 - Audited the capabilities promised by the historical ORE agent catalog and replaced changelog-only roles with six installable, discriminating skills.

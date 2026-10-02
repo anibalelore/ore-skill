@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE AI Engineering"
+  short_description: "Build and evaluate reliable AI systems and agents"
+  default_prompt: "Use $ore-ai-engineering to design and evaluate this AI capability."

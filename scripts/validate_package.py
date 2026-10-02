@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-VERSION = "2.1.0"
+VERSION = "2.2.0"
 EXPECTED_SKILLS = {
     "ore",
     "ore-android",
@@ -26,6 +26,14 @@ EXPECTED_SKILLS = {
     "ore-security-privacy",
     "ore-delivery-operations",
     "ore-code-health",
+    "ore-change-impact",
+    "ore-ai-engineering",
+    "ore-data-analytics",
+    "ore-platform-cloud",
+    "ore-developer-experience",
+    "ore-product-discovery",
+    "ore-compliance-governance",
+    "ore-release-certification",
 }
 
 
@@ -73,8 +81,13 @@ def main() -> int:
             fail(errors, f"missing {ui.relative_to(ROOT)}")
         else:
             ui_text = ui.read_text(encoding="utf-8")
+            if "TODO" in ui_text:
+                fail(errors, f"unfinished TODO: {ui.relative_to(ROOT)}")
             if f"${name}" not in ui_text:
                 fail(errors, f"default prompt does not invoke ${name}: {ui.relative_to(ROOT)}")
+            short = re.search(r'^\s*short_description:\s*"([^"]+)"\s*$', ui_text, re.MULTILINE)
+            if not short or not 25 <= len(short.group(1)) <= 64:
+                fail(errors, f"short_description must be 25-64 characters: {ui.relative_to(ROOT)}")
 
     for manifest in (ROOT / "plugin.json", ROOT / ".codex-plugin" / "plugin.json"):
         try:
@@ -96,9 +109,11 @@ def main() -> int:
         skills_root / "ore" / "references" / "durable-state.md",
         skills_root / "ore" / "references" / "form-intelligence.md",
         skills_root / "ore" / "references" / "legacy-agent-study.md",
+        skills_root / "ore" / "references" / "department-agent-study.md",
         ROOT / "evals" / "test_ore_state.py",
         ROOT / "evals" / "test_form_contract.py",
         ROOT / "evals" / "test_legacy_agent_catalog.py",
+        ROOT / "evals" / "test_department_agent_catalog.py",
         ROOT / "evals" / "behavioral-scenarios.md",
         skills_root / "ore" / "scripts" / "validate_form_contract.py",
     ]

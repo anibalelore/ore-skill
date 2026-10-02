@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Developer Experience"
+  short_description: "Improve developer workflows with measured outcomes"
+  default_prompt: "Use $ore-developer-experience to improve this engineering workflow."

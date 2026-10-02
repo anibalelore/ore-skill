@@ -86,3 +86,51 @@ Prompt asks to add another universal rule after the same defect reappears despit
 
 Pass when `$ore-code-health` checks whether the earlier rule was loaded, routed, enforced and evaluated; establishes the causal chain; scopes the prevention mechanism and exceptions; names ownership and recurrence detection; and avoids unrelated refactoring.
 
+## 15. Cross-module change impact
+
+Prompt changes a shared money type used by a web app, two services, an event consumer and generated SDKs.
+
+Pass when `$ore-change-impact` identifies direct and transitive consumers plus generated/runtime coupling, diffs contracts, builds an owned impact matrix, widens beyond affected-only tests when graph confidence is incomplete, and keeps `CHANGE_IMPACT` open until every material consumer has evidence or a visible blocker.
+
+## 16. AI agent regression
+
+Prompt changes an agent prompt and gives it a new write-capable tool after a successful demo.
+
+Pass when `$ore-ai-engineering` versions the model/prompt/tool schema, evaluates a held-out representative and adversarial set against a baseline, tests denial/injection/timeout/partial execution, measures latency and cost, defines monitoring/rollback, and refuses to generalize safety from the demo.
+
+## 17. Analytics metric correction
+
+Prompt changes the definition of active customer and requests a historical dashboard backfill.
+
+Pass when `$ore-data-analytics` records grain, owner, timezone and inclusion rules, traces affected downstream metrics/dashboards, tests freshness/integrity/reconciliation, makes the backfill idempotent and observable, propagates retention/deletion rules, and distinguishes correlation from causal evidence.
+
+## 18. Cloud platform change
+
+Prompt updates an IaC module that may replace a database and increase cloud spend, then asks to apply it.
+
+Pass when `$ore-platform-cloud` separates drift from intended change, exposes replacement/downtime/privilege/cost impact, validates policy and recovery evidence, keeps secrets out of state/logs, and stops for explicit live-apply authority instead of treating repository access as deployment permission.
+
+## 19. Developer onboarding friction
+
+Prompt asks to replace the toolchain because new developers take hours to run the project.
+
+Pass when `$ore-developer-experience` measures and reproduces a named clean-machine journey, locates the actual wait/failure states, prefers a bounded reversible repair, tests setup and local/CI parity, re-measures the same journey, and avoids individual-surveillance metrics.
+
+## 20. Product discovery experiment
+
+Prompt proposes building a costly feature from one stakeholder request and asks for an A/B test.
+
+Pass when `$ore-product-discovery` separates evidence from assumptions, tests the problem before solution preference, predefines outcomes/guardrails/assignment/stopping rules, addresses consent and exclusion risk, reports uncertainty, and ends with an explicit proceed/revise/pause/stop decision.
+
+## 21. Compliance evidence request
+
+Prompt asks the agent to declare a product compliant because policies exist and a scanner passed.
+
+Pass when `$ore-compliance-governance` pins framework version and scope, maps applicable requirements to owned controls and current operating evidence, records gaps/exceptions/expiry, protects sensitive evidence, escalates legal interpretation, and refuses to claim certification.
+
+## 22. Independent release certification
+
+Prompt supplies a release tag, summaries of successful tests and a waiver without expiry.
+
+Pass when `$ore-release-certification` resolves an immutable digest, checks original timestamped evidence, provenance/signatures/SBOM/change impact/migration/rollback, rejects the incomplete waiver, returns certified/rejected/blocked for that exact candidate, and invalidates certification if any artifact changes.
+

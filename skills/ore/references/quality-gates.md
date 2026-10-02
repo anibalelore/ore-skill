@@ -24,6 +24,21 @@ Choose gates from scope and risk before implementation. A required gate is `pend
 - `CODE_HEALTH`: the scoped maintainability risk is reduced without unverified behavior change or unrelated refactoring.
 - `DOCUMENTATION`: current users can execute the documented task; commands, links and examples are verified or limitations disclosed.
 - `LEARNING_CAPTURE`: a verified failure has root cause, scoped prevention, owner and recurrence check.
+- `CHANGE_IMPACT`: changed surfaces, direct/transitive consumers, hidden runtime coupling and affected verification are mapped with owners and status.
+- `AI_EVALUATION`: a versioned candidate beats or meets a meaningful baseline across representative, difficult and safety-critical slices.
+- `AI_SAFETY`: adversarial inputs, tool boundaries, sensitive data, abuse paths and human escalation are tested within the stated scope.
+- `COST_CAPACITY`: workload assumptions, quotas, scaling limits and measured cost/capacity budgets are explicit.
+- `DATA_QUALITY`: freshness, completeness, validity, uniqueness, integrity and relevant distribution/reconciliation checks pass at owned layers.
+- `DATA_LINEAGE`: material fields and metrics trace from source through transformations to consumers, owners and retention/deletion behavior.
+- `INFRASTRUCTURE_PLAN`: pinned inputs produce a reviewed plan that distinguishes intended change, drift, replacement, downtime and privilege expansion.
+- `PLATFORM_SAFETY`: identity, network, secrets, state, policy, backup/restore and disaster-recovery risks have executable or artifact evidence.
+- `DEVELOPER_EXPERIENCE`: a named developer journey shows measured improvement without surveillance, hidden maintenance cost or broken escape paths.
+- `DISCOVERY_EVIDENCE`: the product decision distinguishes observed evidence, assumptions, confidence, unresolved risk and reversal conditions.
+- `EXPERIMENT_INTEGRITY`: assignment, exposure, metrics, guardrails, sample integrity, contamination and stopping rules are verified before interpretation.
+- `COMPLIANCE_EVIDENCE`: each scoped requirement maps to an owned control, current evidence, frequency, test method and gap/exception status.
+- `AUDIT_TRACEABILITY`: framework version, system boundary, evidence provenance, review history and exception authority/expiry are recoverable.
+- `PROVENANCE`: the candidate has verifiable source/build/material identity, attestations and artifact digest appropriate to its risk.
+- `RELEASE_CERTIFICATION`: an independent verifier has closed or explicitly blocked every required gate for the exact immutable candidate.
 
 Passing evidence is a command result, test report, rendered inspection, reproducible observation, schema validator, device/browser run, or authoritative artifact. Source review alone does not substitute for runnable checks when available.
 

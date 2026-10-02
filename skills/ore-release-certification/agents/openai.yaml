@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Release Certification"
+  short_description: "Independently verify artifacts before release promotion"
+  default_prompt: "Use $ore-release-certification to verify this release candidate."

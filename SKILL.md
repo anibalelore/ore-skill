@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document w
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering

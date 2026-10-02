@@ -4,7 +4,7 @@ description: Design and implement expressive web experiences using scroll storyt
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # ORE Creative Web Lead

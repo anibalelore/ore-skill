@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Product Discovery"
+  short_description: "Validate product problems, outcomes, and experiments"
+  default_prompt: "Use $ore-product-discovery to validate this product opportunity."

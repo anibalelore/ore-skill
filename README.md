@@ -2,7 +2,7 @@
 
 > Durable state, visible progress, the right specialists, and evidence before completion.
 
-ORE is an installable collection of Agent Skills for substantial software work. Version 2.1 combines repository-backed state and computed progress with externally researched specialists for mobile, web, product architecture, backend/data, quality, security/privacy, delivery/operations, code health and discovery.
+ORE is an installable company of Agent Skills for substantial product and software work. Version 2.2 combines repository-backed state, computed progress and 23 externally researched specialists organized into accountable departments.
 
 ## What is now enforceable
 
@@ -10,30 +10,76 @@ ORE is an installable collection of Agent Skills for substantial software work. 
 - **Automatic percentage:** explicit ORE work reports evidence-based progress without the user asking. The percentage is computed from persisted weighted deliverables.
 - **Concurrency protection:** state writes can require the last observed revision so a stale window cannot silently overwrite a newer one.
 - **Form quality:** material forms require an authoritative field contract and tests for semantics, validation, reference lists, roles, accessibility, drafts and idempotency.
-- **Real specialist routing:** dedicated skills cover native Android, native iOS, Flutter, mobile UI/UX, web engineering, creative web, SEO/GEO/AEO and form workflows.
+- **Department routing:** ORE selects accountable specialists across product, experience, application engineering, AI/data, integration quality, security/governance, platform/operations and code health.
+- **Change-impact protection:** cross-module changes require a blast-radius map, affected-consumer verification and appropriately widened tests before completion.
 - **Evidence gates:** completion is blocked by unfinished deliverables, unresolved blockers or required gates without evidence.
 
 The persistence guarantee applies only when windows share the same repository storage and load ORE. ORE does not claim invisible global memory across unrelated clients or workspaces.
 
-## Included skills
+## Agent departments
 
-| Skill | Responsibility |
+### Executive orchestration and product
+
+| Agent | Responsibility |
 | --- | --- |
-| `$ore` | Durable orchestration, progress, handoffs, gates and integration |
-| `$ore-android` | Native Kotlin/Compose Android engineering |
-| `$ore-ios` | Native Swift/SwiftUI/UIKit engineering |
-| `$ore-flutter` | Flutter/Dart and native integration |
-| `$ore-mobile-design` | Mobile product, UI, UX, accessibility and design systems |
-| `$ore-web-engineering` | Web architecture, implementation, quality and release |
+| `$ore` | Accountable orchestration, durable progress, routing, gates and integration |
+| `$ore-product-discovery` | User problems, assumptions, prototypes, outcomes and controlled experiments |
+| `$ore-product-architecture` | Specification, repository archaeology, domain modeling and architecture decisions |
+
+### Experience, design and discovery
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-mobile-design` | Mobile product design, UI, UX, accessibility and design systems |
+| `$ore-form-workflows` | Role-aware, validated, accessible and persistent data-entry workflows |
 | `$ore-creative-web` | Scroll stories, motion, WebGL/3D and playful interaction |
 | `$ore-search-discovery` | Technical SEO, information architecture, structured data, AEO/GEO and measurement |
-| `$ore-form-workflows` | Role-aware, validated and accessible data-entry workflows |
-| `$ore-product-architecture` | Product specification, repository archaeology, domain and architecture decisions |
-| `$ore-backend-data` | APIs, services, databases, messaging, integrations and migrations |
-| `$ore-quality-engineering` | Risk-based testing, accessibility, localization, performance and resilience |
-| `$ore-security-privacy` | Threat modeling, authorization, privacy, compliance evidence and supply chain |
-| `$ore-delivery-operations` | CI/CD, observability, release, rollback and incident response |
-| `$ore-code-health` | Maintainability, documentation, dependencies and recurrence prevention |
+
+### Application engineering
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-web-engineering` | Web architecture, frontend/full-stack implementation, quality and release |
+| `$ore-android` | Native Kotlin/Compose Android engineering |
+| `$ore-ios` | Native Swift/SwiftUI/UIKit engineering |
+| `$ore-flutter` | Flutter/Dart engineering and native integration |
+| `$ore-backend-data` | Transactional APIs, services, databases, messaging, integrations and migrations |
+
+### AI, data and decision systems
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-ai-engineering` | ML/LLM/RAG/agent evaluation, safety, observability, latency and cost |
+| `$ore-data-analytics` | Analytics events, metric contracts, transformations, data quality and lineage |
+
+### Integration, quality and release assurance
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-change-impact` | Dependency blast radius, affected consumers, compatibility and cross-module regressions |
+| `$ore-quality-engineering` | Risk-based testing, synthetic users, accessibility, localization, performance and resilience |
+| `$ore-release-certification` | Independent verification of immutable candidates, provenance, gates, rollout and rollback |
+
+### Security, privacy and governance
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-security-privacy` | Threat modeling, authorization, privacy and supply-chain security |
+| `$ore-compliance-governance` | Framework scope, control mapping, evidence, exceptions and audit traceability |
+
+### Platform, operations and developer productivity
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-platform-cloud` | Cloud infrastructure, IaC, internal platforms, identity, capacity, cost and disaster recovery |
+| `$ore-delivery-operations` | CI/CD, observability, progressive release, rollback and incident response |
+| `$ore-developer-experience` | Onboarding, reproducible environments, feedback loops, self-service and measured friction |
+
+### Code health and organizational learning
+
+| Agent | Responsibility |
+| --- | --- |
+| `$ore-code-health` | Maintainability, documentation, dependencies, root cause and recurrence prevention |
 
 ORE routes only the skills the task needs. The hierarchy is shallow: ORE lead → domain lead → bounded specialist. The ORE lead remains accountable for integration and overall progress.
 
@@ -90,7 +136,7 @@ Behavioral scenarios live in `evals/behavioral-scenarios.md`. The package valida
 
 ## External references
 
-ORE favors official platform documentation and curated open-source references. See `skills/ore/references/ecosystem-sources.md` and the historical-agent study in `skills/ore/references/legacy-agent-study.md`. Repositories are not bundled or silently installed; license, version, attribution and ORE evaluations must be checked before adoption.
+ORE favors official platform documentation and curated open-source references. See `skills/ore/references/ecosystem-sources.md`, `skills/ore/references/legacy-agent-study.md` and `skills/ore/references/department-agent-study.md`. Repositories are not bundled or silently installed; license, version, attribution and ORE evaluations must be checked before adoption.
 
 For SEO/GEO/AEO, ORE improves eligibility, comprehension, authority, answerability and measurement. It never guarantees a ranking or recommendation by Google or an AI system.
 

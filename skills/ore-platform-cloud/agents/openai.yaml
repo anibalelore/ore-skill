@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Platform Cloud"
+  short_description: "Build safe cloud platforms and infrastructure workflows"
+  default_prompt: "Use $ore-platform-cloud to design and validate this platform change."

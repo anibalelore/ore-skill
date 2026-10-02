@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Change Impact"
+  short_description: "Map blast radius and prevent cross-module regressions"
+  default_prompt: "Use $ore-change-impact to verify the blast radius of this change."

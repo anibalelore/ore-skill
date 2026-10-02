@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -75,6 +75,14 @@ Route relevant work to the installed specialist skill or use its instructions as
 - `$ore-security-privacy` — threat modeling, authorization, privacy, compliance evidence and supply-chain security.
 - `$ore-delivery-operations` — CI/CD, observability, release, rollback, production diagnosis and incidents.
 - `$ore-code-health` — maintainability, documentation, dependencies, root cause and recurrence prevention.
+- `$ore-change-impact` — dependency blast radius, affected consumers, compatibility and cross-module regression prevention.
+- `$ore-ai-engineering` — ML/LLM/RAG/agent evaluation, safety, observability and cost.
+- `$ore-data-analytics` — analytics events, metric contracts, transformations, data quality and lineage.
+- `$ore-platform-cloud` — cloud infrastructure, IaC, internal platforms, capacity, cost and disaster recovery.
+- `$ore-developer-experience` — onboarding, local/CI feedback, self-service, templates and measured engineering friction.
+- `$ore-product-discovery` — user problems, assumptions, prototypes, outcomes and controlled experiments.
+- `$ore-compliance-governance` — framework scope, control mapping, evidence, exceptions and audit traceability.
+- `$ore-release-certification` — independent verification of immutable release candidates, provenance, gates and rollback.
 
 The ORE lead owns integration. Specialists return bounded artifacts and evidence; they do not redefine product scope or declare the whole task complete.
 

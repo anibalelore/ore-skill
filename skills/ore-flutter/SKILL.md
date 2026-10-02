@@ -4,7 +4,7 @@ description: Build, review, debug, or modernize Flutter applications with Dart, 
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # ORE Flutter Lead

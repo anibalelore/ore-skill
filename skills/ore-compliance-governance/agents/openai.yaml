@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Compliance Governance"
+  short_description: "Manage controls, evidence, risk, and audit traceability"
+  default_prompt: "Use $ore-compliance-governance to map and verify these controls."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE Data Analytics"
+  short_description: "Build governed analytics and trustworthy data products"
+  default_prompt: "Use $ore-data-analytics to design and verify this data product."
