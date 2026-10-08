@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.4.0 — Integrated Security, Privacy, Trust and Validated Autofix
+
+- Preserved the 26 existing skills, durable-state schema, UI policies, form contracts and plugin discovery; versioned the package forward from 2.3.0 rather than replacing ORE with a 2.0 package.
+- Added five internal coordinated audit capabilities and seven natural-language modes to the existing ORE lead; no additional agents or CLI audit commands.
+- Added one canonical catalog for SEC-01–09, LEG-01–20 and ADV-01–07, with evidence, applicability and safe verification procedures.
+- Added stack, business and jurisdiction playbooks plus a report/checkpoint template; reinforced existing security, governance, operations and quality-gate integration.
+- Mapped existing severities to P0–P3, separated suspicion/confirmation/repair/validation/risk acceptance, and capped repair/re-audit at five iterations with no-progress stopping.
+- Added an optional audit-ledger validator and regression tests for current-state retest evidence, coverage, risk acceptance and stopping boundaries, including a local synthetic cross-tenant audit/repair case.
+- Extended package validation to local Markdown references throughout all skills. Detailed results and uncovered acceptance evidence are in UPDATE_REPORT.md.
+
 ## 2.3.0 — Business Lifecycle, Governed Memory, and Context Efficiency
 
 - Added `$ore-business-lifecycle` as the accountable end-to-end process owner for canonical identity, data and progress continuity in any domain workflow; lead → customer → purchase is only one example.

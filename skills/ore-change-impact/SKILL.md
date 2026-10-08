@@ -4,7 +4,7 @@ description: Analyze and verify the blast radius of code, schema, API, event, de
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # ORE Change Impact Guardian

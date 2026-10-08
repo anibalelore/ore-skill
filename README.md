@@ -2,7 +2,7 @@
 
 > Durable state, visible progress, the right specialists, and evidence before completion.
 
-ORE is an installable company of Agent Skills for substantial product and software work. Version 2.3 combines repository-backed state, computed progress and 26 externally researched specialists organized into accountable departments.
+ORE is an installable company of Agent Skills for substantial product and software work. Version 2.4 preserves repository-backed state, computed progress and 26 externally researched skills, and adds integrated security, privacy/compliance, accessibility/trust, observability and validated autofix passes.
 
 ## What is now enforceable
 
@@ -124,6 +124,16 @@ $ore Build the customer onboarding flow for Android, iOS and web. Persist the
 workflow, show progress automatically, use the supplied industry list exactly,
 and close accessibility, form, security and release gates with evidence.
 ```
+
+## Integrated audit usage
+
+Invoke `$ore` with `ORE audit`, `ORE security`, `ORE compliance`, `ORE accessibility`, `ORE fix`, `ORE loop` or `ORE report` in the request. These are natural-language capabilities, not new CLI commands. Audit/security/compliance/accessibility inspect and report by default; fix/loop authorize relevant repository repairs while preserving external-action boundaries. A strictly read-only audit creates no repository state or reports on disk.
+
+The five capabilities share [29 original controls and seven advanced controls](skills/ore/references/audit-controls.md), [stack/business/jurisdiction playbooks](skills/ore/references/audit-stack-playbooks.md), and an [audit report contract](skills/ore/references/audit-report.md). Applicable checks also run proportionally when ORE develops forms, login, APIs, tables, payments, uploads, AI, subscriptions, interfaces or deployments. Looping stops after at most five iterations or earlier without verified progress. Applied changes remain unvalidated until affected retest and regression checks pass.
+
+Example: `$ore ORE loop: audit this repository and repair confirmed security findings using local tests; keep production actions out of scope.` Legal applicability requires actual jurisdiction facts and current authoritative sources. Missing evidence remains pending; ORE does not claim complete security or legal certification.
+
+For optional JSON evidence ledgers, run `python skills/ore/scripts/validate_audit_report.py <ledger.json>`. This validates coverage, status and evidence links; it does not scan an application. See [UPDATE_REPORT.md](UPDATE_REPORT.md) for this update's discovery, validation and remaining limits.
 
 ## Durable state lifecycle
 

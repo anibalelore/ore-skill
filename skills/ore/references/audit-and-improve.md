@@ -2,6 +2,8 @@
 
 Use this mode to evaluate an existing project, produce evidence-backed findings, and—when requested—repair or improve the current implementation through bounded, validated iterations.
 
+For security, privacy, accessibility/trust and observability, use the single catalog in [audit-controls.md](audit-controls.md), relevant [stack playbooks](audit-stack-playbooks.md), and [report contract](audit-report.md). Existing general correctness and architecture reviews remain available.
+
 ## Choose the mode from user intent
 
 - **Audit only:** inspect, run safe read-only diagnostics, verify findings, rank them, and report. Do not modify project files.
@@ -54,6 +56,10 @@ Each reported finding must include:
 - confidence level when evidence is incomplete;
 - validation required after repair.
 
+Also record stable finding ID, linked control IDs, exploit preconditions, side effects, owner and validation status. Keep `suspected` separate from `confirmed`; source evidence must establish the relevant reachability and missing control before confirmation. If a safe runtime reproduction is unavailable, state that limitation. Severity is independent of confidence and finding lifecycle.
+
+Use the existing names with stable priority aliases: **P0 / Critical** for active information exposure, severe unauthorized access or immediate significant harm; **P1 / High** for an important exploitable vulnerability or an absent essential control with material impact; **P2 / Medium** for a relevant weakness requiring scheduled repair; **P3 / Low** for bounded preventive/documentation/hardening work. Informational observations remain non-vulnerability notes and do not inflate P3 counts. L0–L5 describe operation risk, not finding severity.
+
 Use severity based on impact and likelihood:
 
 - **Critical:** active compromise, destructive data risk, or release-blocking catastrophic failure.
@@ -89,7 +95,11 @@ When repository changes are authorized:
 6. Reassess affected findings and any newly exposed risk.
 7. Continue with the next justified batch while within scope and while meaningful verified progress remains.
 
-Stop the loop when required findings are resolved, the requested scope is complete, remaining items are lower-priority backlog, or progress requires new authority/external state. Do not keep refactoring merely because further changes are possible.
+Run no more than five automatic discover/audit/plan/repair/validate/re-audit iterations per execution; a smaller authorized limit takes precedence. Count unsuccessful batches too. Stop earlier when no verified progress is made, authority/access is missing for the next action, or the requested scope is complete. Do not reset the counter through delegation, compaction or retries. A later explicit continuation starts a new run from the checkpoint.
+
+After each batch run affected regression, authentication/permission and configuration checks; compare behavior to the baseline and re-audit the affected controls. A code edit alone never resolves a finding. Mark an applied but untested change `fixed_unvalidated`; mark `resolved` only with passing retest and affected regression evidence for the current state. Never weaken a security check to make tests pass. Use versioned database migrations and preserve compatible workflows; do not blindly update major dependencies or introduce paid services.
+
+The target is zero confirmed, unresolved P0/P1 findings that can be repaired within the authorized scope. Lower-priority backlog does not justify stopping while an authorized, correctable P0/P1 remains. Accepted risks remain visible findings with owner, rationale, scope and expiry; acceptance is not a repair or a claim of zero findings. When stopping, preserve iteration number, repository revision, changes, gate results, pending priorities and exact next action in the existing durable state plus report ledger. For a strict no-write audit, retain this checkpoint in conversation or an authorized external store.
 
 ## External boundaries
 

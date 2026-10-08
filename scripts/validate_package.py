@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-VERSION = "2.3.0"
+VERSION = "2.4.0"
 EXPECTED_SKILLS = {
     "ore",
     "ore-android",
@@ -102,10 +102,13 @@ def main() -> int:
 
     core = skills_root / "ore" / "SKILL.md"
     core_text = core.read_text(encoding="utf-8")
-    for relative in re.findall(r"\]\(([^)#]+\.md)\)", core_text):
-        target = core.parent / relative
-        if not target.exists():
-            fail(errors, f"broken core reference: {relative}")
+    for source in skills_root.rglob("*.md"):
+        for relative in re.findall(r"\]\(([^)#]+\.md)\)", source.read_text(encoding="utf-8")):
+            if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", relative):
+                continue
+            target = source.parent / relative
+            if not target.is_file():
+                fail(errors, f"broken reference in {source.relative_to(ROOT)}: {relative}")
 
     required = [
         skills_root / "ore" / "scripts" / "ore_state.py",
@@ -121,6 +124,11 @@ def main() -> int:
         ROOT / "evals" / "test_workflow_memory_catalog.py",
         ROOT / "evals" / "behavioral-scenarios.md",
         skills_root / "ore" / "scripts" / "validate_form_contract.py",
+        skills_root / "ore" / "scripts" / "validate_audit_report.py",
+        skills_root / "ore" / "references" / "audit-controls.md",
+        skills_root / "ore" / "references" / "audit-stack-playbooks.md",
+        skills_root / "ore" / "references" / "audit-report.md",
+        ROOT / "evals" / "test_audit_report.py",
     ]
     for path in required:
         if not path.exists():

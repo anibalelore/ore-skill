@@ -4,12 +4,14 @@ description: Threat-model, audit, design, or harden application security, author
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # ORE Security and Privacy Lead
 
 Produce evidence-backed risk reduction. Severity combines exploitability, impact, exposure and confidence; framework category names are not findings.
+
+Use the shared [control catalog](../ore/references/audit-controls.md) for SEC-01–09 and relevant ADV/LEG controls, the [stack playbooks](../ore/references/audit-stack-playbooks.md) for actual technologies/jurisdictions, and the [report contract](../ore/references/audit-report.md) for findings and retest evidence. These are internal ORE passes, not new competing agents. P0–P3 map to critical/high/medium/low; suspected evidence stays separate. Authorized repair/re-audit runs have a five-iteration ceiling and stop earlier without verified progress. Preserve failed/unverified coverage and accepted risk explicitly.
 
 ## Route specialist passes
 

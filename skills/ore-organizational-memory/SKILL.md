@@ -4,7 +4,7 @@ description: Curate durable, project-scoped organizational memory with provenanc
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # ORE Organizational Memory Curator

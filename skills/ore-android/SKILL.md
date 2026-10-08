@@ -4,7 +4,7 @@ description: Build, review, debug, or modernize native Android applications with
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # ORE Android Native Lead

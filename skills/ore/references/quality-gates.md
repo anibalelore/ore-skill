@@ -49,5 +49,9 @@ Choose gates from scope and risk before implementation. A required gate is `pend
 
 Passing evidence is a command result, test report, rendered inspection, reproducible observation, schema validator, device/browser run, or authoritative artifact. Source review alone does not substitute for runnable checks when available.
 
+For integrated audits, attach [control IDs](audit-controls.md) to existing gates rather than create duplicate gates: SEC/ADV security → `SECURITY_PRIVACY`; applicable LEG legal/privacy → `COMPLIANCE_EVIDENCE` and `AUDIT_TRACEABILITY`; LEG-13–15 → `ACCESSIBILITY`; SEC-09 → `OBSERVABILITY`; database/payment changes → `DATA_CONTRACT` and applicable `MIGRATION_SAFETY`; ADV-07 → `AI_SAFETY`; repairs → `TESTS` and affected gates. Preserve commercial/content-trust findings in the shared report even if no specialized gate applies.
+
+An accepted P0/P1 risk may close a gate only under the existing authorized exception policy, with owner, scope, rationale and expiry; it remains unresolved in the finding counts. A ledger validator pass proves structure/evidence links only and cannot close application security or legal gates by itself.
+
 When a check cannot run, record the exact command or environment that is missing, what remains unverified, and the safest next validation step. A blocker does not become a pass.
 

@@ -4,7 +4,7 @@ description: Design, repair, and verify any end-to-end domain workflow so entiti
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.3.0"
+  version: "2.4.0"
 ---
 
 # ORE Business Lifecycle and Entity Continuity Lead
