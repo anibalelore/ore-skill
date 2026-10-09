@@ -4,7 +4,7 @@ description: Design, build, audit, and operate analytics events, metrics, transf
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.2.1-alpha.1"
+  version: "4.2.1-alpha.3"
 ---
 
 # ORE Data and Analytics Lead

@@ -14,6 +14,7 @@ mod.register(on, {});
 let processes = 0, passed = 0, asks = 0;
 let lastPayload = null, lastQuestion = null;
 const questions = [];
+const notices = [];
 const $ = {
   plugin: { root: '/plugin' },
   command: { register: async () => {} },
@@ -33,11 +34,11 @@ const $ = {
     if (input.runtimeUnavailable) throw new Error('Python unavailable');
     return { exitCode: 0, stdout: JSON.stringify(input.result ?? { runtime_result: { allowed: true } }), stderr: '', isStdoutTruncated: false };
   } },
-  ui: { ask: async (question, options) => { asks++; lastQuestion = question; questions.push({ question, options }); if (input.dismiss) throw new Error('dismissed'); return input.answers?.[asks - 1] ?? input.answer ?? 'Cancel'; } }
+  ui: { notice(id, text) { if (input.noticeFailure) throw new Error('notice unavailable'); notices.push({ id, text }); }, ask: async (question, options) => { asks++; lastQuestion = question; questions.push({ question, options }); if (input.dismiss) throw new Error('dismissed'); return input.answers?.[asks - 1] ?? input.answer ?? 'Cancel'; } }
 };
 const event = input.tool ? 'tool.call' : 'command.run';
 const continuation = async () => { passed++; return { continued: true }; };
 continuation.signal = { aborted: input.aborted ?? false };
 const target = handlers.find(h => h.event === event && (input.tool ? h.matcher.tool === input.tool : h.matcher.command === input.mod));
-const result = await target.fn($, input.tool ? { tool: input.tool, file_path: '/workspace/src/a.py' } : { args: JSON.stringify(input.request ?? {}) }, continuation);
-process.stdout.write(JSON.stringify({ result, processes, passed, asks, lastPayload, lastQuestion, questions }));
+const result = await target.fn($, input.tool ? { tool: input.tool, tool_use_id: 'fixture-file', file_path: '/workspace/src/a.py' } : { args: JSON.stringify(input.request ?? {}) }, continuation);
+process.stdout.write(JSON.stringify({ result, processes, passed, asks, lastPayload, lastQuestion, questions, notices }));

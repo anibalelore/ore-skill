@@ -1,6 +1,6 @@
 # ORE 4.2.1 — Human-Friendly Approval Experience
 
-Prerelease: **4.2.1-alpha.1**. The shared presenter improves real ORE dialogs in
+Prerelease: **4.2.1-alpha.3**. The shared presenter improves real ORE dialogs in
 guard, approval-ledger, model-router, browser consent and scoped Write/Edit reviews.
 Inventory remains 29 skills, 28 mods and 9 departments.
 
@@ -11,10 +11,12 @@ Inventory remains 29 skills, 28 mods and 9 departments.
 3. Technical details: complete exact JSON parameters, with real commands/SQL also
    displayed in code fences that safely accommodate backticks in the contents.
 
-High/critical actions show full details in the first dialog before approval. Other
-requests first offer “Rechazar” and “Revisar detalles”; after review, the full-details
+All requests first show a prose summary without commands, SQL or raw parameters.
+Requests first offer “Rechazar” and “Revisar detalles”; after mandatory review, the full-details
 dialog offers “Aprobar una vez”. Free text cannot skip the required details step.
 Reviewing details grants nothing. The selected operation reaches `next(e)` unchanged.
+High/critical actions also require this review: their critical details remain visible
+on the second screen before an approval option becomes available.
 
 For a ledger/policy mutation, one approval authorizes one write of the exact scope,
 expiry, configuration and parameters shown. That written policy may last for its
@@ -40,8 +42,8 @@ of sufficient permissions. Hidden scripts, dynamic commands and indirect effects
 still require host review. Custom guard patterns extend built-in protections.
 
 Only prose normalizes literal escaped newlines. Command/SQL bytes, parameters,
-evidence, diffs and escapes remain unchanged in the full details. Readable commands
-and exact JSON are both shown to distinguish literal escape sequences. User-supplied
+evidence, diffs and escapes remain unchanged in the full details. Commands or SQL
+appear once in a code block, followed by the remaining exact JSON parameters. User-supplied
 descriptions stay in the parameter block rather than becoming ORE instructions.
 
 Nothing is silently truncated. ORE blocks a request when the full rendered details
@@ -77,6 +79,14 @@ authorship or integrity is claimed without tests. This update creates no Supabas
 ## Supported host integration
 
 Existing `tool.call`/`command.run` hooks and `$.ui.ask` provide native interaction.
+The engine alone draws Claude's native permission dialog. This update compacts
+ORE's questions; it cannot hide or replace the host's command/SQL permission view.
+Guard and scoped Write/Edit reviews now attach a concise action, platform, project,
+destination and risk line with `$.ui.notice(e.tool_use_id, text)`. The engine binds
+it to that pending call and removes it when the call resolves. A failed annotation
+denies the reviewed operation; it grants no permission and never replaces exact
+content with a summary. Command-only ledger/model decisions have no native tool
+permission dialog to annotate.
 The repository's generated 2.1.295 declarations document the native AskUserQuestion
 dialog, 2–4 option labels, free text and dismissal/noninteractive rejection. Host calls
 remain in register modules for static permission auditing; the shared engine is pure.
@@ -86,9 +96,12 @@ remain in register modules for static permission auditing; the shared engine is 
 PermissionRequest. ORE neither installs allow-returning PermissionRequest hooks nor
 updates native allow rules or permission modes. [Plugins](https://code.claude.com/docs/en/plugins)
 provide packaging; ORE's existing optional-mod marketplace remains unchanged.
-Official pages were fetched on 2026-10-09. Mods documentation URLs were unavailable
-through the fetcher, so exact interaction contracts additionally use the checked-in
-SDK declarations and installed manifest validator.
+Official pages were fetched on 2026-10-09. The working mods documentation paths are
+[events](https://code.claude.com/docs/en/plugins/mods/events),
+[interface](https://code.claude.com/docs/en/plugins/mods/interface) and
+[API](https://code.claude.com/docs/en/plugins/mods/api). The interface guide explicitly
+excludes permission prompts from render sites. Exact annotation contracts use the
+checked-in 2.1.295 SDK declarations and installed manifest validator.
 
 The existing ledger writer records durable approvals/revocations. Guard choices stay
 ephemeral in the native interaction and create no reusable grant. Departments retain

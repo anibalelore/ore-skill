@@ -3,7 +3,7 @@ export type Approval = {
   action: string; reason: string; platform: string; project: string; environment: string;
   resources: string[]; risk: 'Bajo' | 'Medio' | 'Alto' | 'Crítico'; impact: string;
   reversal: string; permissions: string; checks: string[]; exact: string;
-  critical: string; blocked: string | null;
+  critical: string; parameters: string; blocked: string | null;
 };
 export const APPROVE = 'Aprobar una vez';
 export const REJECT = 'Rechazar';
@@ -45,6 +45,9 @@ export function summarize(tool: string, input: unknown, project: string, reason?
   const text = strings(executable).join('\n');
   const sql = typeof data.sql === 'string' ? data.sql : typeof data.query === 'string' ? data.query : '';
   const command = typeof data.command === 'string' ? data.command : '';
+  const remaining = { ...data };
+  if (command) delete remaining.command;
+  else if (sql) delete remaining[typeof data.sql === 'string' ? 'sql' : 'query'];
   const target = [data.environment, data.target, data.project_id, data.project_ref, data.context, data.cluster].filter(v => typeof v === 'string').join(' ');
   const production = /\bprod(?:uction)?\b|--prod\b/i.test(`${target} ${command} ${sql}`);
   const destructive = /\b(?:DROP\s+(?:TABLE|DATABASE|SCHEMA)|TRUNCATE|DELETE\s+FROM|terraform\s+destroy|rm\s+[^\n]*(?:-[a-z]*[rf]|--recursive|--force)|Remove-Item|rmdir\s+\/s|del\s+\/[sq]|git\s+reset\s+--hard|git\s+push[^\n]*(?:--force|-f\b|\s\+\S+)|kubectl\s+delete)\b/i.test(text);
@@ -74,17 +77,24 @@ export function summarize(tool: string, input: unknown, project: string, reason?
     reversal: destructive ? 'No garantizada; verificar copias y recuperación antes de aprobar.' : metadata || fileEdit ? 'Requiere un cambio explícito o restauración; no se revierte automáticamente.' : 'No verificada; revisar rollback y efectos externos.',
     permissions: metadata ? 'Consentimiento para guardar metadatos del proyecto; restricciones nativas intactas.' : 'Permisos de la herramienta y del destino; el host sigue siendo la autoridad.',
     checks, exact: blocked ? '' : exact,
+    parameters: blocked ? '' : command || sql ? JSON.stringify(remaining, null, 2) : exact,
     critical: blocked ? '' : command ? block(command, 'text') : sql ? block(sql, 'sql') : '', blocked };
   if (!result.blocked && renderApproval(result, true).length > MAX_PRESENTATION) {
     result.blocked = 'Los detalles completos superan el límite de presentación. Divide la operación; no se ha truncado ni ejecutado.';
-    result.exact = ''; result.critical = '';
+    result.exact = ''; result.critical = ''; result.parameters = '';
   }
   return result;
 }
 
 export function renderApproval(value: Approval, details = false): string {
   if (value.blocked) return `ORE · Solicitud bloqueada\n${value.blocked}\n¿Rechazar esta solicitud?`;
-  const summary = `ORE · Solicitud de permiso\nAcción: ${value.action}\nMotivo: ${value.reason}\nPlataforma: ${value.platform}\nProyecto: ${value.project}\nEntorno: ${value.environment}\n\nImpacto: ${value.impact}\nRecursos: ${value.resources.join(', ') || 'No identificados'}\nRiesgo: ${value.risk}\nReversión: ${value.reversal}\nPermisos: ${value.permissions}\n${value.checks.join('\n')}\nEstado: Pendiente de aprobación`;
-  const full = details || value.risk === 'Alto' || value.risk === 'Crítico';
-  return `${summary}${full ? `\n\nDetalles técnicos completos (sin modificar):\n${value.critical}\n${block(value.exact, 'json')}` : '\nDetalles técnicos completos disponibles en «Revisar detalles».'}\n\n¿Aprobar únicamente esta operación?`;
+  const summary = `ORE · Solicitud de permiso\n${value.platform} · ${value.project}\n\nAcción: ${value.action}\n${value.reason}\n\nEntorno: ${value.environment}\nRecursos: ${value.resources.join(', ') || 'No identificados'}\nImpacto: ${value.impact}\nRiesgo: ${value.risk} · Reversión: ${value.reversal}\nPermisos: ${value.permissions}\n${value.checks.join('\n')}\nEstado: Pendiente de aprobación`;
+  const full = details;
+  return `${summary}${full ? `\n\nDetalles técnicos completos (sin modificar):\n${value.critical}${value.parameters === '{}' ? '' : `\n${block(value.parameters, 'json')}`}\n\n¿Aprobar únicamente esta operación?` : '\n\nRevisa los detalles exactos antes de aprobar.\n¿Revisar detalles o rechazar?'}`;
+}
+
+/** A native permission annotation, never an authorization or executable content. */
+export function renderNotice(value: Approval): string {
+  if (value.blocked) throw new Error('Blocked operations have no approval notice');
+  return `ORE · ${value.action} · ${value.platform} · ${value.project} · ${value.environment} · Riesgo ${value.risk}`;
 }

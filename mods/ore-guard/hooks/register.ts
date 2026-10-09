@@ -16,7 +16,7 @@ async function load($: EngineInterface): Promise<Task | null> {
   } catch { return null; }
 }
 import { classify } from './risk.ts';
-import { summarize, renderApproval, APPROVE, REJECT, DETAILS } from './approval.ts';
+import { summarize, renderApproval, renderNotice, APPROVE, REJECT, DETAILS } from './approval.ts';
 
 export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
@@ -34,9 +34,11 @@ export const register: Register = (on, options) => {
       const snapshot = JSON.stringify(e);
       const review = summarize(e.tool, e, task.title, 'La acción puede modificar recursos o tener efectos externos.');
       if (review.blocked) return { deny: review.blocked };
-      const inline = review.risk === 'Alto' || review.risk === 'Crítico';
-      let answer = await $.ui.ask(renderApproval(review), inline ? [APPROVE, REJECT, DETAILS] : [REJECT, DETAILS]);
-      if (!inline && answer !== DETAILS) return { deny: 'ORE guard: exact details were not reviewed.' };
+      // Bound to this pending call; the engine removes it when the call resolves.
+      // Never replace its permission dialog or change the action being authorized.
+      $.ui.notice(e.tool_use_id, renderNotice(review));
+      let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+      if (answer !== DETAILS) return { deny: 'ORE guard: exact details were not reviewed.' };
       if (answer === DETAILS) answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
       if (answer !== APPROVE || next.signal.aborted || JSON.stringify(e) !== snapshot) return { deny: 'ORE guard: explicit approval was not granted for this exact action.' };
       const latest = await load($);

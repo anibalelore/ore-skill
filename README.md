@@ -9,7 +9,7 @@ approvals, blockers and specialist activity visible in the harness.
 
 | Core team | Optional runtime layer | Current release |
 | --- | --- | --- |
-| 29 skills across 9 departments | 6 established mods + 22 runtime adapters | **4.2.1-alpha.1 ? prerelease** |
+| 29 skills across 9 departments | 6 established mods + 22 runtime adapters | **4.2.1-alpha.3 ? prerelease** |
 
 **Start here:** [Install ORE](#install) ? [Try the mods](#claude-code-mods-optional) ?
 [Meet the team](#agent-departments) ? [Update history](#update-history)
@@ -102,7 +102,7 @@ what must pass before a stable 4.0.0 release.
 
 ## Why Adaptive Model Intelligence?
 
-ORE **4.2.1-alpha.1** adds concise native approval summaries with impact and complete
+ORE **4.2.1-alpha.3** adds concise native approval summaries with impact and complete
 technical details. Dangerous actions keep critical details visible; exact operations
 and host permissions remain authoritative. See the
 [approval experience and limits](docs/ore-4.2.1-approval-experience.md).
@@ -128,7 +128,7 @@ Adds `ore-signature-guard` and `ore-safeguards-monitor` through the shared runti
 
 | Version | Main improvement |
 | --- | --- |
-| **4.2.1-alpha.1** | Concise native approval summaries, impact, exact details and fail-closed presentation |
+| **4.2.1-alpha.3** | Concise native approval summaries, impact, exact details and fail-closed presentation |
 | **4.2.0-alpha.1 candidate** | Adaptive model recommendations, scoped governance, locks and native model/usage diagnostics; live switching pending |
 | **4.1.0-alpha.1** | Regulatory skills, signature patterns, safeguards evidence and notification readiness |
 | **4.0.0-alpha.1** | Runtime governance, 19 explicit adapters, synthetic business-flow engine and isolated browser exploration; certification in progress |

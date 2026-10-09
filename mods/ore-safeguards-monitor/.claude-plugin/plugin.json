@@ -1,6 +1,6 @@
 {
   "name": "ore-safeguards-monitor",
-  "version": "4.2.1-alpha.1",
+  "version": "4.2.1-alpha.3",
   "description": "Optional ORE runtime adapter: ore-safeguards-monitor; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

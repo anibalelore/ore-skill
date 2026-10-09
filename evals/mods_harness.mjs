@@ -25,9 +25,10 @@ if (input.mode === 'projection') {
   let tick;
   let asks = 0;
   const questions = [];
+  const notices = [];
   let passed = 0;
   let currentRaw = raw;
-  const callEvent = input.event ?? { tool: 'Bash', command: input.tool };
+  const callEvent = input.event ?? { tool: 'Bash', tool_use_id: 'fixture-call', command: input.tool };
   const $ = {
     command: { register: async () => {} },
     session: { cwd: async () => '/workspace' },
@@ -37,6 +38,11 @@ if (input.mode === 'projection') {
     } },
     clock: { every: (ms, fn) => { tick = fn; return { cancel() { tick = undefined; } }; } },
     ui: {
+      notice(id, text) {
+        if (input.noticeFailure) throw new Error('notice unavailable');
+        if (id !== callEvent.tool_use_id) throw new Error('wrong call');
+        notices.push({ id, text });
+      },
       invalidate() {}, log(text) { logs.push(text); },
       resolve() { return { Box: 'Box', Text: 'Text' }; },
       ask: async (question, options) => {
@@ -55,7 +61,7 @@ if (input.mode === 'projection') {
   if (input.tool && handlers.has('tool.call')) {
     passed = 0;
     const result = await handlers.get('tool.call')($, callEvent, next);
-    process.stdout.write(JSON.stringify({ result, asks, passed, logs, questions }));
+    process.stdout.write(JSON.stringify({ result, asks, passed, logs, questions, notices }));
   } else {
     if (input.updated && tick) {
       currentRaw = JSON.stringify(input.updated);

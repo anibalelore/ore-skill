@@ -1,6 +1,6 @@
 {
   "name": "ore-autopilot",
-  "version": "4.2.1-alpha.1",
+  "version": "4.2.1-alpha.3",
   "description": "Optional ORE runtime adapter: ore-autopilot; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

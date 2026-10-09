@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.2.1-alpha.3 — Native permission context — 2026-10-09
+
+- Attach a human-readable, call-bound summary to native permission dialogs through
+  the supported notice API in guard and scoped file reviews.
+- Group platform/project and risk/reversibility to compact ORE questions.
+- Fail closed on annotation failure; preserve native decisions and exact actions.
+- Validate 140 tests, package types and native manifest checks.
+
+## 4.2.1-alpha.2 — Summary-first approvals — 2026-10-09
+
+- Keep commands, SQL and raw parameters out of the initial ORE dialog at every risk level.
+- Require exact technical review before offering approval, including destructive actions.
+- Display executable SQL/commands once; preserve complete remaining parameters.
+- Clarify that Claude's native permission view is owned by the host.
+- Validate 138 tests and the guard, ledger and router TypeScript packages.
+
 ## 4.2.1-alpha.1 — Human-Friendly Approval Experience — 2026-10-09
 
 - Add one shared approval summary engine: action, reason, platform, project/target,

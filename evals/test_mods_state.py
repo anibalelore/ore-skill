@@ -91,7 +91,7 @@ class ModsStateTests(unittest.TestCase):
                 denied = self.run_mod(mod='ore-guard', tool=command)
                 self.assertEqual(denied['asks'], 1)
                 self.assertIn('deny', denied['result'])
-                allowed = self.run_mod(mod='ore-guard', tool=command, answer='Aprobar una vez')
+                allowed = self.run_mod(mod='ore-guard', tool=command, answers=['Revisar detalles', 'Aprobar una vez'])
                 self.assertEqual(allowed['passed'], 1)
         self.assertEqual(self.run_mod(mod='ore-guard', tool='git status')['asks'], 0)
         for args in ({'dismiss': True}, {'aborted': True}, {'changeDuringAsk': True}):

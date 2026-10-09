@@ -1,5 +1,37 @@
 # ORE 4.0.0-alpha.1 Update Report
 
+## Native approval context — 4.2.1-alpha.3 — 2026-10-09
+
+Guard and scoped Write/Edit reviews now call the supported `$.ui.notice` API with
+the same pending tool-use ID and a plain-language action/platform/project/target/risk
+summary. This annotates the native dialog, which only the host can draw. Raw
+commands/SQL remain in the host view and mandatory technical review. ORE's first
+question groups metadata to reduce visual repetition. Annotation failures deny the
+reviewed action. No allow rules, permission modes or executable parameters change.
+
+Validation: 140 tests passed; package inventory and guard/ledger/router TypeScript
+checks passed. Guard manifest validation recognizes `$.ui.notice`. Native notice
+rendering was verified with the actual handlers and a deterministic host adapter;
+live interactive appearance remains unverified. Official mods events/interface/API
+documentation was fetched through the supported `/plugins/mods/` paths.
+
+## Approval presentation correction — 4.2.1-alpha.2 — 2026-10-09
+
+The initial ORE question now contains only a prose summary for every risk level.
+Exact command/SQL review is mandatory before approval becomes available; free-text
+approval cannot skip it. Commands/SQL appear once, followed by complete remaining
+parameters. Native Claude permission dialogs remain engine-owned and unchanged.
+
+Validation: 138 tests passed; package inventory validation passed (29 skills,
+28 mods); guard, approval-ledger and model-router type checks and native manifest
+validation passed. Actual interactive viewport rendering remains unverified.
+
+Updated the separate installed marketplace source after checking it against the
+clean baseline and backing up originals under `.ore/approval-alpha2-backup`.
+All seven already-installed optional plugins were updated successfully through
+`claude plugin update` to alpha.2. A Claude Code restart is required to apply them.
+Approval-ledger is available in the updated source but was not already installed.
+
 Date: 2026-10-08 (America/Denver).
 
 ## Result and release decision

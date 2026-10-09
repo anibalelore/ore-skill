@@ -1,6 +1,6 @@
 {
   "name": "ore-runtime-diagnostics",
-  "version": "4.2.1-alpha.1",
+  "version": "4.2.1-alpha.3",
   "description": "Optional ORE runtime adapter: ore-runtime-diagnostics; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

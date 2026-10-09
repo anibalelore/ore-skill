@@ -10,7 +10,7 @@ from pathlib import Path
 from build_mods import template, NATIVE_MODS
 
 ROOT = Path(__file__).parents[1]
-VERSION = "4.2.1-alpha.1"
+VERSION = "4.2.1-alpha.3"
 BASE_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
 RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
     "ore-model-router",

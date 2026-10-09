@@ -2,7 +2,7 @@ import type { EngineInterface, Register } from 'claude-code';
 import { pointer, parseTask, handoff } from './state.ts';
 import type { Task } from './state.ts';
 import { NAME } from './identity.ts';
-import { summarize, renderApproval, APPROVE, REJECT, DETAILS } from './approval.ts';
+import { summarize, renderApproval, renderNotice, APPROVE, REJECT, DETAILS } from './approval.ts';
 
 function validGovernance(value: unknown): boolean {
   if (!value || typeof value !== 'object') return false;
@@ -74,7 +74,8 @@ export const register: Register = (on, options) => {
       if (NAME === 'ore-first-contact' && payload.run_browser === true) {
         const review = summarize(NAME, payload, task.title, 'Explorar la aplicación local aislada con un navegador.');
         if (review.blocked) return { text: review.blocked, exitCode: 2 };
-        let answer = await $.ui.ask(renderApproval(review), [APPROVE, REJECT, DETAILS]);
+        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
         if (answer === DETAILS) answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
         if (answer !== APPROVE) return { text: 'Cancelled; no browser started' };
       }
@@ -110,6 +111,7 @@ export const register: Register = (on, options) => {
           const snapshot = JSON.stringify(e);
           const review = summarize('Write', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
           if (review.blocked) return { deny: review.blocked };
+          $.ui.notice(e.tool_use_id, renderNotice(review));
           let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
           if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
           answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
@@ -139,6 +141,7 @@ export const register: Register = (on, options) => {
           const snapshot = JSON.stringify(e);
           const review = summarize('Edit', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
           if (review.blocked) return { deny: review.blocked };
+          $.ui.notice(e.tool_use_id, renderNotice(review));
           let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
           if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
           answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
