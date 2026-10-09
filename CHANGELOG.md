@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0-alpha.1 — Runtime Governance and Business Flow Prerelease
+
+- Preserved all 26 skills and the six existing Claude mods; skill instruction changes are limited to prerelease metadata.
+- Added 19 self-contained command adapters with generated API type checking. Native context/cost/project reads require no process permission; worktree inspection uses a fixed read-only Git command.
+- Added explicit confirmed project rules, scopes, exceptions and approval records through the sole revision-protected ore_state.py writer; declared Write/Edit paths can be restricted without treating approval records as native permissions.
+- Added read-only flow contract/telemetry engines and synthetic factory/marketplace acceptance fixtures for identity, provenance, partial quantities, QA, idempotency, logistics, cancellation and recovery.
+- Added optional bounded Playwright exploration of explicitly authorized isolated loopback applications and a real Chromium fixture test. Missing dependencies produce blocked results.
+- Added runtime regression tests, an independent capability/acceptance audit, reproducible mod builds, and native validation/launch checks.
+- Reworked README with a clear entry point, mod installation, capability limits and update history. Full autonomous execution, application discovery, live subscriptions and release/model certification remain incomplete; this is not stable ORE 4.0.0.
+
 ## 3.0.0 — Optional Claude Code Mods
 
 - Added minimum sufficient execution across the lead and specialists: conditional audit/reference loading, scoped context, incremental handoffs and concise evidence. Required gates, independent review and model choice remain intact; actual token savings are unmeasured.

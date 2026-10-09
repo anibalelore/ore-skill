@@ -1,3 +1,121 @@
+# ORE 4.0.0-alpha.1 Update Report
+
+Date: 2026-10-08 (America/Denver).
+
+## Result and release decision
+
+Delivered a reviewable prerelease: 26 existing skills, six preserved display/guard
+mods and 19 explicit runtime command adapters. README now explains the product,
+installation, existing mods, new adapter limits and the update history. Existing
+skill instructions changed only in version metadata; their scoped execution
+policies and evidence requirements remain intact.
+
+This is **not stable ORE 4.0.0** and does not fulfill every autonomous capability
+in the master prompt. The capability matrix and acceptance contract identify the
+unfinished behavior. The initial review was prepared without a commit or push. The user subsequently
+authorized committing and pushing this prerelease to Git. No tag, deployment,
+package publication or installation into the user's plugin registry is included.
+
+## Implemented behavior
+
+- Governance: confirmed path scopes/living rules, replacement, revocation,
+  expiring exceptions, task-bound approval metadata, project identity and
+  versioned internal events. Only ore_state.py writes .ore/governance.json,
+  under the existing cross-process lock and expected task/governance revisions.
+- Declared Write/Edit restrictions: filesystem resolution, reserved .ore paths,
+  traversal/drive-relative/network spelling rejection, post-dialog revision
+  rechecks, and explicit handling of missing/malformed governance. Runtime
+  failure with a valid rule denies the declared edit. No shell inspection.
+- Flow analysis: supplied schema, identities, cardinalities, provenance,
+  transitions, permissions, idempotency, partial quantities and recovery.
+  Synthetic factory/marketplace fixtures cover QA, logistics, multivendor
+  ordering, cancellation and refunds. Model-only results leave CHANGE_IMPACT
+  and TESTS pending and do not write evidence gates automatically.
+- Flow watch: supplied authorized telemetry produces evidenced alerts; absent
+  telemetry remains disconnected. No causal certainty or automatic repair.
+- First Contact: optional real Playwright exploration in a bounded explicitly
+  isolated loopback application. Outcome criteria remain outside action
+  selection. Optional explicitly approved synthetic screenshots mask editable
+  fields and export redacted action manifests outside .ore, with at most 24h
+  retention and scoped expiry cleanup. No production screenshots or mutation
+  requests; automated redaction cannot guarantee all personal data is removed.
+- Supporting adapters: explicit bounded plans, test-map selection with mandatory
+  broad fallback on incomplete coverage and preserved critical tests, contract
+  comparison, declared review validation, local PR drafts, observed diagnostic
+  summaries and matching-run efficiency comparisons. Native cost/context/project
+  adapters need no process permissions; worktrees use fixed read-only Git argv.
+
+## Validation
+
+- Baseline before changes: **48 unittest tests passed**, package validation
+  passed; clean Git state at **4ed4df85**.
+- Final browser-enabled suite: **84 unittest tests passed**, including original
+  state/form/audit/catalog coverage, real native TypeScript handlers, flow
+  fixtures, governance and actual Chromium exploration/screenshot artifacts.
+  Without optional Playwright, the browser test skips explicitly.
+- Package validation: **26 skills, 25 mods, 4.0.0-alpha.1**. It verifies inventory,
+  versions, local references, canonical readers, audited module templates and
+  byte-identical bundled Python sources.
+- **25 TypeScript checks**, **25 claude plugin validate checks**, and **25 real
+  --plugin-dir status-command launches** with isolated Claude Code **2.1.295**.
+  Status-command launches are smoke tests, not proof of every adapter operation.
+- Real native ore-flow-intelligence command analyzed the factory fixture:
+  valid=true, continuity_verified=true; CHANGE_IMPACT and TESTS stayed pending.
+- Independent review reproduced three errors (reserved-path normalization,
+  missing broad-test blocking, estimated-counter savings), then verified their
+  fixes and the 10 runtime tests. Review also confirmed revision rechecks,
+  task-binding safeguards and minimum native process permissions.
+- One full-suite regression rejected legitimate authoritative-list JSON arrays;
+  fixed by applying object validation only to active/task state. Full suite passed.
+
+Reproduce core validation:
+
+```text
+python scripts/build_mods.py
+python scripts/validate_package.py
+python -m unittest discover -s evals -p "test_*.py" -v
+python scripts/validate_mods.py --claude <2.1.295-executable> --tsc <typescript-executable>
+```
+
+Optional browser dependencies were installed only in temporary directories:
+Playwright **1.63.0**, Chromium **153**. Set PYTHONPATH to the temporary dependency
+folder and PLAYWRIGHT_BROWSERS_PATH to its browser folder for browser-enabled
+validation. The isolated Claude runtime leaves installed **2.1.267** unchanged.
+Node **24.19.0** and Python **3.12.10** were used. Codex **0.162.0-alpha.2** was
+observed, not end-to-end certified. No behavior claims were tested for Opus,
+Fable, Astra or other named models; no actual model token savings are claimed.
+
+## Remaining requirements for stable ORE 4
+
+- A persistent autonomous controller that executes bounded turns and verifies
+  progress; the current autopilot only validates a caller-supplied plan/budget.
+- Worktree creation, collision-aware parallel execution and reviewed merging;
+  the current adapter only reads topology.
+- Automatic contract/dependency/application discovery and integration with
+  artifact-digest-bound completion gates; current engines validate supplied data.
+- Live telemetry subscriptions, operational alert routing and authorized replay;
+  the current watcher analyzes supplied records and never repairs production.
+- Broader user profiles, independent fresh-user retesting, real-app write flows,
+  visual comparison, accessibility checks and preview/release certification.
+- Native asynchronous independent reviewer orchestration, compaction handling,
+  actionable budget control, validated project routing and pull-request delivery.
+- Independently sourced cross-model token/cost benchmarks and complete host
+  compatibility certification. Comparative counters remain declared input.
+
+These are explicit partial capabilities, not hidden placeholders or certified
+outcomes. Malformed optional governance intentionally disables its layer;
+filesystem aliases and review-to-execution races remain limits. High-impact
+approval records never bypass host permissions or the original action guard.
+
+See [adapter inventory](docs/runtime-mods.md),
+[capability matrix](docs/ore-4-capability-matrix.md),
+[acceptance contract](docs/ore-4-acceptance.md),
+[First Contact](docs/first-contact.md) and [flow engine](docs/flow-intelligence.md).
+
+---
+
+# Historical ORE 3.0 report (preserved)
+
 # ORE 3.0.0 Update Report
 
 Date: 2026-10-08 (America/Denver).

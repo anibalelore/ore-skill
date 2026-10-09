@@ -1,25 +1,59 @@
-# ORE — Orchestrated Runtime Engineering
+# ORE ? Orchestrated Runtime Engineering
 
-> Durable state, visible progress, the right specialists, and evidence before completion.
+> Turn a complex request into accountable work, visible progress and verified results.
 
-ORE is an installable company of Agent Skills for substantial product and software work. Version 3.0 preserves the existing 26 skills and adds six optional Claude Code mods for visible state and per-action confirmation.
+**ORE gives your coding agent an engineering team:** a lead, 25 specialists,
+durable project state and evidence gates. Use it in Codex, Claude Code or another
+Agent Skills host. **We now also have Claude Code mods** to make progress,
+approvals, blockers and specialist activity visible in the harness.
+
+| Core team | Optional runtime layer | Current release |
+| --- | --- | --- |
+| 26 skills across 9 departments | 6 established mods + 19 new runtime adapters | **4.0.0-alpha.1 ? prerelease** |
+
+**Start here:** [Install ORE](#install) ? [Try the mods](#claude-code-mods-optional) ?
+[Meet the team](#agent-departments) ? [Update history](#update-history)
+
+## How ORE helps
+
+1. **Understand the outcome.** Define the deliverables, constraints and acceptance criteria.
+2. **Bring in the right specialists.** Load relevant expertise and the context needed for the work.
+3. **Keep work resumable.** Persist weighted progress, decisions, blockers and the next action in the repository.
+4. **Verify before closing.** Require evidence for applicable gates and report anything still unresolved.
+
+```text
+$ore Build the customer onboarding flow. Show progress, keep the industry list
+exactly as supplied, and verify forms, accessibility, permissions and recovery.
+```
+
+ORE uses focused context and incremental handoffs to reduce unnecessary token
+use while retaining required results and evidence. **Model-specific token savings
+have not been measured.** It does not promise identical performance across models.
 
 ## Claude Code mods (optional)
 
-Requires Claude Code CLI **2.1.287+**; tested with **2.1.295**. ORE skills work
-unchanged in Codex and other hosts without these plugins.
+**Already available:** six mods introduced in ORE 3.0 improve visibility and
+confirmation directly in Claude Code. Skills continue to work in other hosts.
 
-| Mod | Behavior |
+| Mod | What you see or control |
 | --- | --- |
-| `ore-progress` | Shows the persisted task, computed percentage and current/next deliverable above the prompt. |
-| `ore-guard` | Confirms configurable high-impact tool actions, showing task context and declared arguments. |
-| `ore-resume` | Prints the active task's objective, progress, next deliverable and blockers on session start. |
-| `ore-gates` | Shows pending required gates/blockers and warns at turn end or an explicit completion command. |
-| `ore-stale-window` | Warns when an observed task/revision changes; it cannot identify which window wrote it. |
-| `ore-departments` | Shows recorded department, command chain and recent specialists; old state shows only `ORE lead`. |
+| `ore-progress` | Active task, calculated progress and next deliverable |
+| `ore-guard` | Confirmation for configurable high-impact tool actions |
+| `ore-resume` | Objective, progress, next action and blockers at startup |
+| `ore-gates` | Pending evidence gates and warnings at attempted completion |
+| `ore-stale-window` | Warning when the observed task or revision changes |
+| `ore-departments` | Recorded department, specialist and command chain |
 
-From a local clone, add its `mods` directory as a marketplace, then install
-each desired plugin:
+**New in the ORE 4 prerelease:** 19 command adapters add confirmed living rules,
+path scopes, an approval ledger, isolated browser exploration, flow contract
+analysis, telemetry analysis and supporting review/delivery tools. They have
+**different levels of completeness**: autopilot does not execute autonomous turns,
+worktree management currently lists topology, and visual/preview tools do not
+certify a release. Read the [adapter inventory and examples](docs/runtime-mods.md)
+and [capability matrix](docs/ore-4-capability-matrix.md) before relying on them.
+
+Requires **Claude Code 2.1.287+**; API validation uses **2.1.295**.
+From a local clone:
 
 ```text
 /plugin marketplace add ./mods
@@ -31,37 +65,59 @@ each desired plugin:
 /plugin install ore-departments@ore-mods
 ```
 
-Or try one session with `claude --plugin-dir mods/ore-progress` (substitute any
-of the six names). Use `/reload-plugins` after installing in an open session.
-Keep the clone in place when using the local marketplace. Nothing is published
-by these instructions.
+Install only the mods you need. To try one session:
 
-**Mods run with your user permissions and have no sandbox.** These six mods
-request only file reads, timers, UI and status commands; they never write
-`.ore/`, access the network or start external processes. Missing/corrupt state
-is ignored. Updates are polled every second. Only terminal/Desktop show the
-band; `/<plugin-name>-status` provides an explicit textual handoff elsewhere.
+```text
+claude --plugin-dir mods/ore-progress
+```
 
-The guard is pattern-based, cannot measure remote effects or hidden scripts,
-and does not bypass host permissions after confirmation. Gates never infer
-completion claims from conversation text. Specialist identity must be recorded
-through the optional `ore_state.py update` arguments. See
-[mod options, state contract, API provenance and validation](mods/README.md).
+Use `/reload-plugins` after installation in an open session. Keep the local clone
+in place. These instructions do not publish a package or change your installed skills.
 
-## What is now enforceable
+**Mods run with your user permissions and have no sandbox.** The six established
+mods only read state and use timers/UI; they do not start processes or access the
+network. New adapters invoke bundled Python tools when needed; the worktree
+adapter reads Git topology and optional browser exploration starts Chromium
+against an explicitly authorized isolated loopback application. Only
+`ore_state.py` writes `.ore/`. Missing/corrupt task state is ignored.
 
-- **Cross-window continuation:** ORE writes `.ore/active.json`, task state and a resumption handoff. Another ORE-enabled window in the same workspace reloads it before planning.
-- **Automatic percentage:** explicit ORE work reports evidence-based progress without the user asking. The percentage is computed from persisted weighted deliverables.
-- **Concurrency protection:** state writes can require the last observed revision so a stale window cannot silently overwrite a newer one.
-- **Form quality:** material forms require an authoritative field contract and tests for semantics, validation, reference lists, roles, accessibility, drafts and idempotency.
-- **Department routing:** ORE selects accountable specialists across product, experience, application engineering, AI/data, integration quality, security/governance, platform/operations and code health.
-- **Change-impact protection:** cross-module changes require a blast-radius map, affected-consumer verification and appropriately widened tests before completion.
-- **Workflow continuity:** any entity or work item keeps canonical identity, field provenance and durable progress across modules instead of duplicating entry at every stage.
-- **Governed memory:** project knowledge carries provenance, typed relationships, staleness and approval-based promotion rather than treating raw history as policy.
-- **Context efficiency:** working sets are reduced only when the same evidence gates still pass; token savings are never invented.
-- **Evidence gates:** completion is blocked by unfinished deliverables, unresolved blockers or required gates without evidence.
+The existing display band updates every second in terminal/Desktop;
+`/<name>-status` provides a textual handoff. Risk matching cannot inspect hidden
+scripts or measure remote effects. Specialist identity comes from recorded state;
+legacy tasks show `ORE lead`. See the [original mod contract](mods/README.md).
 
-The persistence guarantee applies only when windows share the same repository storage and load ORE. ORE does not claim invisible global memory across unrelated clients or workspaces.
+## ORE 4: what is verified today
+
+- **Preserved foundation:** the existing skills, revision-protected writer and six established mods.
+- **Governed rules:** explicit confirmation, project isolation, owners, evidence, replacement, expiry and revocation; declared Write/Edit paths can be restricted.
+- **Business flows:** executable synthetic factory and marketplace models exercise identity, provenance, partial quantities, retries, cancellation and recovery.
+- **First Contact:** a real Chromium test completes a goal in a local fixture using visible controls; unavailable browser dependencies return a blocked result.
+- **Honest evidence:** model validation does not certify a live application. Telemetry tools report disconnected without input. Estimated counters cannot demonstrate token savings.
+
+ORE 4 is a **prerelease**, because full autonomous orchestration, application
+discovery, live telemetry subscriptions, visual certification and multi-host/model
+certification remain unfinished. The [update report](UPDATE_REPORT.md) records
+actual checks and limits; the [acceptance contract](docs/ore-4-acceptance.md) defines
+what must pass before a stable 4.0.0 release.
+
+## Update history
+
+| Version | Main improvement |
+| --- | --- |
+| **4.0.0-alpha.1** | Runtime governance, 19 explicit adapters, synthetic business-flow engine and isolated browser exploration; certification in progress |
+| **3.0.0** | Six optional Claude Code mods and focused execution/context policies |
+| **2.4.0** | Integrated security, privacy, compliance and bounded audit/repair workflows |
+| **2.3.0** | Business lifecycle continuity, governed memory and context efficiency |
+| **2.2.0** | Department specialists and change-impact protection |
+| **2.1.0** | Historical agent research and workflow hardening |
+| **2.0.0** | Durable repository state, resumable work and domain specialists |
+| **1.5.x** | Audit, continuous improvement, progress and token reporting |
+| **1.4.0** | Continuous learning and failure intelligence |
+| **1.2?1.3** | Workflow intelligence and iteration improvements |
+| **1.0?1.1** | Initial ORE skill and early operating protocol |
+
+See the [complete changelog](CHANGELOG.md) for individual changes. Prior release
+reports remain in [UPDATE_REPORT.md](UPDATE_REPORT.md).
 
 ## Agent departments
 

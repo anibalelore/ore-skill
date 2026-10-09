@@ -1,0 +1,8 @@
+{
+  "name": "ore-approval-ledger",
+  "version": "4.0.0-alpha.1",
+  "description": "Optional ORE runtime adapter: ore-approval-ledger; see capability matrix for limits",
+  "author": {
+    "name": "anibalelore"
+  }
+}

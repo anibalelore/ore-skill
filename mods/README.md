@@ -1,9 +1,14 @@
 # ORE Claude Code mods
 
-Six independent, optional plugins. Runtime code is TypeScript and imports only
+The six original independent, optional plugins are documented below. Their runtime code is TypeScript and imports only
 files inside its own plugin. `ore-progress/hooks/state.ts` is the canonical pure
 reader; copies must remain byte-identical (checked by package validation).
 There is no runtime dependency between the plugins.
+
+ORE **4.0.0-alpha.1** additionally includes 19 self-contained command adapters.
+Their executable behavior, partial capabilities, bundled Python processes and
+permissions are described in [runtime adapters](../docs/runtime-mods.md).
+The no-process/no-network guarantees below apply to the original six.
 
 ## API provenance
 

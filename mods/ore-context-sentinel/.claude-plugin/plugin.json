@@ -1,0 +1,8 @@
+{
+  "name": "ore-context-sentinel",
+  "version": "4.0.0-alpha.1",
+  "description": "Optional ORE runtime adapter: ore-context-sentinel; see capability matrix for limits",
+  "author": {
+    "name": "anibalelore"
+  }
+}

@@ -7,10 +7,17 @@ import json
 import re
 import sys
 from pathlib import Path
+from build_mods import template, NATIVE_MODS
 
 ROOT = Path(__file__).parents[1]
-VERSION = "3.0.0"
-EXPECTED_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
+VERSION = "4.0.0-alpha.1"
+BASE_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
+RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
+    "ore-smart-tests", "ore-context-sentinel", "ore-independent-review", "ore-contract-watch",
+    "ore-worktree-manager", "ore-pr-pilot", "ore-preview-certifier", "ore-runtime-diagnostics",
+    "ore-cost-controller", "ore-project-router", "ore-learning-lab", "ore-first-contact",
+    "ore-visual-qa", "ore-flow-intelligence", "ore-flow-watch"}
+EXPECTED_MODS = BASE_MODS | RUNTIME_MODS
 EXPECTED_SKILLS = {
     "ore",
     "ore-android",
@@ -78,7 +85,15 @@ def main() -> int:
             if hooks.get("modules") != ["./register.ts"]:
                 fail(errors, f"mod module mismatch: {name}")
             module = (folder / "hooks/register.ts").read_text(encoding="utf-8")
-            forbidden = re.findall(r"\$\.(?:fs\.write|process\.\w+|http\.\w+|model\.\w+|store\.\w+)", module)
+            forbidden = re.findall(r"\$\.(?:fs\.write|http\.\w+|model\.\w+|store\.\w+)", module)
+            if name in BASE_MODS:
+                forbidden += re.findall(r"\$\.process\.\w+", module)
+            elif module != (mods / "sdk" / template(name)).read_text(encoding="utf-8"):
+                fail(errors, f"runtime module differs from audited SDK: {name}")
+            if name in RUNTIME_MODS - NATIVE_MODS - {"ore-worktree-manager"}:
+                for script in ("ore_state.py", "ore_runtime.py", "ore_flow.py", "ore_first_contact.py"):
+                    if (folder / "scripts" / script).read_bytes() != (ROOT / "skills/ore/scripts" / script).read_bytes():
+                        fail(errors, f"vendored script differs from canonical source: {name}/{script}")
             if forbidden:
                 fail(errors, f"unapproved mod calls in {name}: {forbidden}")
             if (folder / "hooks/state.ts").read_bytes() != canonical_reader.read_bytes():

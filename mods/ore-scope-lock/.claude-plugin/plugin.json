@@ -1,0 +1,8 @@
+{
+  "name": "ore-scope-lock",
+  "version": "4.0.0-alpha.1",
+  "description": "Optional ORE runtime adapter: ore-scope-lock; see capability matrix for limits",
+  "author": {
+    "name": "anibalelore"
+  }
+}

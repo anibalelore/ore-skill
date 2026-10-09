@@ -1,0 +1,623 @@
+{
+  "schema_version": 1,
+  "id": "marketplace",
+  "entities": [
+    {
+      "id": "checkout-1",
+      "type": "checkout",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "order-1",
+      "type": "order",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "payment-1",
+      "type": "payment",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "seller-order-1",
+      "type": "seller_order",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "seller-order-2",
+      "type": "seller_order",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "shipment-1",
+      "type": "shipment",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "shipment-2",
+      "type": "shipment",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "tracking-1",
+      "type": "tracking",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "delivery-1",
+      "type": "delivery",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "settlement-1",
+      "type": "settlement",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "refund-1",
+      "type": "refund",
+      "owner": "operations",
+      "fields": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "checkout-order",
+      "source_type": "checkout",
+      "target_type": "order",
+      "pairs": [
+        [
+          "checkout-1",
+          "order-1"
+        ]
+      ],
+      "cardinality": "one-to-one",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:checkout-order"
+      ]
+    },
+    {
+      "id": "order-payment",
+      "source_type": "order",
+      "target_type": "payment",
+      "pairs": [
+        [
+          "order-1",
+          "payment-1"
+        ]
+      ],
+      "cardinality": "one-to-one",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:order-payment"
+      ]
+    },
+    {
+      "id": "order-sellers",
+      "source_type": "order",
+      "target_type": "seller_order",
+      "pairs": [
+        [
+          "order-1",
+          "seller-order-1"
+        ],
+        [
+          "order-1",
+          "seller-order-2"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:order-sellers"
+      ]
+    },
+    {
+      "id": "payment-sellers",
+      "source_type": "payment",
+      "target_type": "seller_order",
+      "pairs": [
+        [
+          "payment-1",
+          "seller-order-1"
+        ],
+        [
+          "payment-1",
+          "seller-order-2"
+        ]
+      ],
+      "cardinality": "many-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:payment-sellers"
+      ]
+    },
+    {
+      "id": "seller-shipment",
+      "source_type": "seller_order",
+      "target_type": "shipment",
+      "pairs": [
+        [
+          "seller-order-1",
+          "shipment-1"
+        ],
+        [
+          "seller-order-2",
+          "shipment-2"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:seller-shipment"
+      ]
+    },
+    {
+      "id": "shipment-tracking",
+      "source_type": "shipment",
+      "target_type": "tracking",
+      "pairs": [
+        [
+          "shipment-1",
+          "tracking-1"
+        ]
+      ],
+      "cardinality": "one-to-one",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:shipment-tracking"
+      ]
+    },
+    {
+      "id": "tracking-delivery",
+      "source_type": "tracking",
+      "target_type": "delivery",
+      "pairs": [
+        [
+          "tracking-1",
+          "delivery-1"
+        ]
+      ],
+      "cardinality": "one-to-one",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:tracking-delivery"
+      ]
+    },
+    {
+      "id": "delivery-settlement",
+      "source_type": "delivery",
+      "target_type": "settlement",
+      "pairs": [
+        [
+          "delivery-1",
+          "settlement-1"
+        ]
+      ],
+      "cardinality": "one-to-one",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:delivery-settlement"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "checkout",
+      "source": "checkout-1",
+      "target": "order-1",
+      "event": "checkout",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:checkout"
+      ],
+      "required": true
+    },
+    {
+      "id": "payment",
+      "source": "order-1",
+      "target": "payment-1",
+      "event": "payment",
+      "owner": "operations",
+      "preconditions": [
+        "synthetic_payment"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:payment"
+      ],
+      "required": true
+    },
+    {
+      "id": "fulfill-1",
+      "source": "order-1",
+      "target": "seller-order-1",
+      "event": "fulfill-1",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:fulfill-1"
+      ],
+      "required": true
+    },
+    {
+      "id": "fulfill-2",
+      "source": "order-1",
+      "target": "seller-order-2",
+      "event": "fulfill-2",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:fulfill-2"
+      ],
+      "required": true
+    },
+    {
+      "id": "shipping",
+      "source": "seller-order-1",
+      "target": "shipment-1",
+      "event": "shipping",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:shipping"
+      ],
+      "required": true
+    },
+    {
+      "id": "tracking",
+      "source": "shipment-1",
+      "target": "tracking-1",
+      "event": "tracking",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:tracking"
+      ],
+      "required": true
+    },
+    {
+      "id": "delivery",
+      "source": "tracking-1",
+      "target": "delivery-1",
+      "event": "delivery",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:delivery"
+      ],
+      "required": true
+    },
+    {
+      "id": "settle",
+      "source": "delivery-1",
+      "target": "settlement-1",
+      "event": "settle",
+      "owner": "operations",
+      "preconditions": [
+        "delivery_verified",
+        "no_dispute"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:settle"
+      ],
+      "required": true
+    },
+    {
+      "id": "refund",
+      "source": "payment-1",
+      "target": "refund-1",
+      "event": "refund",
+      "owner": "operations",
+      "preconditions": [
+        "refund_approved"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:refund"
+      ],
+      "required": false
+    }
+  ],
+  "executions": [
+    {
+      "id": "checkout",
+      "transition": "checkout",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "checkout",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:checkout"
+      ]
+    },
+    {
+      "id": "payment",
+      "transition": "payment",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "payment",
+      "preconditions": [
+        "synthetic_payment"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:payment"
+      ]
+    },
+    {
+      "id": "fulfill-1",
+      "transition": "fulfill-1",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "fulfill-1",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:fulfill-1"
+      ]
+    },
+    {
+      "id": "fulfill-2",
+      "transition": "fulfill-2",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "fulfill-2",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:fulfill-2"
+      ]
+    },
+    {
+      "id": "shipping",
+      "transition": "shipping",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "shipping",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:shipping"
+      ]
+    },
+    {
+      "id": "tracking",
+      "transition": "tracking",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "tracking",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:tracking"
+      ]
+    },
+    {
+      "id": "delivery",
+      "transition": "delivery",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "delivery",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:delivery"
+      ]
+    },
+    {
+      "id": "settle",
+      "transition": "settle",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "settle",
+      "preconditions": [
+        "delivery_verified",
+        "no_dispute"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:settle"
+      ]
+    }
+  ],
+  "telemetry": {
+    "connection": "unavailable"
+  }
+}

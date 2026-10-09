@@ -1,0 +1,694 @@
+{
+  "schema_version": 1,
+  "id": "factory",
+  "entities": [
+    {
+      "id": "customer-1",
+      "type": "customer",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "po-1",
+      "type": "po",
+      "owner": "operations",
+      "fields": {
+        "quantity": {
+          "value": 120,
+          "source": "po-1.quantity",
+          "version": 1,
+          "owner": "sales",
+          "mode": "canonical"
+        },
+        "products": {
+          "value": [
+            "juice",
+            "water"
+          ],
+          "source": "po-1.products",
+          "version": 1,
+          "owner": "sales",
+          "mode": "canonical"
+        }
+      }
+    },
+    {
+      "id": "sales-1",
+      "type": "sales",
+      "owner": "operations",
+      "fields": {
+        "quantity": {
+          "value": 120,
+          "source": "po-1.quantity",
+          "version": 1,
+          "owner": "sales",
+          "mode": "reuse"
+        }
+      }
+    },
+    {
+      "id": "schedule-1",
+      "type": "schedule",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "production-1",
+      "type": "production",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "batch-1",
+      "type": "batch",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "batch-2",
+      "type": "batch",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "qa-1",
+      "type": "qa",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "qa-2",
+      "type": "qa",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "pack-1",
+      "type": "packaging",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "shipping-1",
+      "type": "shipping",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "shipping-2",
+      "type": "shipping",
+      "owner": "operations",
+      "fields": {}
+    },
+    {
+      "id": "dispatch-1",
+      "type": "dispatch",
+      "owner": "operations",
+      "fields": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "customer-po",
+      "source_type": "customer",
+      "target_type": "po",
+      "pairs": [
+        [
+          "customer-1",
+          "po-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:customer-po"
+      ]
+    },
+    {
+      "id": "po-sales",
+      "source_type": "po",
+      "target_type": "sales",
+      "pairs": [
+        [
+          "po-1",
+          "sales-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:po-sales"
+      ]
+    },
+    {
+      "id": "sales-schedule",
+      "source_type": "sales",
+      "target_type": "schedule",
+      "pairs": [
+        [
+          "sales-1",
+          "schedule-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:sales-schedule"
+      ]
+    },
+    {
+      "id": "schedule-production",
+      "source_type": "schedule",
+      "target_type": "production",
+      "pairs": [
+        [
+          "schedule-1",
+          "production-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:schedule-production"
+      ]
+    },
+    {
+      "id": "production-batches",
+      "source_type": "production",
+      "target_type": "batch",
+      "pairs": [
+        [
+          "production-1",
+          "batch-1"
+        ],
+        [
+          "production-1",
+          "batch-2"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:production-batches"
+      ]
+    },
+    {
+      "id": "batches-qa",
+      "source_type": "batch",
+      "target_type": "qa",
+      "pairs": [
+        [
+          "batch-1",
+          "qa-1"
+        ],
+        [
+          "batch-2",
+          "qa-2"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:batches-qa"
+      ]
+    },
+    {
+      "id": "batch-packaging",
+      "source_type": "batch",
+      "target_type": "packaging",
+      "pairs": [
+        [
+          "batch-1",
+          "pack-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:batch-packaging"
+      ]
+    },
+    {
+      "id": "sale-shipping",
+      "source_type": "sales",
+      "target_type": "shipping",
+      "pairs": [
+        [
+          "sales-1",
+          "shipping-1"
+        ],
+        [
+          "sales-1",
+          "shipping-2"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:sale-shipping"
+      ]
+    },
+    {
+      "id": "shipping-dispatch",
+      "source_type": "shipping",
+      "target_type": "dispatch",
+      "pairs": [
+        [
+          "shipping-1",
+          "dispatch-1"
+        ]
+      ],
+      "cardinality": "one-to-many",
+      "status": "confirmed",
+      "evidence": [
+        "synthetic:shipping-dispatch"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "create-sale",
+      "source": "po-1",
+      "target": "sales-1",
+      "event": "create-sale",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:create-sale"
+      ],
+      "required": true
+    },
+    {
+      "id": "schedule",
+      "source": "sales-1",
+      "target": "schedule-1",
+      "event": "schedule",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:schedule"
+      ],
+      "required": true
+    },
+    {
+      "id": "produce",
+      "source": "schedule-1",
+      "target": "production-1",
+      "event": "produce",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:produce"
+      ],
+      "required": true
+    },
+    {
+      "id": "batch-quality",
+      "source": "batch-1",
+      "target": "qa-1",
+      "event": "batch-quality",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:batch-quality"
+      ],
+      "required": true
+    },
+    {
+      "id": "package",
+      "source": "qa-1",
+      "target": "pack-1",
+      "event": "package",
+      "owner": "operations",
+      "preconditions": [
+        "quality_released"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:package"
+      ],
+      "required": true
+    },
+    {
+      "id": "ship-partial",
+      "source": "pack-1",
+      "target": "shipping-1",
+      "event": "ship-partial",
+      "owner": "operations",
+      "preconditions": [
+        "quality_released"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:ship-partial"
+      ],
+      "required": true
+    },
+    {
+      "id": "dispatch",
+      "source": "shipping-1",
+      "target": "dispatch-1",
+      "event": "dispatch",
+      "owner": "operations",
+      "preconditions": [
+        "logistics_confirmed"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:dispatch"
+      ],
+      "required": true
+    },
+    {
+      "id": "rejected-batch",
+      "source": "batch-2",
+      "target": "qa-2",
+      "event": "rejected-batch",
+      "owner": "operations",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:rejected-batch"
+      ],
+      "required": false
+    },
+    {
+      "id": "remaining-shipment",
+      "source": "pack-1",
+      "target": "shipping-2",
+      "event": "remaining-shipment",
+      "owner": "operations",
+      "preconditions": [
+        "quality_released"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "reused_fields": [],
+      "transformations": [],
+      "state_change": {
+        "from": "ready",
+        "to": "done"
+      },
+      "side_effects": [
+        "persist target"
+      ],
+      "errors": "record failure",
+      "retry": "bounded retry",
+      "idempotency": "stable business operation key",
+      "reconciliation": "compare persisted target",
+      "cancellation": "cancel before release",
+      "recovery": "authorized idempotent retry",
+      "evidence": [
+        "synthetic:contract:remaining-shipment"
+      ],
+      "required": false
+    }
+  ],
+  "executions": [
+    {
+      "id": "create-sale",
+      "transition": "create-sale",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "create-sale",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:create-sale"
+      ]
+    },
+    {
+      "id": "schedule",
+      "transition": "schedule",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "schedule",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:schedule"
+      ]
+    },
+    {
+      "id": "produce",
+      "transition": "produce",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "produce",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:produce"
+      ]
+    },
+    {
+      "id": "batch-quality",
+      "transition": "batch-quality",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "batch-quality",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:batch-quality"
+      ]
+    },
+    {
+      "id": "package",
+      "transition": "package",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "package",
+      "preconditions": [
+        "quality_released"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:package"
+      ]
+    },
+    {
+      "id": "ship-partial",
+      "transition": "ship-partial",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "ship-partial",
+      "preconditions": [
+        "quality_released"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:ship-partial"
+      ]
+    },
+    {
+      "id": "dispatch",
+      "transition": "dispatch",
+      "status": "succeeded",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "dispatch",
+      "preconditions": [
+        "logistics_confirmed"
+      ],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 1,
+      "evidence": [
+        "synthetic:execution:dispatch"
+      ]
+    },
+    {
+      "id": "create-sale-retry",
+      "transition": "create-sale",
+      "status": "duplicate",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "create-sale",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 0,
+      "evidence": [
+        "synthetic:execution:create-sale"
+      ]
+    },
+    {
+      "id": "rejected-batch-rejected",
+      "transition": "rejected-batch",
+      "status": "failed",
+      "at": "2026-01-01T00:00:00Z",
+      "idempotency_key": "rejected-batch",
+      "preconditions": [],
+      "permissions": [
+        "operate"
+      ],
+      "side_effect_count": 0,
+      "evidence": [
+        "synthetic:execution:rejected-batch"
+      ]
+    }
+  ],
+  "telemetry": {
+    "connection": "unavailable"
+  }
+}

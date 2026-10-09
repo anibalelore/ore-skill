@@ -1,0 +1,8 @@
+{
+  "name": "ore-contract-watch",
+  "version": "4.0.0-alpha.1",
+  "description": "Optional ORE runtime adapter: ore-contract-watch; see capability matrix for limits",
+  "author": {
+    "name": "anibalelore"
+  }
+}

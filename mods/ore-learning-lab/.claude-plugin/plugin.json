@@ -1,0 +1,8 @@
+{
+  "name": "ore-learning-lab",
+  "version": "4.0.0-alpha.1",
+  "description": "Optional ORE runtime adapter: ore-learning-lab; see capability matrix for limits",
+  "author": {
+    "name": "anibalelore"
+  }
+}
