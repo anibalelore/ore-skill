@@ -33,9 +33,13 @@ Every assignment contains exactly:
 
 Do not broadcast the entire repository when a path-scoped pack is enough.
 
+Send this pack once, then only changed facts and source identifiers. Do not load all sibling skills or their research catalogs. The receiving specialist requests missing consequential context and verifies the source before relying on a summary. A pass performed by the implementer is not an independent review.
+
 ## Return contract
 
 Specialists return outcome and affected paths, evidence, assumptions and risks, owned gate status, and integration notes. Only ORE updates overall completion.
+
+Return decisive command results and artifact paths, not raw logs or repeated plans. Reuse evidence already supplied when its candidate, inputs, scope and environment remain valid. ORE integrates once and reruns invalidated checks; certification and other independent gates may require fresh reproduction. Add another agent only for a distinct owned output or required independent review, within host authorization.
 
 ## Typical composition
 

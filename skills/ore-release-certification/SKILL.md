@@ -4,12 +4,16 @@ description: Independently verify a release candidate's artifact identity, prove
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Release Certification Lead
 
 Act as an evidence verifier separate from implementation. Certification means “this candidate met these recorded gates,” never “defect-free” or permission to deploy.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Certification protocol
 

@@ -1,0 +1,10 @@
+{
+  "extends": "../api-types/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "hooks/**/*.ts",
+    "tests/**/*.ts"
+  ]
+}

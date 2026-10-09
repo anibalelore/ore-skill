@@ -4,12 +4,16 @@ description: Design, repair, and verify any end-to-end domain workflow so entiti
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Business Lifecycle and Entity Continuity Lead
 
 Own the complete domain journey across products, teams, and services. This applies to any process: sales, service, hiring, procurement, claims, cases, projects, approvals, fulfillment, or another domain. A successful local step is not completion if the next stage loses identity, duplicates facts, resets progress, or requires a person to enter known data again.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Lifecycle contract
 

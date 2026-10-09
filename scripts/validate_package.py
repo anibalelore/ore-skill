@@ -9,7 +9,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-VERSION = "2.4.0"
+VERSION = "3.0.0"
+EXPECTED_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
 EXPECTED_SKILLS = {
     "ore",
     "ore-android",
@@ -62,6 +63,40 @@ def frontmatter(path: Path, errors: list[str]) -> dict[str, str]:
 
 def main() -> int:
     errors: list[str] = []
+    mods = ROOT / "mods"
+    found_mods = {p.name for p in mods.glob("ore-*") if p.is_dir()}
+    if found_mods != EXPECTED_MODS:
+        fail(errors, f"mod set mismatch: {sorted(found_mods)}")
+    canonical_reader = mods / "ore-progress/hooks/state.ts"
+    for name in sorted(EXPECTED_MODS):
+        folder = mods / name
+        try:
+            manifest = json.loads((folder / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+            if manifest.get("name") != name or manifest.get("version") != VERSION:
+                fail(errors, f"mod manifest mismatch: {name}")
+            hooks = json.loads((folder / "hooks/hooks.json").read_text(encoding="utf-8"))
+            if hooks.get("modules") != ["./register.ts"]:
+                fail(errors, f"mod module mismatch: {name}")
+            module = (folder / "hooks/register.ts").read_text(encoding="utf-8")
+            forbidden = re.findall(r"\$\.(?:fs\.write|process\.\w+|http\.\w+|model\.\w+|store\.\w+)", module)
+            if forbidden:
+                fail(errors, f"unapproved mod calls in {name}: {forbidden}")
+            if (folder / "hooks/state.ts").read_bytes() != canonical_reader.read_bytes():
+                fail(errors, f"state reader differs from canonical reader: {name}")
+            if not (folder / "tsconfig.json").is_file():
+                fail(errors, f"missing mod tsconfig: {name}")
+        except (OSError, ValueError) as exc:
+            fail(errors, f"invalid mod {name}: {exc}")
+    try:
+        marketplace = json.loads((mods / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
+        entries = marketplace["plugins"]
+        if {p["name"] for p in entries} != EXPECTED_MODS:
+            fail(errors, "mods marketplace inventory mismatch")
+        for entry in entries:
+            if entry.get("source") != f"./{entry['name']}" or entry.get("version") != VERSION:
+                fail(errors, f"mods marketplace entry mismatch: {entry['name']}")
+    except (OSError, ValueError, KeyError) as exc:
+        fail(errors, f"invalid mods marketplace: {exc}")
     skills_root = ROOT / "skills"
     found = {path.name for path in skills_root.iterdir() if path.is_dir()}
     if found != EXPECTED_SKILLS:
@@ -118,6 +153,7 @@ def main() -> int:
         skills_root / "ore" / "references" / "department-agent-study.md",
         skills_root / "ore" / "references" / "workflow-memory-study.md",
         ROOT / "evals" / "test_ore_state.py",
+        ROOT / "evals" / "test_mods_state.py",
         ROOT / "evals" / "test_form_contract.py",
         ROOT / "evals" / "test_legacy_agent_catalog.py",
         ROOT / "evals" / "test_department_agent_catalog.py",
@@ -139,7 +175,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"ORE package validation passed: {len(EXPECTED_SKILLS)} skills, version {VERSION}")
+    print(f"ORE package validation passed: {len(EXPECTED_SKILLS)} skills, {len(EXPECTED_MODS)} mods, version {VERSION}")
     return 0
 
 

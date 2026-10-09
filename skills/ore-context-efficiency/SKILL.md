@@ -4,12 +4,23 @@ description: Reduce agent context and token cost while preserving task fidelity,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Context Efficiency Lead
 
 Make the working set smaller and more relevant without making the answer less correct.
+
+Apply the lightweight rules below directly within the owning lead; invoking an additional efficiency agent is unnecessary for an ordinary task. Preserve the user's model, reasoning settings, requested detail and authorization boundaries. High-capability models receive the same acceptance criteria with less duplicated context, not weaker review.
+
+## Default execution budget
+
+- Read applicable instructions once in the current context. Links are conditional resources; do not recursively load catalogs, historical studies or every sibling skill. Retrieve omitted source detail whenever a consequential decision depends on it.
+- Search first and read bounded regions with their callers, contracts and tests. Keep full logs/artifacts accessible; carry decisive evidence and paths into the working context. Do not truncate failures before determining their cause.
+- Use one accountable lead until distinct expertise, independent outputs or a required independent review justify another agent. Send a bounded assignment and incremental handoff; never broadcast whole transcripts by default.
+- Preserve passed evidence only for unchanged inputs, candidate and environment. Rerun affected checks after invalidation; reproduce checks when independence or risk requires it. Consolidate overlapping validation without removing any required coverage.
+- Return the requested artifact and decision-relevant evidence. Summarize repeated progress/history once; keep blockers, uncertainties and safety boundaries explicit. Avoid fixed response/token caps that could hide necessary detail.
+- Use native host caching, context or effort controls only when supported and authorized. Do not infer model capability, cache hits or savings from a model name, and do not downgrade the selected model automatically.
 
 ## Optimization protocol
 

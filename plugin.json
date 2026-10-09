@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ore",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Persistent software orchestration with 26 department-based specialists, automatic progress, business lifecycle continuity, and evidence gates.",
   "author": {
     "name": "anibalelore",

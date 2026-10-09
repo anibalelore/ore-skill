@@ -4,12 +4,16 @@ description: Build, review, debug, or modernize native iOS applications with Swi
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE iOS Native Lead
 
 Own the iOS result from project configuration through real device and release behavior. Follow current Swift and Apple-platform conventions while preserving justified project patterns.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Route specialists
 

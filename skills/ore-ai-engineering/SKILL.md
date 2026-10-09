@@ -4,12 +4,16 @@ description: Design, build, evaluate, and operate ML, generative-AI, RAG, model,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE AI Engineering Lead
 
 Treat prompts, models, retrieval, tools and evaluators as versioned system components. A persuasive demo is not an evaluation.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Specialist passes
 

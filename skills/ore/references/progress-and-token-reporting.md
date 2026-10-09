@@ -41,6 +41,8 @@ Publish `ORE <n>% · <phase> · <evidence and next action>`:
 
 Write the durable state before publishing the matching percentage. Never show 100% while a deliverable, required gate, blocker, handoff, or requested artifact remains open.
 
+Combine simultaneous cadence triggers into one update. Report only new evidence and the next action; do not repeat the entire plan, specialist history, ledger or token explanation at every tool call. Specialist reports feed the lead's update rather than duplicating overall progress. Preserve the host's required communication cadence and the user's requested detail.
+
 ## Token-efficiency reporting
 
 Track savings only when a comparable baseline exists:
@@ -50,6 +52,8 @@ Track savings only when a comparable baseline exists:
 - otherwise `0 tokens demonstrated` and state that actual savings are unknown.
 
 Never fabricate precision or count hypothetical savings.
+
+Smaller instruction files demonstrate reduced potential context, not actual billed-token savings or equivalent model performance. Record file identities and the load scenario when comparing source sizes. Compare end-to-end host counters only with the same task, chosen model/settings, tools, acceptance evidence, required independent reviews and gates; include retries, subagents, tool payloads and available cache accounting. Without such a run, report actual savings and behavioral equivalence as unmeasured.
 
 ## Final lines
 

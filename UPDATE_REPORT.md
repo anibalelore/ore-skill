@@ -1,3 +1,113 @@
+# ORE 3.0.0 Update Report
+
+Date: 2026-10-08 (America/Denver).
+
+## Result
+
+Added six optional, independent Claude Code mods and a local `ore-mods`
+marketplace. The domain workflows are retained. The lead and all specialists now use
+minimum sufficient execution; audit detail loads conditionally. Codex and other
+hosts use these skill instructions but do not load the optional mods. No commit, push, tag,
+installation into the user's plugin registry, or publication was performed.
+
+The sole shared behavior extension is explicitly opt-in: ore_state.py update
+accepts --active-specialist, --department and --domain-lead together, records
+identity at the new revision and appends a structured transition event.
+Existing commands and old schema-v1 tasks retain their behavior.
+
+## API verification
+
+The installed CLI was 2.1.267. An isolated npm installation of 2.1.295 was
+created under the user's temporary directory, leaving the installed CLI intact.
+/plugin-types was unavailable in both versions, including an interactive
+2.1.295 session. Loading an empty probe interactively with --plugin-dir generated
+the actual API declarations. An unedited copy is preserved in mods/api-types.
+All implementation events and calls were checked against that snapshot.
+
+Reviewed the official overview/create/reference/admin pages and the official
+Anthropic examples, including blast-radius, sec-default and agents-md. The
+guard uses the typed ui.ask method instead of the example's process-based
+waiting and shell dry runs. No mod uses network, model, process, filesystem
+writes, persistent store, environment or settings APIs.
+
+## Validation
+
+- Python package validator: 26 skills, six mods, version 3.0.0; passed.
+- Full unittest discovery: 48 tests passed, including nine new mod regression tests.
+- claude plugin validate: all six mods passed; local marketplace passed.
+- TypeScript 5.9.3 against generated 2.1.295 types: all six passed.
+- Native claude plugin test: 18 tests passed across the six plugins. These include
+  guard cancellation/approval via mocked AskUserQuestion, and rendering on both
+  terminal/Desktop while preserving the existing band.
+- Each mod loaded separately with claude -p /<name>-status --plugin-dir mods/<name>.
+  Each returned the persisted workspace handoff without requesting a model.
+- Combined interactive load using six repeated --plugin-dir flags: /plugin
+  showed `6 mods active`; progress, gates and the old-state ORE lead fallback
+  rendered together in the terminal.
+- No destructive operation was executed; guard execution was mocked. A mistaken
+  initial combined CLI invocation passed a directory as prompt; a model request
+  was rejected by the account's organization policy. The corrected interactive
+  invocation loaded all six without a model turn. Live model-driven end-to-end
+  actions were not exercised; native host tests cover those event paths offline.
+
+## Explicit limits
+
+- CLI minimum is documented as 2.1.287; this release was tested on 2.1.295 only.
+- State updates are polled every second, not delivered by a filesystem watcher.
+  Revisions identify changes, not the writer/window.
+- active.json is a pointer. The reader also reads the task record and checks
+  the pointer again; absent/corrupt/unsupported state is inert.
+- Gates warn at turn end and explicit Bash completion commands without reading
+  conversational claims. ore_state.py still enforces actual completion.
+- Guard reports declared arguments and labels impact as unmeasured. Patterns
+  cannot prove script/alias/remote effects. Pattern options replace defaults;
+  invalid options require confirmation and oversized arguments do too.
+- State has no approval/scope-exception ledger, so matched actions request
+  confirmation each time an active or blocked task exists. Confirmation never
+  bypasses the host's permission chain; headless confirmation denies actions.
+- Specialist display reflects recorded assignment, not inferred execution.
+  The existing skills do not automatically populate the opt-in identity fields.
+- UI availability/layout may hide or scroll the band. Explicit status commands
+  provide headless handoffs. Mods run as the user and are not sandboxed.
+
+## Review scope
+
+Implementation: mods/, evals/mods_harness.mjs, evals/test_mods_state.py,
+skills/ore/scripts/ore_state.py, scripts/validate_package.py.
+Documentation: README.md, CHANGELOG.md, this report and mods/README.md.
+Skills: minimum sufficient execution policy in the core, efficiency lead and
+24 domain specialists; both root manifests and skill versions remain 3.0.0.
+The Codex marketplace is unchanged; the Claude marketplace lives under mods/.
+
+## Token-efficiency instruction update
+
+Applied the skill-creator workflow to the core and all specialists. Moved the
+original audit mode/surface section verbatim (adjusting relocated links) into
+references/audit-modes.md, loaded only when relevant. Shortened the duplicated
+specialist index; the detailed routing and domain workflows remain accessible.
+Added scoped reads, incremental handoffs, bounded evidence returns and reuse
+only of unchanged validation. Model choice/reasoning settings, acceptance
+criteria, risk-sensitive coverage and independent reviews are preserved.
+The lightweight policy runs within each owning lead; it does not require an
+extra efficiency agent or authorize delegation.
+
+Measured source size against the working tree immediately before this update:
+
+- Core SKILL.md: 11,446 to 9,895 characters (13.6% smaller).
+- Core plus backend SKILL.md: 14,097 to 12,807 characters (9.2% smaller).
+- Domain cards add a small standalone execution rule; the dedicated efficiency
+  skill expands its guidance and is not loaded for every ordinary task.
+
+These are source-context measurements, not actual tokens, cache savings or
+billed usage. Actual token savings: unmeasured. End-to-end behavioral equivalence
+on the named model families: unmeasured. The existing 48-test suite passes,
+all 26 skills pass skill-creator validation, and original domain bodies/audit
+rules were checked for preservation. Acceptance scenarios for a future same-task,
+same-model/gates benchmark are in evals/context-efficiency-scenarios.md.
+No runtime model settings, state schema or mod behavior changed in this update.
+
+## Previous 2.4.0 report (historical)
+
 # Informe de actualización de ORE
 
 Fecha: 2026-10-08, America/Denver. Repositorio: `C:\Users\aniba\Downloads\ORE-SKILL`.

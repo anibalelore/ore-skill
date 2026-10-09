@@ -4,12 +4,16 @@ description: Build, review, debug, or migrate backend services, APIs, databases,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Backend and Data Lead
 
 Own correctness across request, transaction, asynchronous delivery, storage and downstream consumers. A successful HTTP response is not proof that the business operation is correct.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Route specialist passes
 

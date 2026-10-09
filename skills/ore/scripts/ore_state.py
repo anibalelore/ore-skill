@@ -255,6 +255,7 @@ def write_handoff(repo: str, task: dict) -> None:
         f"- Acceptance: {'; '.join(task.get('acceptance_criteria', [])) or 'Not recorded'}",
         f"- Completed: {', '.join(completed) if completed else 'None verified'}",
         f"- Roles: {', '.join(task['roles']) if task['roles'] else 'None assigned'}",
+        *([f"- Active specialist: {task['active_specialist']['department']} -> {task['active_specialist']['specialist']} (domain lead: {task['active_specialist']['domain_lead']})"] if task.get("active_specialist") else []),
         f"- Active files: {', '.join(task.get('active_files', [])) if task.get('active_files') else 'None recorded'}",
         f"- Last validation: {task.get('last_validation') or 'None recorded'}",
         f"- Decisions: {'; '.join(item['detail'] for item in task['decisions']) if task['decisions'] else 'None'}",
@@ -360,6 +361,22 @@ def cmd_update(args: argparse.Namespace) -> dict:
         task, task_path = active_task(args.repo, args.task_id)
         assert_revision(task, args.expect_revision)
         evidence = parse_evidence(args.evidence)
+        identity = (args.active_specialist, args.department, args.domain_lead)
+        if any(identity):
+            if not all(identity):
+                raise StateError("Active specialist requires --active-specialist, --department, and --domain-lead")
+            if not re.fullmatch(r"\$?ore-[a-z0-9-]+", args.active_specialist):
+                raise StateError("Active specialist must be an ORE skill name")
+            specialist = {
+                "specialist": args.active_specialist.lstrip("$"),
+                "department": args.department,
+                "domain_lead": args.domain_lead,
+                "revision": task["revision"] + 1,
+            }
+            previous = task.get("active_specialist", {})
+            if any(previous.get(key) != specialist[key] for key in ("specialist", "department", "domain_lead")):
+                task["active_specialist"] = specialist
+                task.setdefault("events", []).append({"at": now(), "kind": "specialist_changed", **specialist})
         for raw_path in args.form_contract:
             resolved = validate_form_contract(args.repo, raw_path)
             relative = str(resolved.relative_to(Path(args.repo).resolve())).replace("\\", "/")
@@ -527,6 +544,7 @@ def output(task: dict) -> None:
         "deliverables": task["deliverables"],
         "gates": task["gates"],
         "roles": task["roles"],
+        **({"active_specialist": task["active_specialist"]} if task.get("active_specialist") else {}),
         "decisions": task["decisions"],
         "open_questions": task.get("open_questions", []),
         "form_contracts": task.get("form_contracts", []),
@@ -574,6 +592,9 @@ def parser() -> argparse.ArgumentParser:
     update.add_argument("--evidence", action="append", default=[])
     update.add_argument("--next")
     update.add_argument("--role", action="append", default=[])
+    update.add_argument("--active-specialist")
+    update.add_argument("--department")
+    update.add_argument("--domain-lead")
     update.add_argument("--decision", action="append", default=[])
     update.add_argument("--question", action="append", default=[])
     update.add_argument("--resolve-question", action="append", default=[])

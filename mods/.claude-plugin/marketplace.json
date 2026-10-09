@@ -1,0 +1,45 @@
+{
+  "name": "ore-mods",
+  "metadata": { "description": "Six optional ORE runtime mods for Claude Code" },
+  "owner": {
+    "name": "anibalelore"
+  },
+  "plugins": [
+    {
+      "name": "ore-progress",
+      "source": "./ore-progress",
+      "version": "3.0.0",
+      "description": "Optional ORE progress mod"
+    },
+    {
+      "name": "ore-guard",
+      "source": "./ore-guard",
+      "version": "3.0.0",
+      "description": "Optional ORE guard mod"
+    },
+    {
+      "name": "ore-resume",
+      "source": "./ore-resume",
+      "version": "3.0.0",
+      "description": "Optional ORE resume mod"
+    },
+    {
+      "name": "ore-gates",
+      "source": "./ore-gates",
+      "version": "3.0.0",
+      "description": "Optional ORE gates mod"
+    },
+    {
+      "name": "ore-stale-window",
+      "source": "./ore-stale-window",
+      "version": "3.0.0",
+      "description": "Optional ORE stale-window mod"
+    },
+    {
+      "name": "ore-departments",
+      "source": "./ore-departments",
+      "version": "3.0.0",
+      "description": "Optional ORE departments mod"
+    }
+  ]
+}

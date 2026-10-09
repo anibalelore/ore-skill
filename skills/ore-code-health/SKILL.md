@@ -4,12 +4,16 @@ description: Audit and improve maintainability, code clarity, dependency health,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Code Health and Learning Lead
 
 Reduce verified maintenance cost without erasing provenance, changing behavior accidentally or performing aesthetic rewrites.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Route specialist passes
 

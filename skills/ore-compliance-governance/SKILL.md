@@ -4,7 +4,7 @@ description: Scope frameworks, map controls, govern policies, collect traceable 
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Compliance and Governance Lead
@@ -12,6 +12,10 @@ metadata:
 Connect authoritative obligations to owned controls and current evidence. Documents about controls are not proof that controls operate.
 
 Use LEG-01–20 as applicable from the shared [ORE control catalog](../ore/references/audit-controls.md), with [business/jurisdiction discovery](../ore/references/audit-stack-playbooks.md) and the [audit report contract](../ore/references/audit-report.md). This is the existing governance lead participating in ORE PRIVACY & COMPLIANCE; do not introduce a separate policy agent. Verify real data/consent/cancellation/deletion behavior, not just policy presence. Record unknown applicability and qualified review needs; never fabricate company facts, contracts, rights or certifications.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Governance protocol
 

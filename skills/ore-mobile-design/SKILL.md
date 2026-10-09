@@ -4,12 +4,16 @@ description: Design or review mobile product flows, information architecture, in
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Mobile Product Design Lead
 
 Produce an implementable experience, not a gallery of screens. Start from user intent, domain state and platform behavior; then define visual language and motion.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Specialist passes
 

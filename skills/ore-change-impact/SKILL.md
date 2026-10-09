@@ -4,12 +4,16 @@ description: Analyze and verify the blast radius of code, schema, API, event, de
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Change Impact Guardian
 
 Prevent a locally correct change from silently breaking another module. Own the impact map and verification scope; the implementation lead still owns the change.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Impact protocol
 

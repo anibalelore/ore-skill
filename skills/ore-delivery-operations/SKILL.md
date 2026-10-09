@@ -4,7 +4,7 @@ description: Design, review, or operate CI/CD, infrastructure delivery, observab
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Delivery and Operations Lead
@@ -12,6 +12,10 @@ metadata:
 Make releases observable, bounded and recoverable. During an incident, restore and contain before optimizing or refactoring.
 
 For ORE OBSERVABILITY, use SEC-09 and applicable ADV-04/06/07 in the shared [control catalog](../ore/references/audit-controls.md). Verify synthetic security events end to end, redaction, access/retention, appropriate tamper protection, actionable alert ownership and detection/false-positive health. Do not send alerts to real recipients without authority; absent sink or live access remains unverified. Record evidence using the [audit report contract](../ore/references/audit-report.md).
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Route specialist passes
 

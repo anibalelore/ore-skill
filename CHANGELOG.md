@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.0 — Optional Claude Code Mods
+
+- Added minimum sufficient execution across the lead and specialists: conditional audit/reference loading, scoped context, incremental handoffs and concise evidence. Required gates, independent review and model choice remain intact; actual token savings are unmeasured.
+
+- Added six independent Claude-only mods: progress, action confirmation, resume, evidence gates, revision-change alerts and department/specialist display.
+- Added a local Claude marketplace, generated 2.1.295 API declaration snapshot, TypeScript checks and state/handler regression coverage.
+- Extended ore_state.py with optional revision-protected specialist identity and transition events; it remains the only workspace-state writer.
+- Preserved existing skill behavior across hosts. Updated package metadata to 3.0.0 and package validation to include mods.
+- Documented user permissions/no sandbox, polling, headless confirmation denial, pattern limits and the unavailable /plugin-types command.
+
 ## 2.4.0 — Integrated Security, Privacy, Trust and Validated Autofix
 
 - Preserved the 26 existing skills, durable-state schema, UI policies, form contracts and plugin discovery; versioned the package forward from 2.3.0 rather than replacing ORE with a 2.0 package.

@@ -2,7 +2,51 @@
 
 > Durable state, visible progress, the right specialists, and evidence before completion.
 
-ORE is an installable company of Agent Skills for substantial product and software work. Version 2.4 preserves repository-backed state, computed progress and 26 externally researched skills, and adds integrated security, privacy/compliance, accessibility/trust, observability and validated autofix passes.
+ORE is an installable company of Agent Skills for substantial product and software work. Version 3.0 preserves the existing 26 skills and adds six optional Claude Code mods for visible state and per-action confirmation.
+
+## Claude Code mods (optional)
+
+Requires Claude Code CLI **2.1.287+**; tested with **2.1.295**. ORE skills work
+unchanged in Codex and other hosts without these plugins.
+
+| Mod | Behavior |
+| --- | --- |
+| `ore-progress` | Shows the persisted task, computed percentage and current/next deliverable above the prompt. |
+| `ore-guard` | Confirms configurable high-impact tool actions, showing task context and declared arguments. |
+| `ore-resume` | Prints the active task's objective, progress, next deliverable and blockers on session start. |
+| `ore-gates` | Shows pending required gates/blockers and warns at turn end or an explicit completion command. |
+| `ore-stale-window` | Warns when an observed task/revision changes; it cannot identify which window wrote it. |
+| `ore-departments` | Shows recorded department, command chain and recent specialists; old state shows only `ORE lead`. |
+
+From a local clone, add its `mods` directory as a marketplace, then install
+each desired plugin:
+
+```text
+/plugin marketplace add ./mods
+/plugin install ore-progress@ore-mods
+/plugin install ore-guard@ore-mods
+/plugin install ore-resume@ore-mods
+/plugin install ore-gates@ore-mods
+/plugin install ore-stale-window@ore-mods
+/plugin install ore-departments@ore-mods
+```
+
+Or try one session with `claude --plugin-dir mods/ore-progress` (substitute any
+of the six names). Use `/reload-plugins` after installing in an open session.
+Keep the clone in place when using the local marketplace. Nothing is published
+by these instructions.
+
+**Mods run with your user permissions and have no sandbox.** These six mods
+request only file reads, timers, UI and status commands; they never write
+`.ore/`, access the network or start external processes. Missing/corrupt state
+is ignored. Updates are polled every second. Only terminal/Desktop show the
+band; `/<plugin-name>-status` provides an explicit textual handoff elsewhere.
+
+The guard is pattern-based, cannot measure remote effects or hidden scripts,
+and does not bypass host permissions after confirmation. Gates never infer
+completion claims from conversation text. Specialist identity must be recorded
+through the optional `ore_state.py update` arguments. See
+[mod options, state contract, API provenance and validation](mods/README.md).
 
 ## What is now enforceable
 
@@ -20,6 +64,14 @@ ORE is an installable company of Agent Skills for substantial product and softwa
 The persistence guarantee applies only when windows share the same repository storage and load ORE. ORE does not claim invisible global memory across unrelated clients or workspaces.
 
 ## Agent departments
+
+ORE 3.0 uses a minimum sufficient execution policy: conditional reference
+loading, scoped specialist assignments, incremental handoffs, concise evidence
+returns and reuse of checks only while their candidate/inputs/environment remain
+valid. Required gates and independent reviews are preserved. The user's chosen
+model and reasoning settings remain unchanged; no automatic downgrade is used.
+Actual billed-token savings and equivalent model outcomes require a comparable
+end-to-end benchmark. Smaller instructions alone do not establish either.
 
 ### Executive orchestration and product
 

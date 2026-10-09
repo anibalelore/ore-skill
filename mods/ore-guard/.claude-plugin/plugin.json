@@ -1,0 +1,16 @@
+{
+  "name": "ore-guard",
+  "version": "3.0.0",
+  "description": "Optional ORE guard mod for Claude Code",
+  "author": {
+    "name": "anibalelore"
+  },
+  "userConfig": {
+    "patterns": {
+      "type": "string",
+      "title": "High-impact patterns",
+      "description": "JSON array of regular expressions applied to tool name and arguments; replaces defaults",
+      "default": ""
+    }
+  }
+}

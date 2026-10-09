@@ -4,12 +4,16 @@ description: Audit, design, or implement organic discoverability across search a
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Search, AEO and GEO Lead
 
 Improve eligibility, comprehension, authority, answerability and measurement. No ethical implementation can guarantee first place or recommendation by a search/AI system.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Route specialists
 

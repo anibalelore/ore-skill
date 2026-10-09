@@ -4,12 +4,16 @@ description: Design, build, audit, and operate analytics events, metrics, transf
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE Data and Analytics Lead
 
 Make every published number traceable to an owner, definition, grain, source and freshness expectation.
+
+## Execution budget
+
+Read scoped sources once; retrieve missing evidence and affected consumers as needed. Return outcomes, paths, gate evidence and blockers without replaying history. Reuse only unchanged checks; preserve independent review and model choice.
 
 ## Data-product protocol
 

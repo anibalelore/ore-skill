@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "2.4.0"
+  version: "3.0.0"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -23,6 +23,17 @@ For every substantial task:
 6. **Verify, checkpoint, and hand off.** Record command/result evidence, update the durable task, and leave an exact next action that another ORE window can resume.
 
 If the workspace is read-only, keep the same state in the conversation and report that cross-window persistence is unavailable. Do not claim persistence without a written artifact accessible to the next window.
+
+## Minimum sufficient execution
+
+Use this default on every model, including high-capability models; retain the user's chosen model and reasoning settings. Optimize repeated context and work, not required outcomes.
+
+- Read this protocol and each applicable reference once per working context. Reopen only after a relevant change, missing detail, compaction, or evidence conflict. Links are conditional resources, not instructions to recursively read every linked file or research catalog.
+- Search paths/symbols first; read the relevant implementation, callers, contracts and decisive tests. Expand when dependencies or risk require it. Keep full evidence artifacts available; return decisive lines, exit status and paths rather than complete logs.
+- Begin with one accountable lead. Add a specialist pass for distinct expertise and a real agent only when authorized and its owned output or required independent review justifies duplicated context. No ceremonial roster or extra coordinator for a single worker. Independence for L3+ remains mandatory.
+- Share objective, task id/revision, owned paths, decisions, acceptance criteria and gates. Send changes since the last handoff, not the whole transcript; recipients verify source evidence and retrieve missing details before acting.
+- Once relevant checks pass, rerun only after a change invalidates their inputs/environment or independence requires reproduction. Never reuse a pass for a different artifact, scope or configuration.
+- Keep progress updates to the required percentage, new evidence and next action; specialists return outcomes, affected paths, gate evidence, blockers and integration decisions. Expand for requested detail or material risks. No hidden evidence, fixed universal token cap, automatic model downgrade, or fabricated savings.
 
 ## Startup protocol
 
@@ -46,40 +57,11 @@ Do not silently inherit a stale task. Resume only when its objective matches; ot
 
 Read [quality-gates.md](references/quality-gates.md) to choose and close gates. For audits or improvement work, also read [audit-and-improve.md](references/audit-and-improve.md).
 
-## Integrated audit capabilities
+## Conditional audit modes
 
-ORE SECURITY, ORE PRIVACY & COMPLIANCE, ORE ACCESSIBILITY & TRUST, ORE OBSERVABILITY, and ORE AUTOFIX & VALIDATION are reusable internal passes under this lead. They share one scope, finding register, severity model and validation ledger. Preserve existing specialist routing; these five capabilities do not create five competing agents or imply permission to delegate.
+For `ORE audit`, `security`, `compliance`, `accessibility`, `fix`, `loop`, or `report`, read [audit-modes.md](references/audit-modes.md). It preserves ORE SECURITY, ORE PRIVACY & COMPLIANCE, ORE ACCESSIBILITY & TRUST, ORE OBSERVABILITY, and ORE AUTOFIX & VALIDATION, mode authority, all 36 controls for integral audits, proportional surface checks, and the five-iteration repair ceiling. Load only relevant control/playbook sections after establishing applicability; an integral audit still accounts for every control. Audit does not imply repair or publication authority.
 
-Interpret the following as natural-language modes of `$ore`, not installed shell commands:
-
-| Request | Scope and authority |
-| --- | --- |
-| `ORE audit` | Integral audit; inspect all 36 control IDs for applicability, without implying repair authority. |
-| `ORE security` | SEC-01–09 and relevant ADV controls, including security observability. |
-| `ORE compliance` | LEG-01–08, LEG-16–20, applicable commercial LEG-09–12 and regulatory evidence. |
-| `ORE accessibility` | LEG-09–15 and relevant trust, content and design controls. |
-| `ORE fix` | Repair confirmed scoped findings; audit/reproduce first if none were supplied. |
-| `ORE loop` | Discover → audit → plan → authorized repair → validate → re-audit, at most five iterations per run. |
-| `ORE report` | Report current evidence and prioritized pending work; reconcile stale evidence and label unexecuted checks. |
-
-For these modes, read [audit-and-improve.md](references/audit-and-improve.md), then relevant sections of [audit-controls.md](references/audit-controls.md). Read [audit-stack-playbooks.md](references/audit-stack-playbooks.md) for detected technologies, business and jurisdiction. Use [audit-report.md](references/audit-report.md) for reports, validation and checkpoints. In a focused review, mark omitted controls as out of scope rather than passed.
-
-During everyday development, select proportional checks before closing the affected deliverable:
-
-| Changed surface | Required review |
-| --- | --- |
-| Form | Validation, data purpose/minimization, permissions, accessible errors and existing form contract. |
-| Login | Sessions/tokens, server limits, enumeration, recovery, OAuth and privileged MFA risk. |
-| API | Server authorization, schema, response exposure, rate limits and safe errors. |
-| Table | Ownership/tenant model, grants, applicable RLS and migration constraints. |
-| Payments | Server amounts/currency/beneficiary, webhook signatures, idempotency and money privileges. |
-| Upload | Real type, size, active content, quarantine/processing and storage access. |
-| AI feature | Tool authority, injection, tenant/RAG isolation, privacy and cost budgets. |
-| Subscription | Prices, renewal, refund/cancellation behavior and commercial transparency. |
-| Interface | Contrast, keyboard/focus, semantics and deceptive patterns. |
-| Deployment | Secrets, dependency risk, environment configuration, tests and recovery. |
-
-Do not run a full expensive audit for an irrelevant edit. Missing tools, live access or legal context are coverage limitations, not automatic findings or passes. Do not claim complete security or legal compliance.
+For ordinary development, review the affected trust/data/UI/release boundaries and their required gates. Load the surface table when selecting those checks; do not load the full audit catalog for an irrelevant edit. Unexecuted checks remain visible coverage limitations.
 
 ## Risk levels
 
@@ -94,33 +76,33 @@ Increase independence checks and rollback evidence with risk. L4–L5 consequent
 
 ## Specialist skills
 
-Route relevant work to the installed specialist skill or use its instructions as the lead card:
+Load only the selected skill. Domain scope and handoff composition are in [specialist-routing.md](references/specialist-routing.md).
 
-- `$ore-android` — native Android/Kotlin/Compose.
-- `$ore-ios` — native iOS/Swift/SwiftUI/UIKit.
-- `$ore-flutter` — Flutter/Dart and native bridges.
-- `$ore-mobile-design` — mobile product, UI, UX, accessibility, and design systems.
-- `$ore-web-engineering` — web architecture, frontend/full-stack, accessibility, and performance.
-- `$ore-creative-web` — art direction, scroll storytelling, motion, 3D, and playful interaction.
-- `$ore-search-discovery` — technical SEO, information architecture, structured data, AEO, GEO, and measurement.
-- `$ore-form-workflows` — role-aware, validated, accessible, persistent form and data-entry workflows.
-- `$ore-business-lifecycle` — canonical identity, data and progress continuity through any end-to-end cross-module workflow.
-- `$ore-product-architecture` — product specification, repository archaeology, domain modeling, architecture and compatibility.
-- `$ore-backend-data` — services, APIs, databases, messaging, integrations and migrations.
-- `$ore-quality-engineering` — risk-based testing, synthetic users, accessibility, localization, performance and resilience.
-- `$ore-security-privacy` — threat modeling, authorization, privacy, compliance evidence and supply-chain security.
-- `$ore-delivery-operations` — CI/CD, observability, release, rollback, production diagnosis and incidents.
-- `$ore-code-health` — maintainability, documentation, dependencies, root cause and recurrence prevention.
-- `$ore-organizational-memory` — project-scoped decisions, lessons, relationships, promotion, staleness and forgetting.
-- `$ore-context-efficiency` — minimum sufficient context packs and evidence-based token accounting.
-- `$ore-change-impact` — dependency blast radius, affected consumers, compatibility and cross-module regression prevention.
-- `$ore-ai-engineering` — ML/LLM/RAG/agent evaluation, safety, observability and cost.
-- `$ore-data-analytics` — analytics events, metric contracts, transformations, data quality and lineage.
-- `$ore-platform-cloud` — cloud infrastructure, IaC, internal platforms, capacity, cost and disaster recovery.
-- `$ore-developer-experience` — onboarding, local/CI feedback, self-service, templates and measured engineering friction.
-- `$ore-product-discovery` — user problems, assumptions, prototypes, outcomes and controlled experiments.
-- `$ore-compliance-governance` — framework scope, control mapping, evidence, exceptions and audit traceability.
-- `$ore-release-certification` — independent verification of immutable release candidates, provenance, gates and rollback.
+- `$ore-android` ? Android/Kotlin/Compose.
+- `$ore-ios` ? iOS/Swift.
+- `$ore-flutter` ? Flutter/Dart.
+- `$ore-mobile-design` ? mobile UI/UX.
+- `$ore-web-engineering` ? web/full-stack.
+- `$ore-creative-web` ? motion/3D/storytelling.
+- `$ore-search-discovery` ? SEO/AEO/GEO.
+- `$ore-form-workflows` ? forms/data entry.
+- `$ore-business-lifecycle` ? cross-module workflow continuity.
+- `$ore-product-architecture` ? specification/domain/architecture.
+- `$ore-backend-data` ? services/APIs/storage/migrations.
+- `$ore-quality-engineering` ? testing/accessibility/resilience.
+- `$ore-security-privacy` ? security/privacy.
+- `$ore-delivery-operations` ? CI/CD/operations/incidents.
+- `$ore-code-health` ? maintainability/root cause.
+- `$ore-organizational-memory` ? project knowledge/provenance.
+- `$ore-context-efficiency` ? context and token measurement.
+- `$ore-change-impact` ? dependencies/consumers/compatibility.
+- `$ore-ai-engineering` ? ML/LLM/RAG/agents.
+- `$ore-data-analytics` ? metrics/data quality/lineage.
+- `$ore-platform-cloud` ? cloud/IaC/platforms/DR.
+- `$ore-developer-experience` ? onboarding/feedback/tooling.
+- `$ore-product-discovery` ? discovery/experiments.
+- `$ore-compliance-governance` ? governance/control evidence.
+- `$ore-release-certification` ? independent release verification.
 
 The ORE lead owns integration. Specialists return bounded artifacts and evidence; they do not redefine product scope or declare the whole task complete.
 
