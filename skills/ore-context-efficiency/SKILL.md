@@ -4,7 +4,7 @@ description: Reduce agent context and token cost while preserving task fidelity,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.1.0-alpha.1"
+  version: "4.2.0-alpha.1"
 ---
 
 # ORE Context Efficiency Lead
@@ -37,3 +37,9 @@ Apply the lightweight rules below directly within the owning lead; invoking an a
 Report exact savings only from authoritative comparable counters. Report an estimated range only with the method, assumptions, and uncertainty. Otherwise write `Token efficiency: 0 tokens demonstrated`. Fixed universal context thresholds and unsupported percentage claims are not evidence.
 
 `CONTEXT_EFFICIENCY` passes when the reduced context still closes the same required gates and the comparison is reproducible. `TOKEN_ACCOUNTING` passes when baseline/candidate boundaries, measurement source, assumptions, and result are explicit. See `../ore/references/workflow-memory-study.md` for adopted and rejected external advice.
+# Adaptive model integration
+
+Use `$ore-adaptive-model-routing` for model/effort recommendations under verified
+capabilities, explicit scoped consent and locks. Context minimization never changes
+acceptance or required gates. Share compact handoffs; keep estimates separate from
+reported host usage. See [routing skill](../ore-adaptive-model-routing/SKILL.md).

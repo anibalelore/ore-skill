@@ -354,3 +354,92 @@ dependency while preserving its exclusion of reference-study repositories.
 
 Latest validation: all 100 tests passed without omissions, including real isolated
 Chromium exploration and screenshot export; package validation and diff checks passed.
+# ORE 4.2 Adaptive Model Intelligence candidate — 2026-10-09
+
+Work branch: `feat/ore-4.2-adaptive-routing`. Starting tree was clean at
+`40dbb83`; no existing user edits were overwritten. Changes remain local and
+unpublished. No commit, push, tag, release, global configuration write, provider
+inference or background agent installation was performed.
+
+## Implemented
+
+- `ore-adaptive-model-routing` skill with seven focused references and discovery UI.
+- Optional `ore-model-router`, registered in the existing generated marketplace;
+  native requested/effective model diagnostics and reported usage, no model call.
+- Versioned expiring observed registry, ten-dimensional explicit L0–L4 rubric,
+  eligibility/ranking engine and conservative complete-cost estimates.
+- MANUAL/APPROVAL_REQUIRED/AUTHORIZED_AUTO metadata modes, model/provider/effort
+  locks, restrictive scoped preferences, exact ledger authorization matching,
+  expiry/revocation/project checks, retry/delegation limits and cycle diagnostics.
+- Existing single writer and governance file extended with optional schema-v1
+  routing metadata, confirmation, atomic locking and task/governance revision checks.
+- Explicit allowlisted local Claude JSON and Codex TOML configuration readers;
+  safe ChatGPT manual adapter and unsupported-provider rejection.
+- Preserved task acceptance/gates and risk floor; native usage remains separate
+  from estimates; no second billing ledger. Existing guard, gates, regulatory,
+  resume, context and department contracts remain authoritative.
+- Reproducible synthetic evaluation for ten categories and fixed/adaptive/escalating
+  strategies, plus routing and actual TypeScript-handler contract tests.
+
+Inventory verified from package directories and marketplace: **29 skills, 28 mods,
+9 existing departments**. All 28 previous skills and 27 previous mods are preserved.
+Shared scripts were re-vendored using the existing builder; other adapters retain
+their entrypoint templates. Metadata identifies **4.2.0-alpha.1 as a candidate**.
+
+## Verification and review
+
+The previous complete suite comprised 100 tests. Routing adds deterministic contract,
+local host inspection, writer integration and native-handler tests; the final suite
+contains 122 tests. No provider inference measurements are included.
+
+| Check | Evidence |
+| --- | --- |
+| Regression suite | `python -m unittest discover -s evals -q`: **122 passed, no omissions**; includes isolated Chromium exploration and regulatory/state/runtime contracts |
+| Package inventory/discovery/links/vendoring | `python scripts/validate_package.py`: 29 skills, 28 mods, 4.2.0-alpha.1 |
+| New skill | skill-creator `quick_validate.validate_skill`: valid |
+| New native mod | `claude plugin validate mods/ore-model-router`: passed, audited calls listed |
+| TypeScript | TypeScript `tsc -p mods/ore-model-router --noEmit`: passed against checked-in 2.1.295 API types |
+| Synthetic benchmark | 30 comparisons, 0 provider calls, no measured usage/cost/success/savings |
+| Whitespace | `git diff --check`: passed |
+| Live host | Installed Claude Code **2.1.267**, below repository requirement **2.1.287+**; compatible native launch remains unverified |
+
+Independent read-only reviewer exercised core contracts and found authoritative task
+requirements could be replaced, session identity was caller-controlled, policy scope
+was omitted from the confirmation, and malformed delegation/state inputs were not
+fully guarded. Fixed those findings and added regression coverage. Review is local
+code/contract evidence, not independent certification of provider execution.
+
+Follow-up review confirmed all five findings fixed and found no remaining blocker
+within the manual/advisory scope. Its audit-detail recommendation was also addressed:
+decisions now retain fixed rationale, host, scope, level/dimensions, timestamp,
+governance revision and requirement/registry hashes without storing sensitive profiles.
+
+## Acceptance status and pending work
+
+The local package and offline routing behavior are reviewable. **The master request
+is not fully accepted or certified.** No stable release or measured savings is claimed.
+
+| Requirement | Status |
+| --- | --- |
+| Skill discovery and inventory | Verified locally |
+| Mod package and marketplace registration | Verified locally; actual install/launch on compatible host pending |
+| Registry, analyzer and adaptive policy | Verified with synthetic trusted observations; empirical calibration pending |
+| Consent, locks, preferences and recovery | Local contract/writer tests passed; real host end-to-end approval execution pending |
+| Effective model and reported usage | Native SDK calls validated by types and handler mocks; live observation pending |
+| Safe incompatible-host fallback | Implemented manual selection; unknown effective values remain unknown |
+| Native model/provider/effort changes | Not implemented as verified execution; current adapters inspect/recommend only |
+| Persistent configuration scopes | Project/session/task implemented; installation/organization writer absent |
+| Once/reject/keep/revoke controls | Manual once/keep; existing ledger revocation and task decisions; atomic one-use execution grant deferred |
+| Benchmarks | Synthetic policy set executed; real providers and token/cost improvements unmeasured |
+| Quality and regulatory preservation | Authoritative task requirements retained; existing regressions exercised |
+| Release certification | Pending compatible-host execution and remaining adapter evidence |
+
+Model/provider/effort changes, persistent authorization, expanded budget, provider
+transmission, global configuration and publication retain their applicable user
+authorization requirements. The existing model selected by this user was not changed.
+No credentials were requested or read. Other-provider compatibility is not claimed.
+
+Details, installation/removal commands, configuration examples, documented sources,
+known limits and next-version work are in
+[the 4.2 guide](docs/ore-4.2-adaptive-routing.md). Official Claude and OpenAI host
+documentation was fetched on 2026-10-09; model access still requires actual observation.

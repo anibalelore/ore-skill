@@ -11,6 +11,7 @@ from pathlib import PurePosixPath
 
 VERSION = 1
 MODULES = {
+    "ore-model-router",
     "ore-signature-guard", "ore-safeguards-monitor",
     "ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
     "ore-smart-tests", "ore-context-sentinel", "ore-independent-review", "ore-contract-watch",
@@ -18,7 +19,7 @@ MODULES = {
     "ore-cost-controller", "ore-project-router", "ore-learning-lab", "ore-first-contact",
     "ore-visual-qa", "ore-flow-intelligence", "ore-flow-watch",
 }
-GOVERNANCE_ACTIONS = {"scope", "rule", "revoke-rule", "exception", "approval", "revoke-approval"}
+GOVERNANCE_ACTIONS = {"scope", "rule", "revoke-rule", "exception", "approval", "revoke-approval", "model-policy", "model-decision"}
 
 
 def require(condition, message):
@@ -84,6 +85,9 @@ def validate_governance(data, project):
                     bounded_text(record.get(key), key)
                 timestamp(record.get("expires_at"))
                 require(record.get("grants_native_permissions") is False, "Invalid approval privileges")
+    if 'routing' in data:
+        from ore_models import validate_routing
+        validate_routing(data['routing'])
     return data
 
 
@@ -95,7 +99,7 @@ def apply_governance(data, action, payload, project, now, confirmed):
     """Return a new revision. Approval records never grant native privileges."""
     validate_governance(data, project)
     require(confirmed is True, "Durable governance changes require explicit confirmation")
-    require(action in GOVERNANCE_ACTIONS and isinstance(payload, dict), "Invalid governance action")
+    require(action in GOVERNANCE_ACTIONS - {'model-policy', 'model-decision'} and isinstance(payload, dict), "Invalid governance action")
     result = copy.deepcopy(data)
     owner = bounded_text(payload.get("owner"), "owner", 200)
     evidence = bounded_text(payload.get("evidence"), "evidence")

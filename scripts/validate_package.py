@@ -10,9 +10,10 @@ from pathlib import Path
 from build_mods import template, NATIVE_MODS
 
 ROOT = Path(__file__).parents[1]
-VERSION = "4.1.0-alpha.1"
+VERSION = "4.2.0-alpha.1"
 BASE_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
 RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
+    "ore-model-router",
     "ore-signature-guard", "ore-safeguards-monitor",
     "ore-smart-tests", "ore-context-sentinel", "ore-independent-review", "ore-contract-watch",
     "ore-worktree-manager", "ore-pr-pilot", "ore-preview-certifier", "ore-runtime-diagnostics",
@@ -20,6 +21,7 @@ RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore
     "ore-visual-qa", "ore-flow-intelligence", "ore-flow-watch"}
 EXPECTED_MODS = BASE_MODS | RUNTIME_MODS
 EXPECTED_SKILLS = {
+    "ore-adaptive-model-routing",
     "ore-fda-part11", "ore-ftc-safeguards",
     "ore",
     "ore-android",
@@ -95,7 +97,7 @@ def main() -> int:
             if name in RUNTIME_MODS - NATIVE_MODS - {"ore-worktree-manager"}:
                 if (folder / 'requirements.txt').read_bytes() != (ROOT / 'skills/ore/requirements.txt').read_bytes():
                     fail(errors, f'vendored requirements differ from canonical source: {name}')
-                for script in ("ore_state.py", "ore_runtime.py", "ore_flow.py", "ore_first_contact.py", "ore_regulatory.py"):
+                for script in ("ore_state.py", "ore_runtime.py", "ore_flow.py", "ore_first_contact.py", "ore_regulatory.py", "ore_models.py"):
                     if (folder / "scripts" / script).read_bytes() != (ROOT / "skills/ore/scripts" / script).read_bytes():
                         fail(errors, f"vendored script differs from canonical source: {name}/{script}")
             if forbidden:

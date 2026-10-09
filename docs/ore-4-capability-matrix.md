@@ -142,3 +142,10 @@ manual integrations require a prerelease and a candid inventory.
 ## ORE 4.1 additive regulatory roadmap
 
 Both regulatory adapters are implemented offline artifact evaluators using the audited SDK and shared writer. Signature patterns and flow preconditions are executable; production authentication, atomic record/audit storage, tamper resistance, scanner/IdP integrations and complete transition coverage remain host-specific acceptance work. Preserve every existing 4.0 item and original mod. Stable release additionally requires applicability-owner review and application executions for all regulatory scenarios. See [extension report](ore-4.1-regulatory.md).
+
+## ORE 4.2 model routing extension
+
+`ore-model-router` adds native model/usage diagnostics and pure routing/consent
+contracts. `ore-adaptive-model-routing` joins the existing AI/data department.
+Live execution adapters remain experimental; manual fallback preserves the current
+configuration. See [4.2 compatibility and acceptance](ore-4.2-adaptive-routing.md).

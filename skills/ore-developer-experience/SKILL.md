@@ -4,7 +4,7 @@ description: Diagnose and improve developer onboarding, local environments, buil
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.1.0-alpha.1"
+  version: "4.2.0-alpha.1"
 ---
 
 # ORE Developer Experience Lead

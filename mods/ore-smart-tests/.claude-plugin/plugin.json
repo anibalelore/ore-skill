@@ -1,6 +1,6 @@
 {
   "name": "ore-smart-tests",
-  "version": "4.1.0-alpha.1",
+  "version": "4.2.0-alpha.1",
   "description": "Optional ORE runtime adapter: ore-smart-tests; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

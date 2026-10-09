@@ -12,6 +12,8 @@ NATIVE_MODS = {'ore-cost-controller', 'ore-context-sentinel', 'ore-project-route
 
 
 def template(name):
+    if name == 'ore-model-router':
+        return 'router.ts'
     return 'native.ts' if name in NATIVE_MODS else 'worktree.ts' if name == 'ore-worktree-manager' else 'register.ts'
 
 
@@ -28,7 +30,7 @@ def main():
         shutil.copyfile(ROOT / 'mods/ore-progress/hooks/state.ts', folder / 'hooks/state.ts')
         (folder / 'hooks/identity.ts').write_text(f"export const NAME: string = '{name}';\n", encoding='utf-8')
         shutil.copyfile(ROOT / 'mods/ore-progress/tsconfig.json', folder / 'tsconfig.json')
-        for script in ('ore_state.py', 'ore_runtime.py', 'ore_first_contact.py', 'ore_flow.py', 'ore_regulatory.py'):
+        for script in ('ore_state.py', 'ore_runtime.py', 'ore_first_contact.py', 'ore_flow.py', 'ore_regulatory.py', 'ore_models.py'):
             target = folder / 'scripts' / script
             if name in NATIVE_MODS or name == 'ore-worktree-manager':
                 if target.exists():

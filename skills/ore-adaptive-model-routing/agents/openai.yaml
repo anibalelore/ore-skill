@@ -1,0 +1,6 @@
+interface:
+  display_name: "ORE Adaptive Model Routing"
+  short_description: "Recommend models with scoped consent and quality gates"
+  default_prompt: "Use $ore-adaptive-model-routing to assess this task and recommend an authorized configuration."
+policy:
+  allow_implicit_invocation: true

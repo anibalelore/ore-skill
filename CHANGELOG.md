@@ -130,3 +130,17 @@
 ## 4.1.0-alpha.1 ? 2026-10-09
 
 Added FDA Part 11 and FTC Safeguards skills plus two self-contained runtime adapters; preserved all 26 prior skills, 25 prior mods and ORE 4.0 acceptance items. Added signature/session/binding/supersession patterns, regulatory flow preconditions, incident readiness, six file-evidence-backed gates and completion digest checks. Real system adapters and organizational evidence remain application responsibilities.
+
+## 4.2.0-alpha.1 — Adaptive Model Intelligence candidate — 2026-10-09
+
+- Add ore-adaptive-model-routing and optional ore-model-router: 29 skills, 28 mods,
+  9 existing departments, preserving previous components and contracts.
+- Implement versioned observed registry, ten-dimension L0–L4 analysis, conservative
+  selection/cost estimates, scoped preferences, locks and exact approval-ledger lookup.
+- Extend the single revision-checked state writer; preserve authoritative task
+  acceptance, risk and gates; store only allowlisted routing decision metadata.
+- Add explicit local Claude/Codex configuration readers, ChatGPT manual fallback,
+  Claude native model/usage diagnostics and synthetic governance/handler regressions.
+- Document installation, consent, budgets, host compatibility and benchmark methodology.
+- Native switching, live compatible-host launch, one-use execution grants and measured
+  provider benchmarks remain pending; no savings or full acceptance certified.

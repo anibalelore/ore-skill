@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.1.0-alpha.1"
+  version: "4.2.0-alpha.1"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -129,3 +129,7 @@ from this skill directory (or the repository root), then run
 `python -m playwright install chromium` using the same interpreter as the ORE runtime.
 Playwright and Chromium are required for First Contact and the complete validation suite;
 missing dependencies block execution and fail browser acceptance rather than skip it.
+
+## Adaptive model routing
+
+Route model/effort and delegation planning to `$ore-adaptive-model-routing` in the existing AI, data and decision systems department. The ORE lead retains acceptance and gates. Use verified host inventory, scoped ledger consent and locks; unsupported changes remain manual. See [routing skill](../ore-adaptive-model-routing/SKILL.md).

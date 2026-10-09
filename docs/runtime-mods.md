@@ -1,11 +1,12 @@
 # ORE 4 runtime adapters
 
-**Prerelease: 4.1.0-alpha.1.** All 21 additions are explicit command adapters,
+**Prerelease candidate: 4.2.0-alpha.1.** All 22 additions are explicit command adapters,
 not a certificate that the complete ORE 4 autonomous system is implemented.
 The six ORE 3 display/guard mods retain their existing behavior.
 
 | Adapter | Executable behavior | Current limit |
 | --- | --- | --- |
+| ore-model-router | Observe main model/native usage; evaluate supplied routing; confirm scoped metadata using shared writer | Manual selection; no live verified switching or guaranteed savings; see [4.2 guide](ore-4.2-adaptive-routing.md) |
 | ore-never-again | Confirm, persist, replace and revoke scoped path rules; intercept Write/Edit | Corrections must be supplied explicitly; shell commands and semantic policies are not enforced |
 | ore-scope-lock | Confirm allow-list scopes and expiring exceptions; resolve actual filesystem paths | Write/Edit only; filesystem changes between review and execution remain possible |
 | ore-approval-ledger | Confirm scoped approvals with owner, evidence and expiry; list active records | Records never grant native permissions or automatically approve a tool |

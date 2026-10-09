@@ -76,3 +76,7 @@ Return decisive command results and artifact paths, not raw logs or repeated pla
 - `$ore-ftc-safeguards`: Part 314 scope, safeguards evidence and incident readiness with the same shared owners.
 
 Use [regulatory-engineering.md](regulatory-engineering.md) for the contract.
+
+## Adaptive model routing
+
+`$ore-adaptive-model-routing` advises the ORE lead in AI, data and decision systems. Preserve compact handoffs, acceptance and gates; recommendations never grant delegation or provider permissions. See [routing contract](../../ore-adaptive-model-routing/SKILL.md).

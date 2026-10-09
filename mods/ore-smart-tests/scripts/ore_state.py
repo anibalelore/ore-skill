@@ -607,6 +607,12 @@ def cmd_runtime(args: argparse.Namespace) -> dict:
         if args.action == "evaluate":
             task, _ = active_task(args.repo, args.task_id)
             assert_revision(task, args.expect_revision)
+            if args.mod == 'ore-model-router':
+                from ore_models import route
+                identity = project_id(root)
+                target = root / '.ore' / 'governance.json'
+                data = load_json(target) if target.exists() else initial_governance(identity)
+                return {'runtime_result': route(payload, task, data, identity, now()), 'revision': task['revision'], 'governance_revision': data['revision']}
             if args.mod in {"ore-scope-lock", "ore-never-again", "ore-approval-ledger"}:
                 from ore_runtime import check_paths, valid_now
                 target = root / ".ore" / "governance.json"
@@ -646,7 +652,8 @@ def cmd_runtime(args: argparse.Namespace) -> dict:
             raise StateError("Governance writes require an explicit confirmed action")
         allowed = {"ore-scope-lock": {"scope", "exception"},
                    "ore-never-again": {"rule", "revoke-rule", "exception"},
-                   "ore-approval-ledger": {"approval", "revoke-approval"}}
+                   "ore-approval-ledger": {"approval", "revoke-approval"},
+                   "ore-model-router": {"model-policy", "model-decision"}}
         if args.action not in allowed.get(args.mod, set()):
             raise StateError("Action does not belong to this governance module")
         with repo_lock(args.repo):
@@ -661,7 +668,11 @@ def cmd_runtime(args: argparse.Namespace) -> dict:
             validate_governance(data, identity)
             if data["revision"] != args.expect_governance_revision:
                 raise StateError("Governance revision conflict; reload before confirming")
-            updated = apply_governance(data, args.action, payload, identity, now(), True)
+            if args.mod == 'ore-model-router':
+                from ore_models import mutate
+                updated = mutate(data, args.action, payload, identity, now(), task)
+            else:
+                updated = apply_governance(data, args.action, payload, identity, now(), True)
             updated["events"][-1]["task_id"] = task["id"]
             updated["events"][-1]["task_revision"] = task["revision"]
             if args.action == "approval":

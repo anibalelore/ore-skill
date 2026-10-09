@@ -2,14 +2,14 @@
 
 > Turn a complex request into accountable work, visible progress and verified results.
 
-**ORE gives your coding agent an engineering team:** a lead, 27 specialists,
+**ORE gives your coding agent an engineering team:** a lead, 28 specialists,
 durable project state and evidence gates. Use it in Codex, Claude Code or another
 Agent Skills host. **We now also have Claude Code mods** to make progress,
 approvals, blockers and specialist activity visible in the harness.
 
 | Core team | Optional runtime layer | Current release |
 | --- | --- | --- |
-| 28 skills across 9 departments | 6 established mods + 21 runtime adapters | **4.1.0-alpha.1 ? prerelease** |
+| 29 skills across 9 departments | 6 established mods + 22 runtime adapters | **4.2.0-alpha.1 ? prerelease** |
 
 **Start here:** [Install ORE](#install) ? [Try the mods](#claude-code-mods-optional) ?
 [Meet the team](#agent-departments) ? [Update history](#update-history)
@@ -100,7 +100,22 @@ certification remain unfinished. The [update report](UPDATE_REPORT.md) records
 actual checks and limits; the [acceptance contract](docs/ore-4-acceptance.md) defines
 what must pass before a stable 4.0.0 release.
 
-## ORE 4.1 regulatory extension
+## Why Adaptive Model Intelligence?
+
+A multiagent engineering system can assign different models to bounded tasks.
+ORE 4.2 recommends configurations using task complexity, observed capabilities,
+scoped user consent, locks and resource estimates while preserving quality gates.
+Potential benefits include less wasted context, better work distribution, efficient
+use of capability, context continuity, budget visibility and developer control.
+Savings require measured comparisons and are never guaranteed.
+
+The new `$ore-adaptive-model-routing` skill and optional `ore-model-router` mod
+are documented in the [implementation and installation guide](docs/ore-4.2-adaptive-routing.md).
+Current adapters inspect configuration and report recommendations/observations;
+native model switching and provider benchmarks remain unverified. This is an alpha
+candidate, not full acceptance certification.
+
+## ORE 4.1 regulatory extension history
 
 Adds `ore-signature-guard` and `ore-safeguards-monitor` through the shared runtime, six evidence-backed regulatory gates and reusable signature/flow contracts. Preserves all ORE 4.0 roadmap items and original mods. See [implementation and limits](docs/ore-4.1-regulatory.md). Offline package validation does not certify customer systems.
 
@@ -108,6 +123,7 @@ Adds `ore-signature-guard` and `ore-safeguards-monitor` through the shared runti
 
 | Version | Main improvement |
 | --- | --- |
+| **4.2.0-alpha.1 candidate** | Adaptive model recommendations, scoped governance, locks and native model/usage diagnostics; live switching pending |
 | **4.1.0-alpha.1** | Regulatory skills, signature patterns, safeguards evidence and notification readiness |
 | **4.0.0-alpha.1** | Runtime governance, 19 explicit adapters, synthetic business-flow engine and isolated browser exploration; certification in progress |
 | **3.0.0** | Six optional Claude Code mods and focused execution/context policies |
@@ -172,6 +188,7 @@ end-to-end benchmark. Smaller instructions alone do not establish either.
 | Agent | Responsibility |
 | --- | --- |
 | `$ore-ai-engineering` | ML/LLM/RAG/agent evaluation, safety, observability, latency and cost |
+| `$ore-adaptive-model-routing` | Model recommendations, verified capabilities, scoped consent, locks and resource estimates |
 | `$ore-data-analytics` | Analytics events, metric contracts, transformations, data quality and lineage |
 
 ### Integration, quality and release assurance

@@ -1,6 +1,6 @@
 {
   "name": "ore-flow-watch",
-  "version": "4.1.0-alpha.1",
+  "version": "4.2.0-alpha.1",
   "description": "Optional ORE runtime adapter: ore-flow-watch; see capability matrix for limits",
   "author": {
     "name": "anibalelore"
