@@ -46,9 +46,9 @@ export const register: Register = (on, options) => {
       if (action !== 'evaluate') {
         const review = summarize('ore-model-router', { action, payload, task_revision: task.revision, governance_revision: revision }, task.title, 'Guardar preferencias o evidencia de routing; la selección del modelo sigue siendo manual.');
         if (review.blocked) return { text: review.blocked, exitCode: 2 };
-        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
         if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
-        answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
         if (answer !== APPROVE) return { text: 'Cancelled; no state written' };
         const current = await load($);
         if (!current || current.id !== task.id || current.revision !== task.revision) throw new Error('State changed during confirmation');

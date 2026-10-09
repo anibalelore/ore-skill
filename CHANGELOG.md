@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased ? Host-managed approvals
+
+- Remove extra ORE confirmation dialogs by default; retain optional `approvalMode: "ask"`.
+- Keep validation, revision checks, path restrictions and host permissions.
+
+
 ## 4.2.1-alpha.3 — Native permission context — 2026-10-09
 
 - Attach a human-readable, call-bound summary to native permission dialogs through

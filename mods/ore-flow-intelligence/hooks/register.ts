@@ -74,17 +74,17 @@ export const register: Register = (on, options) => {
       if (NAME === 'ore-first-contact' && payload.run_browser === true) {
         const review = summarize(NAME, payload, task.title, 'Explorar la aplicación local aislada con un navegador.');
         if (review.blocked) return { text: review.blocked, exitCode: 2 };
-        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
         if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
-        if (answer === DETAILS) answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        if (answer === DETAILS) answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
         if (answer !== APPROVE) return { text: 'Cancelled; no browser started' };
       }
       if (action !== 'evaluate') {
         const review = summarize(NAME, { action, payload, task_revision: task.revision, governance_revision: governanceRevision }, task.title, 'Guardar una decisión explícita con alcance y vigencia en el proyecto.');
         if (review.blocked) return { text: review.blocked, exitCode: 2 };
-        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
         if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
-        answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
         if (answer !== APPROVE) return { text: 'Cancelled; no state written' };
         const current = await load($);
         if (!current || current.id !== task.id || current.revision !== task.revision) throw new Error('State changed during confirmation');
@@ -112,9 +112,9 @@ export const register: Register = (on, options) => {
           const review = summarize('Write', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
           if (review.blocked) return { deny: review.blocked };
           $.ui.notice(e.tool_use_id, renderNotice(review));
-          let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+          let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
           if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
-          answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+          answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
           if (answer !== APPROVE || JSON.stringify(e) !== snapshot || next.signal.aborted) return { deny: 'ORE review was not approved for the unchanged action' };
           const current = await load($);
           if (!current || current.id !== task.id || current.revision !== task.revision || JSON.stringify(await runtime($, task, { paths: [e.file_path] }, 'evaluate', python)) !== JSON.stringify(result)) return { deny: 'ORE state changed during review; review again' };
@@ -142,9 +142,9 @@ export const register: Register = (on, options) => {
           const review = summarize('Edit', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
           if (review.blocked) return { deny: review.blocked };
           $.ui.notice(e.tool_use_id, renderNotice(review));
-          let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+          let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
           if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
-          answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+          answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
           if (answer !== APPROVE || JSON.stringify(e) !== snapshot || next.signal.aborted) return { deny: 'ORE review was not approved for the unchanged action' };
           const current = await load($);
           if (!current || current.id !== task.id || current.revision !== task.revision || JSON.stringify(await runtime($, task, { paths: [e.file_path] }, 'evaluate', python)) !== JSON.stringify(result)) return { deny: 'ORE state changed during review; review again' };

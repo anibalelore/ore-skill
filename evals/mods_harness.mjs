@@ -20,7 +20,7 @@ if (input.mode === 'projection') {
     return { catch() {} };
   };
   const register = await import(pathToFileURL(resolve(folder, 'register.ts')));
-  register.register(on, input.options ?? {});
+  register.register(on, { approvalMode: 'ask', ...input.options });
   const logs = [];
   let tick;
   let asks = 0;

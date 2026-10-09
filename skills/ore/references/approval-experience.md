@@ -1,3 +1,9 @@
+## Approval mode
+
+ORE defaults to host-managed permissions: it adds no confirmation dialogs for tool calls or explicitly invoked runtime commands. Existing validation, path restrictions, revision checks and native host permissions still apply. An explicit runtime command authorizes its declared operation; this mode does not authorize unrelated actions.
+
+Set plugin option `approvalMode: "ask"` to restore the optional ORE detail-review and approval dialogs. Missing or other values use host-managed permissions. User authorization persists for the requested task: do not ask conversationally to confirm the same instruction again. Clarify only missing scope needed to execute it.
+
 # Human-friendly authorization
 
 Before consent, show action, reason, tool/platform, project and actual or unknown

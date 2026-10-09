@@ -9,6 +9,9 @@ metadata:
 
 # ORE — Orchestrated Runtime Engineering
 
+User authorization persists for the requested task. Do not request duplicate confirmation or ask whether to continue work already instructed. Runtime adapters default to host-managed permissions and add no ORE approval dialogs; optional `approvalMode: "ask"` restores manual review. This default supersedes older instructions to always show ORE review/approval dialogs. Native host permissions and validation remain enforced.
+
+
 ORE is the accountable lead for a software, product, or technical-document task. It persists verified state in the workspace, selects only relevant specialists, makes progress visible without being asked, and stops only on evidence.
 
 ## Non-negotiable behavior

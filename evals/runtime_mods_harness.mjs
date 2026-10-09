@@ -10,7 +10,7 @@ const on = (event, matcher, fn) => {
   return { catch() {} };
 };
 const mod = await import(pathToFileURL(resolve('mods', input.mod, 'hooks/register.ts')));
-mod.register(on, {});
+mod.register(on, { approvalMode: 'ask', ...input.options });
 let processes = 0, passed = 0, asks = 0;
 let lastPayload = null, lastQuestion = null;
 const questions = [];

@@ -23,6 +23,20 @@ class ApprovalExperience(unittest.TestCase):
         from test_mods_state import FIXTURE
         return self.invoke('runtime_mods_harness.mjs', dict(mod='ore-approval-ledger', task=FIXTURE, request=request, **changes))
 
+    def test_default_guard_delegates_permissions_without_extra_questions(self):
+        for options in ({'approvalMode': 'host'}, {'approvalMode': None}):
+            result = self.guard('git push origin main', options=options, dismiss=True)
+            self.assertEqual(result['asks'], 0)
+            self.assertEqual(result['passed'], 1)
+            self.assertEqual(len(result['notices']), 1)
+
+    def test_explicit_runtime_command_does_not_ask_twice_in_host_mode(self):
+        request = dict(action='approval', payload=dict(id='approve-a', operation='deploy', scope='task:test', environment='production', expires_at='2099-01-01T00:00:00Z', owner='owner', evidence='explicit'))
+        result = self.ledger(request, options={'approvalMode': 'host'}, dismiss=True)
+        self.assertEqual(result['asks'], 0)
+        self.assertEqual(result['processes'], 1)
+        self.assertEqual(result['lastPayload'], request['payload'])
+
     def test_sql_multilineal_exacto_y_controles_no_verificados(self):
         sql = 'CREATE TABLE public.activity_log (\n  id bigint PRIMARY KEY,\n  actor uuid NOT NULL\n);'
         result = self.summary(dict(query=sql, project_id='isolated-test'), tool='mcp__supabase__execute_sql', details=True)
