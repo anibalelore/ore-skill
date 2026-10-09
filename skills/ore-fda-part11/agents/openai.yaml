@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE FDA Part 11"
+  short_description: "Verify regulated electronic records and signatures"
+  default_prompt: "Use $ore-fda-part11 to assess scope and verify this signature workflow."

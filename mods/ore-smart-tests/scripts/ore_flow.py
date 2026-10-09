@@ -232,6 +232,19 @@ def analyze_flow(document) -> dict:
             state = record.get("to_state", state)
         if transition.get("required", True) and not success:
             add("missing_transition", transition["id"], transition["evidence"], "no successful execution observed")
+    if 'regulatory_transitions' in document:
+        from ore_regulatory import transition as regulatory_transition
+        checks = document['regulatory_transitions']
+        if not isinstance(checks, list) or not checks:
+            add('regulatory_contract_missing', document['id'], [], 'Regulatory transitions must be nonempty')
+        else:
+            for check in checks:
+                try:
+                    allowed = regulatory_transition(check['domain'], check['before'], check['after'], check.get('signature'))
+                except (ValueError, KeyError, TypeError, AttributeError):
+                    allowed = False
+                if not allowed:
+                    add('regulatory_transition_blocked', document['id'], [], 'Signature binding or access/protection precondition failed')
     verified = bool(document["transitions"]) and not findings
     result["continuity_verified"] = verified
     model_gates = {"BUSINESS_LIFECYCLE", "ENTITY_CONTINUITY", "WORKFLOW_RECOVERY", "DATA_CONTRACT"}

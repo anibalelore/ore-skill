@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "domain": "ftc",
+  "risk": "unassessed",
+  "source": {
+    "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-314",
+    "version": "eCFR current through 2026-10-07; refresh before use",
+    "checked_at": "2026-10-09T00:00:00-06:00"
+  },
+  "scope": {
+    "status": "pending",
+    "owner": "assign-regulatory-owner",
+    "rationale": "Applicability and source review pending",
+    "citations": [
+      "314.1, 314.2, 314.6"
+    ],
+    "evidence": [],
+    "activity": "pending review",
+    "jurisdiction": "pending review",
+    "financial_institution_analysis": "pending review",
+    "entity_role": "pending review",
+    "protected_data": [],
+    "providers": [],
+    "314_6_analysis": "pending review"
+  },
+  "controls": {
+    "change_management": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "disposal": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "encryption_rest": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "encryption_transit": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "incident_response": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "inventory": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "least_privilege": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "mfa": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "monitoring": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "providers": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "secrets": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "secure_development": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "security_tests": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "unauthorized_detection": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "vulnerabilities": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  },
+  "tests": {
+    "authorized": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "disposal": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "encryption": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "events": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "incident": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "integration_failure": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "mfa": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "recovery": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "secrets": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "tenant_isolation": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "unauthorized": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  },
+  "documents": {
+    "exceptions": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "incident_plan": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "management_report": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "provider_contracts": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "provider_oversight": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "qualified_individual": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "risk_assessment": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "training": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  }
+}

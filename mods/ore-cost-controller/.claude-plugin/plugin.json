@@ -1,6 +1,6 @@
 {
   "name": "ore-cost-controller",
-  "version": "4.0.0-alpha.1",
+  "version": "4.1.0-alpha.1",
   "description": "Optional ORE runtime adapter: ore-cost-controller; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

@@ -51,3 +51,7 @@ Synthetic factory tests cover an existing customer, two products, separate PO/sa
 Adapters must collect real schema/API/trace/test evidence to create flow documents. Browser exploration, repository-wide discovery, external telemetry connectors, automatic code repair, and production replay are not implemented by this module. Integrate with existing `ore-business-lifecycle`, `ore-backend-data`, `ore-form-workflows`, and quality-engineering procedures rather than treating the model as independent certification.
 
 `gates` are local model recommendations. `CHANGE_IMPACT` and `TESTS` remain pending because a model alone cannot establish them. Recommendations never close ORE's persisted quality gates; `ore_state.py` remains the state-writing authority, and real scope-specific evidence is required before task completion. Version 1 documents are optional and do not change legacy task behavior.
+
+## Regulatory continuity
+
+Optional `regulatory_transitions` attach FDA immutable signed-record checks and FTC access/protection checks to flow analysis. A failed precondition prevents verified continuity. Applications enforce the same precondition before committing each applicable transition. See [regulatory contract](../skills/ore/references/regulatory-engineering.md).

@@ -4,7 +4,7 @@ description: Design, repair, and verify any end-to-end domain workflow so entiti
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE Business Lifecycle and Entity Continuity Lead
@@ -43,3 +43,7 @@ Derive scenarios from the actual domain rather than assuming a sales funnel. At 
 `BUSINESS_LIFECYCLE`, `ENTITY_CONTINUITY`, `WORKFLOW_RECOVERY`, `DATA_CONTRACT`, `SECURITY_PRIVACY`, `CHANGE_IMPACT`, and `TESTS` pass only with executable or inspectable evidence across the actual boundaries. Route implementation to product architecture, backend/data, forms, security, quality, and change-impact specialists while retaining ownership of the whole lifecycle.
 
 See `../ore/references/workflow-memory-study.md` for the external workflow, identity, memory, and graph patterns adapted by this skill.
+
+## Regulatory integration
+
+For assessed FDA/FTC scope, reuse this specialist's existing controls and reference evidence through [regulatory-engineering.md](../ore/references/regulatory-engineering.md). Coordinate with `$ore-fda-part11` and `$ore-ftc-safeguards`; do not duplicate the shared gates or invent missing evidence.

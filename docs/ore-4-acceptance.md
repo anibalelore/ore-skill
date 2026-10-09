@@ -123,3 +123,7 @@ partial, blocked or pending. Keep code-local, committed, pushed, installed and
 published states separate. Use a prerelease when requested major functionality
 is missing or not executed. No commit, push, tag, deployment or publication is
 implied by completion of local acceptance checks.
+
+## ORE 4.1 additive acceptance
+
+Preserve the 26 existing skills, six original mods and all 19 prior adapters; add two skills and two adapters. Execute all FDA and FTC scenarios in [the regulatory contract](../skills/ore/references/regulatory-engineering.md). Refresh official source versions, get scope-owner review, verify authentic procedural evidence and run production-adapter tests in isolation. Package fixtures are not customer compliance evidence. Require current hash-bound gate proofs and demonstrate storage/authentication guarantees before a stable release.

@@ -1,0 +1,3 @@
+# Required for ORE First Contact browser execution and full package validation.
+# Install the matching browser separately: python -m playwright install chromium
+playwright==1.63.0

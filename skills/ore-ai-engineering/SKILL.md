@@ -4,7 +4,7 @@ description: Design, build, evaluate, and operate ML, generative-AI, RAG, model,
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE AI Engineering Lead

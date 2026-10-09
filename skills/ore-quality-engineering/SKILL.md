@@ -4,7 +4,7 @@ description: Design and execute risk-based software quality work across unit, in
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE Quality Engineering Lead
@@ -37,3 +37,7 @@ The return must include tested risks, environment, commands, results, artifacts,
 
 Use existing project frameworks first. External tools such as Playwright, axe-core, Pact or Chaos Mesh are optional and license/version-reviewed; see `../ore/references/legacy-agent-study.md`.
 
+
+## Regulatory integration
+
+For assessed FDA/FTC scope, reuse this specialist's existing controls and reference evidence through [regulatory-engineering.md](../ore/references/regulatory-engineering.md). Coordinate with `$ore-fda-part11` and `$ore-ftc-safeguards`; do not duplicate the shared gates or invent missing evidence.

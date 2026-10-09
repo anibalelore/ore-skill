@@ -326,3 +326,31 @@ Siguiente paso verificable: cargar el paquete actualizado en el host y ejecutar 
 Se consultaron ubicaciones primarias de [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [vistas](https://supabase.com/docs/guides/database/views), [funciones](https://supabase.com/docs/guides/database/functions), [OWASP MASVS](https://mas.owasp.org/MASVS/), proyectos OWASP y [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/). Las referencias del skill ordenan verificar la versión vigente al ejecutar cada auditoría. No se adoptó una legislación universal ni se copiaron manuales externos.
 
 Los cambios quedan en el árbol de trabajo local para revisión. Token efficiency: 0 tokens demonstrated; no se contó con una comparación válida de consumo.
+# ORE 4.1 regulatory extension — 2026-10-09
+
+Added two regulatory skills and two shared-runtime adapters while preserving the
+26 prior skills, 25 prior mods and the ORE 4.0 roadmap. Current prerelease:
+4.1.0-alpha.1; inventory: 28 skills and 27 mods.
+
+Implemented reusable signature/binding/session/supersession patterns, regulatory
+flow preconditions, six evidence-backed gates, completion hash rechecks and FTC
+incident readiness without automatic notification. See
+[the extension report](docs/ore-4.1-regulatory.md) for interfaces and limitations.
+
+Validation: 100 tests (99 passed; one optional Playwright test skipped), package
+validation, both skill validators, both new mod manifests and TypeScript checks
+passed. Real native launch remains blocked by installed Claude Code 2.1.267 versus
+the repository requirement of 2.1.287+. Production adapters and organizational
+evidence require application-specific validation. No FDA/FTC certification claimed.
+
+## Required Playwright dependency — 2026-10-09
+
+Installed Playwright 1.63.0 and matching Chromium in the runtime Python environment.
+Added pinned requirements to the repository and core skill, vendored them into
+Python runtime mods, and documented both package and browser installation. Browser
+acceptance now fails when dependencies are absent rather than skipping execution.
+Updated the historical catalog check to allow this explicitly required browser
+dependency while preserving its exclusion of reference-study repositories.
+
+Latest validation: all 100 tests passed without omissions, including real isolated
+Chromium exploration and screenshot export; package validation and diff checks passed.

@@ -69,3 +69,10 @@ Return decisive command results and artifact paths, not raw logs or repeated pla
 - **Compliance/governance (`$ore-compliance-governance`):** governance lead → framework/scope, control mapping, evidence, exceptions, audit traceability.
 - **Release certification (`$ore-release-certification`):** independent verifier → artifact identity, provenance/SBOM, gate replay, compatibility, rollout/rollback, waivers.
 
+
+## Regulatory engineering
+
+- `$ore-fda-part11`: predicate-rule scope, records, signatures and FDA gates, with governance/security/quality and business lifecycle.
+- `$ore-ftc-safeguards`: Part 314 scope, safeguards evidence and incident readiness with the same shared owners.
+
+Use [regulatory-engineering.md](regulatory-engineering.md) for the contract.

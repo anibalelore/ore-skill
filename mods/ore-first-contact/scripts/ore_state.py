@@ -433,6 +433,21 @@ def cmd_update(args: argparse.Namespace) -> dict:
             gate_evidence = evidence.pop(name, [])
             if status in {"passed", "not_applicable"} and not gate_evidence:
                 raise StateError(f"Closing gate '{name}' requires evidence or a not-applicable reason")
+            from ore_regulatory import GATES as REGULATORY_GATES, evaluate_file
+            if name in REGULATORY_GATES and status in {"passed", "not_applicable"}:
+                proofs = []
+                reports = []
+                for contract in gate_evidence:
+                    try:
+                        report = evaluate_file(args.repo, contract)
+                        if name not in report['gates'] or report['gates'][name]['status'] != status:
+                            raise ValueError('Requested gate outcome is not verified by contract')
+                        proofs.extend(report['dependencies'])
+                        reports.append(report['gates'][name])
+                    except (OSError, ValueError, KeyError, TypeError) as error:
+                        raise StateError(f'Regulatory gate blocked: {error}') from error
+                task['gates'][name]['regulatory_proofs'] = proofs
+                task['gates'][name]['regulatory_controls'] = reports
             if name == "FORM_INTELLIGENCE" and status == "passed" and not task["form_contracts"]:
                 raise StateError("FORM_INTELLIGENCE requires a validated --form-contract")
             if name == "FORM_INTELLIGENCE" and status == "not_applicable" and task.get("kind") == "form":
@@ -503,6 +518,17 @@ def cmd_complete(args: argparse.Namespace) -> dict:
         open_gates = [name for name, gate in task["gates"].items() if gate["required"] and gate["status"] not in {"passed", "not_applicable"}]
         if incomplete or open_gates or task["blockers"]:
             raise StateError(f"Cannot complete; incomplete={incomplete}, open_gates={open_gates}, blockers={task['blockers']}")
+        from ore_regulatory import GATES as REGULATORY_GATES, evidence as verify_regulatory_evidence
+        for gate_name, gate in task['gates'].items():
+            if gate_name in REGULATORY_GATES and gate['status'] in {'passed', 'not_applicable'}:
+                if not gate.get('regulatory_proofs'):
+                    raise StateError('Regulatory gate has no verified evidence')
+                for proof in gate['regulatory_proofs']:
+                    try:
+                        verify_regulatory_evidence(Path(args.repo).resolve(), dict(proof, owner='state-writer',
+                            validation='completion digest recheck', limitations=[], at=now()))
+                    except (OSError, ValueError) as error:
+                        raise StateError(f'Regulatory evidence changed: {error}') from error
         if task["gates"].get("FORM_INTELLIGENCE", {}).get("status") == "passed":
             verify_form_integrity(task, args.repo)
         task["status"] = "complete"
@@ -613,6 +639,8 @@ def cmd_runtime(args: argparse.Namespace) -> dict:
                                           "active_exceptions": sum(valid_now(r, now()) for r in data["exceptions"]),
                                           "prevented_incidents": None, "rule_hits": None}}
                 return {"runtime_result": result, "revision": task["revision"]}
+            if args.mod in {'ore-signature-guard', 'ore-safeguards-monitor'}:
+                payload['_repo'] = str(root)
             return {"runtime_result": evaluate(args.mod, payload, task), "revision": task["revision"]}
         if args.action not in GOVERNANCE_ACTIONS or not args.confirmed:
             raise StateError("Governance writes require an explicit confirmed action")

@@ -1,6 +1,6 @@
 # ORE 4 runtime adapters
 
-**Prerelease: 4.0.0-alpha.1.** All 19 additions are explicit command adapters,
+**Prerelease: 4.1.0-alpha.1.** All 21 additions are explicit command adapters,
 not a certificate that the complete ORE 4 autonomous system is implemented.
 The six ORE 3 display/guard mods retain their existing behavior.
 
@@ -9,7 +9,7 @@ The six ORE 3 display/guard mods retain their existing behavior.
 | ore-never-again | Confirm, persist, replace and revoke scoped path rules; intercept Write/Edit | Corrections must be supplied explicitly; shell commands and semantic policies are not enforced |
 | ore-scope-lock | Confirm allow-list scopes and expiring exceptions; resolve actual filesystem paths | Write/Edit only; filesystem changes between review and execution remain possible |
 | ore-approval-ledger | Confirm scoped approvals with owner, evidence and expiry; list active records | Records never grant native permissions or automatically approve a tool |
-| ore-first-contact | Validate isolated scenarios, prepare, summarize or run a bounded loopback browser session; optionally export masked synthetic screenshots | Optional Playwright; deterministic exploration; no video or mutation requests |
+| ore-first-contact | Validate isolated scenarios, prepare, summarize or run a bounded loopback browser session; optionally export masked synthetic screenshots | Required Playwright and Chromium; deterministic exploration; no video or mutation requests |
 | ore-flow-intelligence | Validate supplied identities, relationships, transitions, provenance and execution records | No automatic application discovery; passing a model is not application certification |
 | ore-flow-watch | Analyze supplied authorized telemetry for evidence-backed alerts | Disconnected without telemetry; no live subscription or repair |
 | ore-autopilot | Validate an explicit plan and compute the remaining maximum-five-step budget | Does not execute model turns; attempts are caller-supplied |
@@ -24,6 +24,8 @@ The six ORE 3 display/guard mods retain their existing behavior.
 | ore-runtime-diagnostics | Summarize evidence-backed error observations | No automatic source connection, causal proof or repair |
 | ore-cost-controller | Read native context, rate-limit and cost figures | No model downgrade, hard spend cap or unsupported counters |
 | ore-project-router | Read known project manifest presence | Reports observations; does not automatically assign specialists |
+| ore-signature-guard | Verify supplied FDA applicability, signed records and file-bound executed checks | Offline evaluator; trusted identity/storage adapters remain application-specific |
+| ore-safeguards-monitor | Verify supplied FTC scope and control evidence; assess incident candidates | No live scanner/IdP connection or automatic legal notification |
 | ore-learning-lab | Compare supplied runs with matching task/model/settings/gates and full counters | No synthetic savings claims or automatic policy changes; counters are declared evidence |
 
 ## Installation and commands
@@ -81,7 +83,7 @@ for sharing the single state writer and executing browser adapters; no shell
 strings, arbitrary command execution, model calls or network API are used.
 Worktree topology uses the fixed read-only `git worktree list --porcelain`
 command. Browser exploration starts Chromium and makes only authorized same-origin
-loopback GET/HEAD requests. Python and optional Playwright must be installed
+loopback GET/HEAD requests. Python, required Playwright and Chromium must be installed
 separately; nothing installs them automatically. `pythonCommand` can select a
 trusted interpreter executable.
 
@@ -111,3 +113,7 @@ Edit `mods/sdk/register.ts` or canonical Python scripts, then run
 installation. Run package, Python, TypeScript and native Claude validation.
 The [capability matrix](ore-4-capability-matrix.md) and
 [acceptance contract](ore-4-acceptance.md) track remaining certification work.
+
+## Regulatory runtime additions (4.1)
+
+`ore-signature-guard` and `ore-safeguards-monitor` accept `{"contract":"evidence/domain.json"}` through the same command/runtime API. They verify offline, authorized evidence and emit owned findings and gate results. They do not sign into IdPs, run remote scanners or notify agencies. Gate persistence uses the existing writer and requires reevaluation. See [contracts and roadmap](ore-4.1-regulatory.md).

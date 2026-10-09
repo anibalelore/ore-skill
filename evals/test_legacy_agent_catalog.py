@@ -36,11 +36,16 @@ class HistoricalAgentCatalogTests(unittest.TestCase):
         self.assertIn("AGPL code such as Renovate", study)
 
         dependency_manifests = [
-            ROOT / "requirements.txt",
             ROOT / "pyproject.toml",
             ROOT / "package.json",
         ]
         self.assertFalse(any(path.exists() for path in dependency_manifests))
+        # Browser execution is now an explicit requirement; study repositories
+        # must still not become implicitly installed runtime dependencies.
+        requirements = (ROOT / 'skills/ore/requirements.txt').read_text(encoding='utf-8')
+        packages = {line.split('==', 1)[0] for line in requirements.splitlines()
+                    if line.strip() and not line.startswith('#')}
+        self.assertEqual(packages, {'playwright'})
 
     def test_behavioral_evals_cover_every_historical_lead(self):
         scenarios = (ROOT / "evals/behavioral-scenarios.md").read_text(encoding="utf-8")

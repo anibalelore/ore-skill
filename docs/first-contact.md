@@ -1,13 +1,13 @@
 # First Contact: evidence before claims
 
-`skills/ore/scripts/ore_first_contact.py` implements an optional bounded Playwright
+`skills/ore/scripts/ore_first_contact.py` implements a bounded Playwright
 adapter and a read-only scenario/evidence interface. It never writes `.ore/`.
 The host imports a redacted result through the sole ORE state writer.
 
 ## Reproducible local demonstration
 
 ```sh
-python -m pip install playwright
+python -m pip install -r requirements.txt
 python -m playwright install chromium
 python skills/ore/scripts/ore_first_contact.py demo
 # Optional screenshots from the explicitly synthetic demo:
@@ -16,9 +16,15 @@ python skills/ore/scripts/ore_first_contact.py demo --artifact-directory /tmp/or
 
 The demo starts a temporary loopback-only HTTP server, opens the synthetic fixture,
 discovers the visible Support button, and independently checks its visible result.
-It shuts down the server afterward. Installing Playwright/browser binaries is
-optional and separate from installing ORE. Without either dependency the adapter
+It shuts down the server afterward. Playwright and its matching Chromium binaries
+are required ORE dependencies for browser execution and full validation. The Python
+version is pinned in `skills/ore/requirements.txt` and bundled with runtime adapters.
+For a standalone skill install, run `python -m pip install -r requirements.txt`
+from the installed `ore` skill directory, then `python -m playwright install chromium`.
+For a standalone mod, use its bundled `requirements.txt` with the same Python interpreter
+configured for that mod. Without either dependency the adapter
 reports blocked; it does not fabricate interactions or successful outcomes.
+The browser acceptance test fails instead of skipping when dependencies are missing.
 
 ## Scenario contract
 

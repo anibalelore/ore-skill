@@ -127,8 +127,9 @@ class FirstContactTests(unittest.TestCase):
             manifest.write_text("corrupt")
             self.assertEqual(fc.cleanup_artifacts(directory, current_time=200), [])
 
-    @unittest.skipUnless(importlib.util.find_spec("playwright"), "Optional Playwright package absent")
     def test_real_local_black_box_exploration(self):
+        self.assertIsNotNone(importlib.util.find_spec("playwright"),
+                             'Required Playwright missing: pip install -r requirements.txt; python -m playwright install chromium')
         fixtures = Path(__file__).parent / "fixtures" / "first-contact"
         server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(SimpleHTTPRequestHandler, directory=str(fixtures)))
         worker = threading.Thread(target=server.serve_forever, daemon=True)
@@ -137,8 +138,7 @@ class FirstContactTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as directory:
                 result = fc.run_session(self.scenario(url=f"http://127.0.0.1:{server.server_port}", artifact_directory=directory,
                                                       capture_screenshots=True, synthetic_screen_capture_confirmed=True), "Support available")
-                if result["status"] == "blocked":
-                    self.skipTest(result["limitation"])
+                self.assertNotEqual(result['status'], 'blocked', result.get('limitation'))
                 self.assertTrue(result["goal_verified"])
                 self.assertEqual(result["actions"][1]["name"], "Support")
                 self.assertEqual(len(result["artifact_files"]), 2)

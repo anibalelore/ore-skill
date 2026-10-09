@@ -55,3 +55,7 @@ An accepted P0/P1 risk may close a gate only under the existing authorized excep
 
 When a check cannot run, record the exact command or environment that is missing, what remains unverified, and the safest next validation step. A blocker does not become a pass.
 
+
+## Regulatory engineering gates
+
+`FDA_PART11_APPLICABILITY`, `FDA_SIGNATURE_INTEGRITY`, `FDA_RECORD_CONTROLS`, `FTC_SAFEGUARDS_APPLICABILITY`, `FTC_SECURITY_CONTROLS`, `REGULATORY_EVIDENCE`: use the shared [regulatory contract](regulatory-engineering.md). Unknown scope blocks; applicable missing controls fail; exclusions need cited owner evidence. The state writer verifies artifacts and rechecks their hashes at completion. These gates do not establish certification.

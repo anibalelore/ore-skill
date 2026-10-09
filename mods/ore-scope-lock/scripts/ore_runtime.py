@@ -11,6 +11,7 @@ from pathlib import PurePosixPath
 
 VERSION = 1
 MODULES = {
+    "ore-signature-guard", "ore-safeguards-monitor",
     "ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
     "ore-smart-tests", "ore-context-sentinel", "ore-independent-review", "ore-contract-watch",
     "ore-worktree-manager", "ore-pr-pilot", "ore-preview-certifier", "ore-runtime-diagnostics",
@@ -238,6 +239,12 @@ def diagnostics(payload):
 
 def evaluate(mod, payload, task):
     require(mod in MODULES and isinstance(payload, dict), "Invalid runtime module/payload")
+    if mod in {"ore-signature-guard", "ore-safeguards-monitor"}:
+        from ore_regulatory import evaluate_file
+        result = evaluate_file(payload.get('_repo'), payload.get('contract'))
+        expected = 'FDA_PART11_APPLICABILITY' if mod == 'ore-signature-guard' else 'FTC_SAFEGUARDS_APPLICABILITY'
+        require(expected in result['gates'], 'Regulatory contract belongs to another module')
+        return result
     functions = {"ore-autopilot": lambda p: autopilot(task,p), "ore-smart-tests": smart_tests,
         "ore-contract-watch": contract_watch, "ore-independent-review": independent_review,
         "ore-learning-lab": learning_comparison, "ore-runtime-diagnostics": diagnostics}

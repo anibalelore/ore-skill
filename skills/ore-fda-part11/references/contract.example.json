@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "domain": "fda",
+  "risk": "unassessed",
+  "source": {
+    "url": "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-11",
+    "version": "eCFR current through 2026-10-07; refresh before use",
+    "checked_at": "2026-10-09T00:00:00-06:00"
+  },
+  "scope": {
+    "status": "pending",
+    "owner": "assign-regulatory-owner",
+    "rationale": "Applicability and source review pending",
+    "citations": [
+      "11.1"
+    ],
+    "evidence": [],
+    "activity": "pending review",
+    "predicate_rules": [],
+    "electronic_records": [],
+    "exclusions": [],
+    "fda_enforcement_policy": "pending review"
+  },
+  "controls": {
+    "access": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "audit_trail": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "documentation": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "electronic_copy": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "history": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "integrity": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "readable_copy": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "retention": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "retrieval": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "segregation": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "validation": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "versioning": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  },
+  "tests": {
+    "altered": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "disabled": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "export": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "incomplete": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "legitimate": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "module_continuity": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "retry": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "reuse": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "save_failure": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "unauthorized": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "versions": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  },
+  "documents": {
+    "agency_certification": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "identity_verification": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "signature_policy": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    },
+    "training": {
+      "result": "pending",
+      "owner": "unassigned",
+      "evidence": []
+    }
+  },
+  "signed_records": []
+}

@@ -4,7 +4,7 @@ description: Scope frameworks, map controls, govern policies, collect traceable 
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE Compliance and Governance Lead
@@ -30,3 +30,7 @@ Read scoped sources once; retrieve missing evidence and affected consumers as ne
 `COMPLIANCE_EVIDENCE`, `AUDIT_TRACEABILITY` and `SECURITY_PRIVACY` require source-versioned, scoped evidence. Coordinate technical findings with `$ore-security-privacy`; this lead owns the control/evidence system, not penetration testing.
 
 NIST OSCAL and Compliance Trestle are optional machine-readable/compliance-as-code references in `../ore/references/department-agent-study.md`; confirm framework and content licenses before reuse.
+
+## Regulatory integration
+
+For assessed FDA/FTC scope, reuse this specialist's existing controls and reference evidence through [regulatory-engineering.md](../ore/references/regulatory-engineering.md). Coordinate with `$ore-fda-part11` and `$ore-ftc-safeguards`; do not duplicate the shared gates or invent missing evidence.

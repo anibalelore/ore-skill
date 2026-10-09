@@ -1,7 +1,7 @@
 {
   "name": "ore",
-  "version": "4.0.0-alpha.1",
-  "description": "Persistent software orchestration with 26 department-based specialists, automatic progress, business lifecycle continuity, and evidence gates.",
+  "version": "4.1.0-alpha.1",
+  "description": "Persistent software orchestration with 28 department-based specialists, automatic progress, business lifecycle continuity, and evidence gates.",
   "author": {
     "name": "anibalelore",
     "url": "https://github.com/anibalelore"
@@ -14,7 +14,7 @@
   "interface": {
     "displayName": "ORE",
     "shortDescription": "Persistent evidence-driven software orchestration",
-    "longDescription": "Build, audit, repair, and improve products through 26 department-based specialists covering business lifecycles, discovery, architecture, apps, AI, data, memory, impact, quality, security, governance, platform, operations and release certification.",
+    "longDescription": "Build, audit, repair, and improve products through 28 department-based specialists covering business lifecycles, discovery, architecture, apps, AI, data, memory, impact, quality, security, governance, platform, operations and release certification.",
     "developerName": "anibalelore",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],

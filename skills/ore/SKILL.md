@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -117,3 +117,15 @@ Before reporting completion:
 - progress and token-efficiency lines use the required format.
 
 Never say “done,” “production ready,” or equivalent from code inspection alone when runnable verification was available.
+
+## Regulatory engineering extension
+
+Route regulated electronic records/signatures to `$ore-fda-part11` and covered financial-institution safeguards to `$ore-ftc-safeguards`. First establish applicability with `$ore-compliance-governance`; payments or food production alone do not establish scope. Read [regulatory-engineering.md](references/regulatory-engineering.md) for contracts, gate evidence and host integration limits. Preserve existing security, quality, business lifecycle and never-again ownership.
+
+## Required browser dependencies
+
+Install the bundled Python dependencies with `python -m pip install -r requirements.txt`
+from this skill directory (or the repository root), then run
+`python -m playwright install chromium` using the same interpreter as the ORE runtime.
+Playwright and Chromium are required for First Contact and the complete validation suite;
+missing dependencies block execution and fail browser acceptance rather than skip it.

@@ -2,14 +2,14 @@
 
 > Turn a complex request into accountable work, visible progress and verified results.
 
-**ORE gives your coding agent an engineering team:** a lead, 25 specialists,
+**ORE gives your coding agent an engineering team:** a lead, 27 specialists,
 durable project state and evidence gates. Use it in Codex, Claude Code or another
 Agent Skills host. **We now also have Claude Code mods** to make progress,
 approvals, blockers and specialist activity visible in the harness.
 
 | Core team | Optional runtime layer | Current release |
 | --- | --- | --- |
-| 26 skills across 9 departments | 6 established mods + 19 new runtime adapters | **4.0.0-alpha.1 ? prerelease** |
+| 28 skills across 9 departments | 6 established mods + 21 runtime adapters | **4.1.0-alpha.1 ? prerelease** |
 
 **Start here:** [Install ORE](#install) ? [Try the mods](#claude-code-mods-optional) ?
 [Meet the team](#agent-departments) ? [Update history](#update-history)
@@ -100,10 +100,15 @@ certification remain unfinished. The [update report](UPDATE_REPORT.md) records
 actual checks and limits; the [acceptance contract](docs/ore-4-acceptance.md) defines
 what must pass before a stable 4.0.0 release.
 
+## ORE 4.1 regulatory extension
+
+Adds `ore-signature-guard` and `ore-safeguards-monitor` through the shared runtime, six evidence-backed regulatory gates and reusable signature/flow contracts. Preserves all ORE 4.0 roadmap items and original mods. See [implementation and limits](docs/ore-4.1-regulatory.md). Offline package validation does not certify customer systems.
+
 ## Update history
 
 | Version | Main improvement |
 | --- | --- |
+| **4.1.0-alpha.1** | Regulatory skills, signature patterns, safeguards evidence and notification readiness |
 | **4.0.0-alpha.1** | Runtime governance, 19 explicit adapters, synthetic business-flow engine and isolated browser exploration; certification in progress |
 | **3.0.0** | Six optional Claude Code mods and focused execution/context policies |
 | **2.4.0** | Integrated security, privacy, compliance and bounded audit/repair workflows |
@@ -183,6 +188,8 @@ end-to-end benchmark. Smaller instructions alone do not establish either.
 | --- | --- |
 | `$ore-security-privacy` | Threat modeling, authorization, privacy and supply-chain security |
 | `$ore-compliance-governance` | Framework scope, control mapping, evidence, exceptions and audit traceability |
+| `$ore-fda-part11` | Assessed Part 11 applicability, record controls and signature integrity |
+| `$ore-ftc-safeguards` | Assessed Part 314 applicability, security evidence and incident readiness |
 
 ### Platform, operations and developer productivity
 
@@ -224,6 +231,22 @@ Restart the client, select **ORE Skills**, install **ORE**, and start a new conv
 ### Other Agent Skills hosts
 
 Clone the repository where the host discovers Agent Skills. Direct-skill hosts read the root `SKILL.md`; plugin-aware hosts discover all folders under `skills/`.
+
+### Required browser runtime
+
+Playwright and Chromium are required for First Contact and full validation. Run
+these commands from the ORE repository or the installed `ore` skill directory,
+using the Python interpreter configured for the runtime:
+
+```text
+python -m pip install -r requirements.txt
+python -m playwright install chromium
+```
+
+Python dependencies are pinned in the bundled requirements file. Chromium is
+installed separately for that Playwright version. Standalone Python runtime mods
+include their own `requirements.txt`. Missing dependencies fail browser acceptance
+rather than silently skipping it. See [First Contact](docs/first-contact.md).
 
 ## Example
 

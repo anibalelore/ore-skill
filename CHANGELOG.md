@@ -126,3 +126,7 @@
 - Agency Brain, Prompt Architect, Agent Router, Context Engineer, Memory Manager, Token Governor, Execution Engine, quality gates, and communication contract.
 - Professional specialist catalog covering product, design, architecture, engineering, QA, security, reliability, DevOps, release, documentation, review, and post-release operations.
 - Adaptive workflows, stack packs, templates, scripts, and scenario evals.
+
+## 4.1.0-alpha.1 ? 2026-10-09
+
+Added FDA Part 11 and FTC Safeguards skills plus two self-contained runtime adapters; preserved all 26 prior skills, 25 prior mods and ORE 4.0 acceptance items. Added signature/session/binding/supersession patterns, regulatory flow preconditions, incident readiness, six file-evidence-backed gates and completion digest checks. Real system adapters and organizational evidence remain application responsibilities.

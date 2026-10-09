@@ -10,15 +10,17 @@ from pathlib import Path
 from build_mods import template, NATIVE_MODS
 
 ROOT = Path(__file__).parents[1]
-VERSION = "4.0.0-alpha.1"
+VERSION = "4.1.0-alpha.1"
 BASE_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
 RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
+    "ore-signature-guard", "ore-safeguards-monitor",
     "ore-smart-tests", "ore-context-sentinel", "ore-independent-review", "ore-contract-watch",
     "ore-worktree-manager", "ore-pr-pilot", "ore-preview-certifier", "ore-runtime-diagnostics",
     "ore-cost-controller", "ore-project-router", "ore-learning-lab", "ore-first-contact",
     "ore-visual-qa", "ore-flow-intelligence", "ore-flow-watch"}
 EXPECTED_MODS = BASE_MODS | RUNTIME_MODS
 EXPECTED_SKILLS = {
+    "ore-fda-part11", "ore-ftc-safeguards",
     "ore",
     "ore-android",
     "ore-ios",
@@ -91,7 +93,9 @@ def main() -> int:
             elif module != (mods / "sdk" / template(name)).read_text(encoding="utf-8"):
                 fail(errors, f"runtime module differs from audited SDK: {name}")
             if name in RUNTIME_MODS - NATIVE_MODS - {"ore-worktree-manager"}:
-                for script in ("ore_state.py", "ore_runtime.py", "ore_flow.py", "ore_first_contact.py"):
+                if (folder / 'requirements.txt').read_bytes() != (ROOT / 'skills/ore/requirements.txt').read_bytes():
+                    fail(errors, f'vendored requirements differ from canonical source: {name}')
+                for script in ("ore_state.py", "ore_runtime.py", "ore_flow.py", "ore_first_contact.py", "ore_regulatory.py"):
                     if (folder / "scripts" / script).read_bytes() != (ROOT / "skills/ore/scripts" / script).read_bytes():
                         fail(errors, f"vendored script differs from canonical source: {name}/{script}")
             if forbidden:
@@ -161,6 +165,8 @@ def main() -> int:
                 fail(errors, f"broken reference in {source.relative_to(ROOT)}: {relative}")
 
     required = [
+        ROOT / 'requirements.txt',
+        skills_root / 'ore' / 'requirements.txt',
         skills_root / "ore" / "scripts" / "ore_state.py",
         skills_root / "ore" / "references" / "durable-state.md",
         skills_root / "ore" / "references" / "form-intelligence.md",

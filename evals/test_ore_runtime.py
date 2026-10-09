@@ -105,6 +105,19 @@ class NativeRuntimeAdapters(unittest.TestCase):
         result = self.run_handler(mod='ore-flow-intelligence', missing=True)
         self.assertEqual(result['processes'], 0)
 
+    def test_regulatory_handlers_are_read_only_and_report_runtime_errors(self):
+        for name in ('ore-signature-guard', 'ore-safeguards-monitor'):
+            with self.subTest(mod=name):
+                absent = self.run_handler(mod=name, missing=True)
+                self.assertEqual(absent['processes'], 0)
+                report = self.run_handler(mod=name, request={'contract': 'evidence/domain.json'},
+                    result={'runtime_result': {'verified': False, 'gates': {'REGULATORY_EVIDENCE': {'status': 'failed'}}}})
+                self.assertEqual(report['processes'], 1)
+                self.assertEqual(report['asks'], 0)
+                self.assertFalse(json.loads(report['result']['text'])['runtime_result']['verified'])
+                unavailable = self.run_handler(mod=name, runtimeUnavailable=True)
+                self.assertEqual(unavailable['result']['exitCode'], 2)
+
     def test_durable_rule_requires_ui_confirmation(self):
         result = self.run_handler(mod='ore-never-again', request={'action': 'rule', 'payload': {}}, answer='Cancel')
         self.assertEqual(result['asks'], 1)

@@ -28,13 +28,15 @@ def main():
         shutil.copyfile(ROOT / 'mods/ore-progress/hooks/state.ts', folder / 'hooks/state.ts')
         (folder / 'hooks/identity.ts').write_text(f"export const NAME: string = '{name}';\n", encoding='utf-8')
         shutil.copyfile(ROOT / 'mods/ore-progress/tsconfig.json', folder / 'tsconfig.json')
-        for script in ('ore_state.py', 'ore_runtime.py', 'ore_first_contact.py', 'ore_flow.py'):
+        for script in ('ore_state.py', 'ore_runtime.py', 'ore_first_contact.py', 'ore_flow.py', 'ore_regulatory.py'):
             target = folder / 'scripts' / script
             if name in NATIVE_MODS or name == 'ore-worktree-manager':
                 if target.exists():
                     target.unlink()
             else:
                 shutil.copyfile(ROOT / 'skills/ore/scripts' / script, target)
+        if name not in NATIVE_MODS and name != 'ore-worktree-manager':
+            shutil.copyfile(ROOT / 'skills/ore/requirements.txt', folder / 'requirements.txt')
     marketplace = ROOT / 'mods/.claude-plugin/marketplace.json'
     data = json.loads(marketplace.read_text(encoding='utf-8'))
     data['plugins'] = [{'name': folder.name, 'source': f'./{folder.name}', 'version': version,

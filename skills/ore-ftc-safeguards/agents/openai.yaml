@@ -1,0 +1,4 @@
+interface:
+  display_name: "ORE FTC Safeguards"
+  short_description: "Verify safeguards, scope and incident readiness"
+  default_prompt: "Use $ore-ftc-safeguards to assess applicability and verify these controls."

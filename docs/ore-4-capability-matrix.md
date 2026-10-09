@@ -138,3 +138,7 @@ this is allowed and must never silently reuse a completed task's approval.
 Stable ORE 4.0.0 requires the requested executable behaviors and acceptance
 evidence. Partial engines, missing browser execution, unimplemented adapters or
 manual integrations require a prerelease and a candid inventory.
+
+## ORE 4.1 additive regulatory roadmap
+
+Both regulatory adapters are implemented offline artifact evaluators using the audited SDK and shared writer. Signature patterns and flow preconditions are executable; production authentication, atomic record/audit storage, tamper resistance, scanner/IdP integrations and complete transition coverage remain host-specific acceptance work. Preserve every existing 4.0 item and original mod. Stable release additionally requires applicability-owner review and application executions for all regulatory scenarios. See [extension report](ore-4.1-regulatory.md).

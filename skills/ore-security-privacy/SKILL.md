@@ -4,7 +4,7 @@ description: Threat-model, audit, design, or harden application security, author
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.0.0-alpha.1"
+  version: "4.1.0-alpha.1"
 ---
 
 # ORE Security and Privacy Lead
@@ -37,3 +37,7 @@ Read scoped sources once; retrieve missing evidence and affected consumers as ne
 
 `SECURITY_PRIVACY` passes only when applicable high/critical findings are resolved or explicitly accepted by an authorized owner and retested. Compliance remains “control evidence reviewed,” never “certified.” External references and their share-alike/attribution limits are recorded in `../ore/references/legacy-agent-study.md`.
 
+
+## Regulatory integration
+
+For assessed FDA/FTC scope, reuse this specialist's existing controls and reference evidence through [regulatory-engineering.md](../ore/references/regulatory-engineering.md). Coordinate with `$ore-fda-part11` and `$ore-ftc-safeguards`; do not duplicate the shared gates or invent missing evidence.
