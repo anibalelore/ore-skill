@@ -443,3 +443,78 @@ Details, installation/removal commands, configuration examples, documented sourc
 known limits and next-version work are in
 [the 4.2 guide](docs/ore-4.2-adaptive-routing.md). Official Claude and OpenAI host
 documentation was fetched on 2026-10-09; model access still requires actual observation.
+# ORE 4.2.1 — Human-Friendly Approval Experience — 2026-10-09
+
+Implemented on `feat/ore-4.2.1-friendly-approvals`, starting from clean main at
+`6bb6fed`. This update stays local for review; earlier Git publication authorization
+was for the previous update. No release/tag, global configuration, model switch,
+production operation, cloud/Supabase write or background process was created.
+
+## Changes
+
+- Pure shared `mods/sdk/approval.ts`: structured natural-language summaries and
+  impact, four risk classes, full exact JSON plus multiline SQL/command code blocks.
+- Guard, shared runtime/ledger, model-router, scope reviews and browser consent use
+  the same real native dialog. No second approval ledger or permission subsystem.
+- Dangerous full details remain visible before approval. Progressive requests first
+  require details, then approve the exact action. Free text cannot bypass that sequence.
+- Missing destinations/resources remain unknown; declared targets are not claimed
+  verified. RLS/privilege/authorship/integrity/mutation protection remain unproved
+  unless separate evidence exists. No table immutability claim is introduced.
+- No silent truncation: excessive rendered requests, secrets, control characters,
+  explicit insufficient permissions and presentation failure block approval.
+- Prose-only newline normalization; SQL/commands/parameters stay byte-for-byte
+  equivalent. Safe code fences and escaped labels prevent misleading presentation.
+- Native deny/ask/allow rules, unchanged next(e), task revisions, action snapshots,
+  ledger expiry/revocation and project scopes remain authoritative. Invalid custom
+  guard configuration blocks; custom patterns cannot remove base protections.
+- Canonical presenter is vendored by the existing builder and checked by the package
+  validator. Metadata is 4.2.1-alpha.1; inventory remains **29 skills / 28 mods / 9 departments**.
+
+## Verification
+
+The dedicated approval suite contains **15 tests**, added to the previous 122.
+Full regression: **137 tests passed, no omissions**, including isolated Chromium,
+state, runtime, routing, business-flow and regulatory contracts. New cases cover
+long/oversized requests, multiline SQL, literal escapes, destructive/production/cloud
+operations, unknown resources, insufficient permissions, secrets, rejection, expired
+approval, presentation failure, action/state changes, safe fences and policy patterns.
+
+Package validation passed with coherent inventory, references and canonical vendoring.
+The three changed native packages (guard, approval-ledger, model-router) passed
+`claude plugin validate` and TypeScript checks against the generated 2.1.295 API.
+TypeScript additionally passed for **all 28 mods**. Package validation and
+`git diff --check` passed. The skill frontmatter and self-contained approval reference
+are preserved; no new skill or department is added.
+Native status commands for all three packages launched successfully with
+`--plugin-dir --no-session-persistence -p`; no inference was requested by these
+implemented commands. Router status observed claude-sonnet-5-5, USD 0 usage and
+modelChanged false. Installed Claude Code is now **2.1.295**; this agent did not
+upgrade it. Native observations do not imply a provider benchmark or model switch.
+
+## Compatibility and limitations
+
+`$.ui.ask` is the supported native AskUserQuestion dialog; arbitrary “Other” text
+is not treated as approval beyond exact labels and the detail-review phase. Dismissal
+or noninteractive inability to present consent blocks mutation. No native permission
+rule, mode or PermissionRequest allow decision is installed or changed.
+
+Persistent/previous-policy choices are intentionally absent from ORE's presenter
+because this guard cannot prove and enforce such native scope. Host-native policy
+controls are retained. One-time metadata writes still require explicit review of
+their displayed durable scope/expiry. Guard consent is ephemeral; the existing writer
+audits durable ledger/policy decisions. ORE adds no raw-action state/log; native
+transcript behavior remains the host's responsibility.
+
+Real interactive dialog viewport/rendering across supported surfaces remains
+unverified. The 12,000-character limit is a conservative ORE bound, not a guarantee
+about host rendering. Classification remains pattern-based and cannot inspect
+hidden scripts, dynamic shell effects or remote permissions. Required quality and
+regulatory evidence remains unchanged. No guaranteed savings or stable certification.
+
+Official [permissions](https://code.claude.com/docs/en/permissions),
+[hooks](https://code.claude.com/docs/en/hooks) and
+[plugin](https://code.claude.com/docs/en/plugins) documentation was fetched on
+2026-10-09; unavailable mods documentation was supplemented by checked-in native SDK
+declarations and actual local plugin validation. See
+[the approval guide](docs/ore-4.2.1-approval-experience.md) for UX, examples and scope.

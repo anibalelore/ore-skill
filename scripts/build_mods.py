@@ -19,6 +19,7 @@ def template(name):
 
 def main():
     version = json.loads((ROOT / 'plugin.json').read_text(encoding='utf-8'))['version']
+    shutil.copyfile(ROOT / 'mods/sdk/approval.ts', ROOT / 'mods/ore-guard/hooks/approval.ts')
     for name in sorted(MODULES):
         folder = ROOT / 'mods' / name
         for part in ('.claude-plugin', 'hooks', 'scripts'):
@@ -27,6 +28,7 @@ def main():
         (folder / '.claude-plugin/plugin.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
         (folder / 'hooks/hooks.json').write_text('{"modules": ["./register.ts"]}\n', encoding='utf-8')
         shutil.copyfile(ROOT / 'mods/sdk' / template(name), folder / 'hooks/register.ts')
+        shutil.copyfile(ROOT / 'mods/sdk/approval.ts', folder / 'hooks/approval.ts')
         shutil.copyfile(ROOT / 'mods/ore-progress/hooks/state.ts', folder / 'hooks/state.ts')
         (folder / 'hooks/identity.ts').write_text(f"export const NAME: string = '{name}';\n", encoding='utf-8')
         shutil.copyfile(ROOT / 'mods/ore-progress/tsconfig.json', folder / 'tsconfig.json')

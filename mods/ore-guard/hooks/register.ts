@@ -15,7 +15,8 @@ async function load($: EngineInterface): Promise<Task | null> {
     return pointer(await $.fs.read(active)) === id ? task : null;
   } catch { return null; }
 }
-import { classify, preview } from './risk.ts';
+import { classify } from './risk.ts';
+import { summarize, renderApproval, APPROVE, REJECT, DETAILS } from './approval.ts';
 
 export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
@@ -28,10 +29,16 @@ export const register: Register = (on, options) => {
     if (!task || task.status === 'complete') return next(e);
     const risk = classify(e.tool, e, options.patterns);
     if (!risk) return next(e);
-    const report = `ORE task: ${task.title} (r${task.revision})\n${risk}\nAction arguments: ${preview(e)}\nImpact is limited to declared arguments; remote effects and hidden script contents are not measured. Proceed with this action?`;
+    if (risk === 'Invalid guard pattern configuration') return { deny: 'ORE guard: invalid review configuration; fix it before execution.' };
     try {
-      const answer = await $.ui.ask(report, ['Cancel', 'Proceed once']);
-      if (answer !== 'Proceed once' || next.signal.aborted) return { deny: 'ORE guard: explicit approval was not granted for this action.' };
+      const snapshot = JSON.stringify(e);
+      const review = summarize(e.tool, e, task.title, 'La acción puede modificar recursos o tener efectos externos.');
+      if (review.blocked) return { deny: review.blocked };
+      const inline = review.risk === 'Alto' || review.risk === 'Crítico';
+      let answer = await $.ui.ask(renderApproval(review), inline ? [APPROVE, REJECT, DETAILS] : [REJECT, DETAILS]);
+      if (!inline && answer !== DETAILS) return { deny: 'ORE guard: exact details were not reviewed.' };
+      if (answer === DETAILS) answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+      if (answer !== APPROVE || next.signal.aborted || JSON.stringify(e) !== snapshot) return { deny: 'ORE guard: explicit approval was not granted for this exact action.' };
       const latest = await load($);
       if (!latest || latest.id !== task.id || latest.revision !== task.revision) return { deny: 'ORE guard: state changed during confirmation; resume and review the action again.' };
     } catch {

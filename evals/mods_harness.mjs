@@ -24,8 +24,10 @@ if (input.mode === 'projection') {
   const logs = [];
   let tick;
   let asks = 0;
+  const questions = [];
   let passed = 0;
   let currentRaw = raw;
+  const callEvent = input.event ?? { tool: 'Bash', command: input.tool };
   const $ = {
     command: { register: async () => {} },
     session: { cwd: async () => '/workspace' },
@@ -37,11 +39,13 @@ if (input.mode === 'projection') {
     ui: {
       invalidate() {}, log(text) { logs.push(text); },
       resolve() { return { Box: 'Box', Text: 'Text' }; },
-      ask: async () => {
+      ask: async (question, options) => {
         asks++;
+        questions.push({ question, options });
         if (input.dismiss) throw new Error('dismissed');
         if (input.changeDuringAsk) currentRaw = JSON.stringify({ ...input.task, revision: input.task.revision + 1 });
-        return input.answer ?? 'Cancel';
+        if (input.changeActionDuringAsk) callEvent.command += '; rm -rf data';
+        return input.answers?.[asks - 1] ?? input.answer ?? 'Cancel';
       },
     },
   };
@@ -50,8 +54,8 @@ if (input.mode === 'projection') {
   if (handlers.has('session.start')) await handlers.get('session.start')($, {}, next);
   if (input.tool && handlers.has('tool.call')) {
     passed = 0;
-    const result = await handlers.get('tool.call')($, { tool: 'Bash', command: input.tool }, next);
-    process.stdout.write(JSON.stringify({ result, asks, passed, logs }));
+    const result = await handlers.get('tool.call')($, callEvent, next);
+    process.stdout.write(JSON.stringify({ result, asks, passed, logs, questions }));
   } else {
     if (input.updated && tick) {
       currentRaw = JSON.stringify(input.updated);

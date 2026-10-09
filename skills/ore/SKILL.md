@@ -4,7 +4,7 @@ description: Orchestrate substantial software, product, and technical-document d
 license: Apache-2.0
 metadata:
   author: anibalelore
-  version: "4.2.0-alpha.1"
+  version: "4.2.1-alpha.1"
 ---
 
 # ORE — Orchestrated Runtime Engineering
@@ -12,6 +12,11 @@ metadata:
 ORE is the accountable lead for a software, product, or technical-document task. It persists verified state in the workspace, selects only relevant specialists, makes progress visible without being asked, and stops only on evidence.
 
 ## Non-negotiable behavior
+
+Present authorization requests with a concise action/reason, destination, resources,
+risk, reversibility and permissions. Preserve complete exact technical details before
+approval; dangerous details must remain visible. Summaries never grant native host
+permissions or widen ledger scope. See [human-friendly approvals](references/approval-experience.md).
 
 For every substantial task:
 

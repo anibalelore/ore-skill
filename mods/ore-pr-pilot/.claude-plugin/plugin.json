@@ -1,6 +1,6 @@
 {
   "name": "ore-pr-pilot",
-  "version": "4.2.0-alpha.1",
+  "version": "4.2.1-alpha.1",
   "description": "Optional ORE runtime adapter: ore-pr-pilot; see capability matrix for limits",
   "author": {
     "name": "anibalelore"

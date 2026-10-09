@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.2.1-alpha.1 — Human-Friendly Approval Experience — 2026-10-09
+
+- Add one shared approval summary engine: action, reason, platform, project/target,
+  resources, risk, reversibility and required permissions in natural Spanish.
+- Integrate guard, approval-ledger, model-router, scoped file reviews and browser
+  consent using the supported native dialog and unchanged exact operation.
+- Show dangerous details before approval; require exact detail review for progressive
+  requests. Block oversized, secret-bearing or unpresentable operations without truncation.
+- Preserve host permissions, ledger scopes/expiry and existing runtime writer;
+  prevent free-text approval bypass and custom-pattern removal of guard protections.
+- Add 15 approval regression tests; preserve 29 skills, 28 mods and 9 departments.
+- Verify actual native status commands on Claude Code 2.1.295. Interactive dialog
+  viewport/rendering remains pending; no fake UI or persistent policy choice added.
+
 ## 4.0.0-alpha.1 — Runtime Governance and Business Flow Prerelease
 
 - Preserved all 26 skills and the six existing Claude mods; skill instruction changes are limited to prerelease metadata.

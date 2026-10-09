@@ -91,15 +91,17 @@ class ModsStateTests(unittest.TestCase):
                 denied = self.run_mod(mod='ore-guard', tool=command)
                 self.assertEqual(denied['asks'], 1)
                 self.assertIn('deny', denied['result'])
-                allowed = self.run_mod(mod='ore-guard', tool=command, answer='Proceed once')
+                allowed = self.run_mod(mod='ore-guard', tool=command, answer='Aprobar una vez')
                 self.assertEqual(allowed['passed'], 1)
         self.assertEqual(self.run_mod(mod='ore-guard', tool='git status')['asks'], 0)
         for args in ({'dismiss': True}, {'aborted': True}, {'changeDuringAsk': True}):
-            self.assertIn('deny', self.run_mod(mod='ore-guard', tool='npm publish', answer='Proceed once', **args)['result'])
+            self.assertIn('deny', self.run_mod(mod='ore-guard', tool='npm publish', answer='Aprobar una vez', **args)['result'])
 
     def test_guard_configurable_patterns(self):
         self.assertEqual(self.run_mod(mod='ore-guard', tool='release-live', options={'patterns': '["release-live"]'})['asks'], 1)
-        self.assertEqual(self.run_mod(mod='ore-guard', tool='git status', options={'patterns': '['})['asks'], 1)
+        invalid = self.run_mod(mod='ore-guard', tool='git status', options={'patterns': '['})
+        self.assertEqual(invalid['asks'], 0)
+        self.assertIn('deny', invalid['result'])
 
     def test_specialist_writer_is_optional_revision_protected(self):
         script = ROOT / 'skills/ore/scripts/ore_state.py'

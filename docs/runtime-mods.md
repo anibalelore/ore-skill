@@ -1,8 +1,10 @@
 # ORE 4 runtime adapters
 
-**Prerelease candidate: 4.2.0-alpha.1.** All 22 additions are explicit command adapters,
+**Prerelease candidate: 4.2.1-alpha.1.** All 22 additions are explicit command adapters,
 not a certificate that the complete ORE 4 autonomous system is implemented.
-The six ORE 3 display/guard mods retain their existing behavior.
+The six ORE 3 display/guard mods retain their optional lifecycle. Guard presentation
+uses the shared [4.2.1 approval experience](ore-4.2.1-approval-experience.md), as do
+ledger, routing and scoped-review dialogs. Native permissions remain intact.
 
 | Adapter | Executable behavior | Current limit |
 | --- | --- | --- |

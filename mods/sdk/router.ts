@@ -1,6 +1,7 @@
 import type { EngineInterface, Register } from 'claude-code';
 import { pointer, parseTask, handoff } from './state.ts';
 import type { Task } from './state.ts';
+import { summarize, renderApproval, APPROVE, REJECT, DETAILS } from './approval.ts';
 
 async function load($: EngineInterface): Promise<Task | null> {
   try {
@@ -43,13 +44,12 @@ export const register: Register = (on, options) => {
       const revision = request.governanceRevision ?? 0;
       if (typeof revision !== 'number' || !Number.isInteger(revision) || revision < 0) throw new Error('Invalid revision');
       if (action !== 'evaluate') {
-        // Only allowlisted metadata is echoed. Raw inputs may contain secrets.
-        const safe = action === 'model-policy'
-          ? JSON.stringify({ policy: payload.policy, scope: payload.scope, expires_at: payload.expires_at, session_id: payload.session_id })
-            .replace(/((?:password|secret|token|api[_-]?key|authorization)\s*["']?\s*[:=]\s*["']?)[^\s",}]+/gi, '$1[redacted]')
-          : 'Persist the evaluated routing decision metadata';
-        const answer = await $.ui.ask(`ORE MODEL ROUTER: ${action}\n${safe}\nTask: ${task.id}; governance revision: ${revision}. This authorizes metadata persistence only; model selection remains manual.`, ['Cancel', 'Confirm durable change']);
-        if (answer !== 'Confirm durable change') return { text: 'Cancelled; no state written' };
+        const review = summarize('ore-model-router', { action, payload, task_revision: task.revision, governance_revision: revision }, task.title, 'Guardar preferencias o evidencia de routing; la selección del modelo sigue siendo manual.');
+        if (review.blocked) return { text: review.blocked, exitCode: 2 };
+        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
+        answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        if (answer !== APPROVE) return { text: 'Cancelled; no state written' };
         const current = await load($);
         if (!current || current.id !== task.id || current.revision !== task.revision) throw new Error('State changed during confirmation');
       }

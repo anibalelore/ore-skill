@@ -1,5 +1,10 @@
 # ORE 4.2 Adaptive Model Intelligence
 
+Current approval UX and host verification are documented in the
+[4.2.1 update](ore-4.2.1-approval-experience.md). Its successful native status launches
+on Claude Code 2.1.295 supersede the historical launch limitation below; manual
+model selection and the remaining routing-execution limitations still apply.
+
 This local alpha candidate adds a task rubric, versioned observed-model registry,
 selection engine, scoped policy/lock persistence, approval-ledger lookup and an
 optional model/usage diagnostic mod. No model is changed automatically. Live host

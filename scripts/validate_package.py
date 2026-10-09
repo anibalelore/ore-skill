@@ -10,7 +10,7 @@ from pathlib import Path
 from build_mods import template, NATIVE_MODS
 
 ROOT = Path(__file__).parents[1]
-VERSION = "4.2.0-alpha.1"
+VERSION = "4.2.1-alpha.1"
 BASE_MODS = {"ore-progress", "ore-guard", "ore-resume", "ore-gates", "ore-stale-window", "ore-departments"}
 RUNTIME_MODS = {"ore-scope-lock", "ore-never-again", "ore-approval-ledger", "ore-autopilot",
     "ore-model-router",
@@ -89,6 +89,9 @@ def main() -> int:
             if hooks.get("modules") != ["./register.ts"]:
                 fail(errors, f"mod module mismatch: {name}")
             module = (folder / "hooks/register.ts").read_text(encoding="utf-8")
+            if name in RUNTIME_MODS or name == 'ore-guard':
+                if (folder / 'hooks/approval.ts').read_bytes() != (mods / 'sdk/approval.ts').read_bytes():
+                    fail(errors, f'approval presenter differs from canonical source: {name}')
             forbidden = re.findall(r"\$\.(?:fs\.write|http\.\w+|model\.\w+|store\.\w+)", module)
             if name in BASE_MODS:
                 forbidden += re.findall(r"\$\.process\.\w+", module)

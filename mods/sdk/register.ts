@@ -2,6 +2,7 @@ import type { EngineInterface, Register } from 'claude-code';
 import { pointer, parseTask, handoff } from './state.ts';
 import type { Task } from './state.ts';
 import { NAME } from './identity.ts';
+import { summarize, renderApproval, APPROVE, REJECT, DETAILS } from './approval.ts';
 
 function validGovernance(value: unknown): boolean {
   if (!value || typeof value !== 'object') return false;
@@ -71,17 +72,24 @@ export const register: Register = (on, options) => {
       const payload = (request.payload ?? request) as Record<string, unknown>;
       const governanceRevision = typeof request.governanceRevision === 'number' ? request.governanceRevision : 0;
       if (NAME === 'ore-first-contact' && payload.run_browser === true) {
-        const answer = await $.ui.ask('Run bounded browser exploration against the explicitly authorized isolated loopback application? This starts a local browser process.', ['Cancel', 'Run isolated exploration']);
-        if (answer !== 'Run isolated exploration') return { text: 'Cancelled; no browser started' };
+        const review = summarize(NAME, payload, task.title, 'Explorar la aplicación local aislada con un navegador.');
+        if (review.blocked) return { text: review.blocked, exitCode: 2 };
+        let answer = await $.ui.ask(renderApproval(review), [APPROVE, REJECT, DETAILS]);
+        if (answer === DETAILS) answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        if (answer !== APPROVE) return { text: 'Cancelled; no browser started' };
       }
       if (action !== 'evaluate') {
-        const answer = await $.ui.ask(`Persist ${action} for ${NAME} in this project?\n${display(payload).slice(0, 4000)}\nExpected task revision: ${task.revision}; governance revision: ${governanceRevision}`, ['Cancel', 'Confirm durable change']);
-        if (answer !== 'Confirm durable change') return { text: 'Cancelled; no state written' };
+        const review = summarize(NAME, { action, payload, task_revision: task.revision, governance_revision: governanceRevision }, task.title, 'Guardar una decisión explícita con alcance y vigencia en el proyecto.');
+        if (review.blocked) return { text: review.blocked, exitCode: 2 };
+        let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+        if (answer !== DETAILS) return { text: 'Cancelled; exact details were not reviewed' };
+        answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+        if (answer !== APPROVE) return { text: 'Cancelled; no state written' };
         const current = await load($);
         if (!current || current.id !== task.id || current.revision !== task.revision) throw new Error('State changed during confirmation');
       }
       return { text: display(await runtime($, task, payload, action, python, governanceRevision)) };
-    } catch (error) { return { text: `ORE operation blocked: ${String(error)}`, exitCode: 2 }; }
+    } catch { return { text: 'ORE operation blocked: input, presentation or runtime unavailable; no authorization was expanded.', exitCode: 2 }; }
   });
   // Path restrictions apply only to declared file edits. Shell scripts are not inspected.
   if (NAME === 'ore-scope-lock' || NAME === 'ore-never-again') {
@@ -99,8 +107,13 @@ export const register: Register = (on, options) => {
         const check = result.runtime_result;
         if (check?.allowed === false) return { deny: `ORE path restriction: ${JSON.stringify(check.violations)}` };
         if (Array.isArray(check?.review_required) && check.review_required.length) {
-          const answer = await $.ui.ask(`ORE review rules: ${JSON.stringify(check.review_required)}`, ['Cancel', 'Proceed once']);
-          if (answer !== 'Proceed once') return { deny: 'ORE review was not approved' };
+          const snapshot = JSON.stringify(e);
+          const review = summarize('Write', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
+          if (review.blocked) return { deny: review.blocked };
+          let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+          if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
+          answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+          if (answer !== APPROVE || JSON.stringify(e) !== snapshot || next.signal.aborted) return { deny: 'ORE review was not approved for the unchanged action' };
           const current = await load($);
           if (!current || current.id !== task.id || current.revision !== task.revision || JSON.stringify(await runtime($, task, { paths: [e.file_path] }, 'evaluate', python)) !== JSON.stringify(result)) return { deny: 'ORE state changed during review; review again' };
         }
@@ -123,8 +136,13 @@ export const register: Register = (on, options) => {
         const check = result.runtime_result;
         if (check?.allowed === false) return { deny: `ORE path restriction: ${JSON.stringify(check.violations)}` };
         if (Array.isArray(check?.review_required) && check.review_required.length) {
-          const answer = await $.ui.ask(`ORE review rules: ${JSON.stringify(check.review_required)}`, ['Cancel', 'Proceed once']);
-          if (answer !== 'Proceed once') return { deny: 'ORE review was not approved' };
+          const snapshot = JSON.stringify(e);
+          const review = summarize('Edit', { ...e, review_required: check.review_required }, task.title, 'Revisar las reglas de alcance antes de modificar el archivo.');
+          if (review.blocked) return { deny: review.blocked };
+          let answer = await $.ui.ask(renderApproval(review), [REJECT, DETAILS]);
+          if (answer !== DETAILS) return { deny: 'ORE review: exact details were not reviewed' };
+          answer = await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]);
+          if (answer !== APPROVE || JSON.stringify(e) !== snapshot || next.signal.aborted) return { deny: 'ORE review was not approved for the unchanged action' };
           const current = await load($);
           if (!current || current.id !== task.id || current.revision !== task.revision || JSON.stringify(await runtime($, task, { paths: [e.file_path] }, 'evaluate', python)) !== JSON.stringify(result)) return { deny: 'ORE state changed during review; review again' };
         }

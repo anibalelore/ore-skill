@@ -10,169 +10,169 @@
     {
       "name": "ore-approval-ledger",
       "source": "./ore-approval-ledger",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-approval-ledger; see capability matrix for limits"
     },
     {
       "name": "ore-autopilot",
       "source": "./ore-autopilot",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-autopilot; see capability matrix for limits"
     },
     {
       "name": "ore-context-sentinel",
       "source": "./ore-context-sentinel",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-context-sentinel; see capability matrix for limits"
     },
     {
       "name": "ore-contract-watch",
       "source": "./ore-contract-watch",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-contract-watch; see capability matrix for limits"
     },
     {
       "name": "ore-cost-controller",
       "source": "./ore-cost-controller",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-cost-controller; see capability matrix for limits"
     },
     {
       "name": "ore-departments",
       "source": "./ore-departments",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE departments mod for Claude Code"
     },
     {
       "name": "ore-first-contact",
       "source": "./ore-first-contact",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-first-contact; see capability matrix for limits"
     },
     {
       "name": "ore-flow-intelligence",
       "source": "./ore-flow-intelligence",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-flow-intelligence; see capability matrix for limits"
     },
     {
       "name": "ore-flow-watch",
       "source": "./ore-flow-watch",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-flow-watch; see capability matrix for limits"
     },
     {
       "name": "ore-gates",
       "source": "./ore-gates",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE gates mod for Claude Code"
     },
     {
       "name": "ore-guard",
       "source": "./ore-guard",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE guard mod for Claude Code"
     },
     {
       "name": "ore-independent-review",
       "source": "./ore-independent-review",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-independent-review; see capability matrix for limits"
     },
     {
       "name": "ore-learning-lab",
       "source": "./ore-learning-lab",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-learning-lab; see capability matrix for limits"
     },
     {
       "name": "ore-model-router",
       "source": "./ore-model-router",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-model-router; see capability matrix for limits"
     },
     {
       "name": "ore-never-again",
       "source": "./ore-never-again",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-never-again; see capability matrix for limits"
     },
     {
       "name": "ore-pr-pilot",
       "source": "./ore-pr-pilot",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-pr-pilot; see capability matrix for limits"
     },
     {
       "name": "ore-preview-certifier",
       "source": "./ore-preview-certifier",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-preview-certifier; see capability matrix for limits"
     },
     {
       "name": "ore-progress",
       "source": "./ore-progress",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE progress mod for Claude Code"
     },
     {
       "name": "ore-project-router",
       "source": "./ore-project-router",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-project-router; see capability matrix for limits"
     },
     {
       "name": "ore-resume",
       "source": "./ore-resume",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE resume mod for Claude Code"
     },
     {
       "name": "ore-runtime-diagnostics",
       "source": "./ore-runtime-diagnostics",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-runtime-diagnostics; see capability matrix for limits"
     },
     {
       "name": "ore-safeguards-monitor",
       "source": "./ore-safeguards-monitor",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-safeguards-monitor; see capability matrix for limits"
     },
     {
       "name": "ore-scope-lock",
       "source": "./ore-scope-lock",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-scope-lock; see capability matrix for limits"
     },
     {
       "name": "ore-signature-guard",
       "source": "./ore-signature-guard",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-signature-guard; see capability matrix for limits"
     },
     {
       "name": "ore-smart-tests",
       "source": "./ore-smart-tests",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-smart-tests; see capability matrix for limits"
     },
     {
       "name": "ore-stale-window",
       "source": "./ore-stale-window",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE stale-window mod for Claude Code"
     },
     {
       "name": "ore-visual-qa",
       "source": "./ore-visual-qa",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-visual-qa; see capability matrix for limits"
     },
     {
       "name": "ore-worktree-manager",
       "source": "./ore-worktree-manager",
-      "version": "4.2.0-alpha.1",
+      "version": "4.2.1-alpha.1",
       "description": "Optional ORE runtime adapter: ore-worktree-manager; see capability matrix for limits"
     }
   ]

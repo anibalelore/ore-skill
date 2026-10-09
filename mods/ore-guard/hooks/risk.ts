@@ -1,5 +1,7 @@
 /** Configurable pattern matching, not a shell interpreter or remote dry run. */
 const DEFAULTS = [
+  ['Database schema or data change', String.raw`\b(?:CREATE|ALTER)\s+(?:TABLE|SCHEMA|INDEX)|\b(?:INSERT\s+INTO|UPDATE\s+\S+\s+SET|DELETE\s+FROM|GRANT|REVOKE)\b`],
+  ['Git or cloud mutation', String.raw`\bgit\s+(?:commit|merge|rebase|push|tag)\b|\b(?:terraform\s+apply|kubectl\s+apply|supabase\s+db\s+push|vercel\s+deploy|aws\s+\S+\s+(?:create|delete|put)|gcloud\s+\S+\s+(?:create|delete|deploy)|chmod|chown)\b`],
   ['Mass deletion', String.raw`\b(?:rm\s+(?:-[a-zA-Z]*[rf][a-zA-Z]*|--recursive|--force)|Remove-Item\b[\s\S]*-Recurse|rmdir\s+/s|del\s+/[sq])`],
   ['Destructive database operation', String.raw`\b(?:DROP\s+(?:TABLE|DATABASE|SCHEMA|INDEX)|TRUNCATE\b|(?:prisma|alembic|knex|sequelize)\b[\s\S]*(?:reset|drop|downgrade|rollback)|migrate\b[\s\S]*(?:reset|drop|destructive))`],
   ['Force push', String.raw`\bgit\b[\s\S]*\bpush\b[\s\S]*(?:--force\b|--force-with-lease\b|(?:\s|\")-f(?:\s|\"|$)|\s\+\S+)`],
@@ -13,7 +15,7 @@ export function classify(tool: string, input: unknown, configured: unknown): str
     try {
       const value: unknown = JSON.parse(configured);
       if (!Array.isArray(value) || value.length > 50 || !value.every(v => typeof v === 'string' && v.length <= 500)) return 'Invalid guard pattern configuration';
-      patterns = value.map(v => ['Configured high-impact operation', v]);
+      patterns = [...DEFAULTS, ...value.map(v => ['Configured high-impact operation', v])];
     } catch { return 'Invalid guard pattern configuration'; }
   }
   // Bound input and patterns. Regular expressions remain trusted plugin options.
