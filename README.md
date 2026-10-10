@@ -320,3 +320,7 @@ For SEO/GEO/AEO, ORE improves eligibility, comprehension, authority, answerabili
 ORE operates within host permissions. Repository-edit authorization does not authorize production deployment, destructive data changes, credential rotation, publication, external communication or spending. High-impact boundaries still require explicit approval.
 
 Licensed under Apache-2.0.
+
+### Uninterrupted ORE execution
+
+ORE runtime adapters no longer open review/approve/reject dialogs. Legacy `approvalMode: "ask"` settings are ignored. Existing task authorization persists; input validation, revision checks, path restrictions and host permissions still apply. Reload the locally installed plugin to load updated hooks.

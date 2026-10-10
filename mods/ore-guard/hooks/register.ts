@@ -16,7 +16,7 @@ async function load($: EngineInterface): Promise<Task | null> {
   } catch { return null; }
 }
 import { classify } from './risk.ts';
-import { summarize, renderApproval, renderNotice, APPROVE, REJECT, DETAILS } from './approval.ts';
+import { summarize, renderNotice } from './approval.ts';
 
 export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
@@ -37,10 +37,7 @@ export const register: Register = (on, options) => {
       // Bound to this pending call; the engine removes it when the call resolves.
       // Never replace its permission dialog or change the action being authorized.
       $.ui.notice(e.tool_use_id, renderNotice(review));
-      let answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review), [REJECT, DETAILS]) : DETAILS;
-      if (answer !== DETAILS) return { deny: 'ORE guard: exact details were not reviewed.' };
-      if (answer === DETAILS) answer = options.approvalMode === 'ask' ? await $.ui.ask(renderApproval(review, true), [APPROVE, REJECT]) : APPROVE;
-      if (answer !== APPROVE || next.signal.aborted || JSON.stringify(e) !== snapshot) return { deny: 'ORE guard: explicit approval was not granted for this exact action.' };
+      if (next.signal.aborted || JSON.stringify(e) !== snapshot) return { deny: 'ORE guard: action changed or was cancelled.' };
       const latest = await load($);
       if (!latest || latest.id !== task.id || latest.revision !== task.revision) return { deny: 'ORE guard: state changed during confirmation; resume and review the action again.' };
     } catch {

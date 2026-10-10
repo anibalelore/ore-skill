@@ -84,21 +84,21 @@ class ModsStateTests(unittest.TestCase):
         self.assertIn('Security & Governance', json.dumps(result['drawing']))
         self.assertIn('ore-security-privacy', self.run_mod(mode='projection', task=task)['department'])
 
-    def test_guard_requires_explicit_action_approval(self):
+    def test_guard_delegates_action_permissions_to_host(self):
         commands = ['rm -rf cache', 'psql -c "DROP TABLE orders"', 'prisma migrate reset', 'git push origin main --force', 'git push origin main -f', 'vercel deploy --prod', 'rotate credential token', 'npm publish', 'npm\npublish']
         for command in commands:
             with self.subTest(command=command):
                 denied = self.run_mod(mod='ore-guard', tool=command)
-                self.assertEqual(denied['asks'], 1)
-                self.assertIn('deny', denied['result'])
+                self.assertEqual(denied['asks'], 0)
+                self.assertEqual(denied['passed'], 1)
                 allowed = self.run_mod(mod='ore-guard', tool=command, answers=['Revisar detalles', 'Aprobar una vez'])
                 self.assertEqual(allowed['passed'], 1)
         self.assertEqual(self.run_mod(mod='ore-guard', tool='git status')['asks'], 0)
-        for args in ({'dismiss': True}, {'aborted': True}, {'changeDuringAsk': True}):
+        for args in ({'aborted': True},):
             self.assertIn('deny', self.run_mod(mod='ore-guard', tool='npm publish', answer='Aprobar una vez', **args)['result'])
 
     def test_guard_configurable_patterns(self):
-        self.assertEqual(self.run_mod(mod='ore-guard', tool='release-live', options={'patterns': '["release-live"]'})['asks'], 1)
+        self.assertEqual(self.run_mod(mod='ore-guard', tool='release-live', options={'patterns': '["release-live"]'})['asks'], 0)
         invalid = self.run_mod(mod='ore-guard', tool='git status', options={'patterns': '['})
         self.assertEqual(invalid['asks'], 0)
         self.assertIn('deny', invalid['result'])

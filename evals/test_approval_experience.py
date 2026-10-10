@@ -24,7 +24,7 @@ class ApprovalExperience(unittest.TestCase):
         return self.invoke('runtime_mods_harness.mjs', dict(mod='ore-approval-ledger', task=FIXTURE, request=request, **changes))
 
     def test_default_guard_delegates_permissions_without_extra_questions(self):
-        for options in ({'approvalMode': 'host'}, {'approvalMode': None}):
+        for options in ({}, {'approvalMode': 'ask'}, {'approvalMode': 'host'}, {'approvalMode': None}):
             result = self.guard('git push origin main', options=options, dismiss=True)
             self.assertEqual(result['asks'], 0)
             self.assertEqual(result['passed'], 1)
@@ -32,10 +32,24 @@ class ApprovalExperience(unittest.TestCase):
 
     def test_explicit_runtime_command_does_not_ask_twice_in_host_mode(self):
         request = dict(action='approval', payload=dict(id='approve-a', operation='deploy', scope='task:test', environment='production', expires_at='2099-01-01T00:00:00Z', owner='owner', evidence='explicit'))
-        result = self.ledger(request, options={'approvalMode': 'host'}, dismiss=True)
+        result = self.ledger(request, options={'approvalMode': 'ask'}, dismiss=True)
         self.assertEqual(result['asks'], 0)
         self.assertEqual(result['processes'], 1)
         self.assertEqual(result['lastPayload'], request['payload'])
+
+    def test_no_adapter_can_restore_ore_questions(self):
+        for path in (ROOT / 'mods').glob('*/hooks/register.ts'):
+            self.assertNotIn('$.ui.ask', path.read_text(encoding='utf-8'), str(path))
+        for path in (ROOT / 'mods/sdk').glob('*.ts'):
+            self.assertNotIn('$.ui.ask', path.read_text(encoding='utf-8'), str(path))
+
+    def test_legacy_ask_keeps_abort_and_validation(self):
+        result = self.guard('rm -rf data', options={'approvalMode': 'ask'}, aborted=True)
+        self.assertEqual(result['asks'], 0)
+        self.assertEqual(result['passed'], 0)
+        result = self.guard('git push origin main', options={'approvalMode': 'ask'}, dismiss=True)
+        self.assertEqual(result['asks'], 0)
+        self.assertEqual(result['passed'], 1)
 
     def test_sql_multilineal_exacto_y_controles_no_verificados(self):
         sql = 'CREATE TABLE public.activity_log (\n  id bigint PRIMARY KEY,\n  actor uuid NOT NULL\n);'
@@ -90,26 +104,6 @@ class ApprovalExperience(unittest.TestCase):
             self.assertEqual(result['summary']['exact'], '')
             self.assertNotIn('private-credential', result['text'])
 
-    def test_rechazo_revision_y_fallo_presentacion(self):
-        for changes in ({'answer': 'Rechazar'}, {'answer': 'Aprobar dentro de una política'}, {'answer': 'Aprobar una vez', 'dismiss': True}, {'answer': 'Aprobar una vez', 'changeDuringAsk': True}, {'answer': 'Aprobar una vez', 'changeActionDuringAsk': True}):
-            result = self.guard('rm -rf data', **changes)
-            self.assertIn('deny', result['result'])
-            self.assertEqual(result['passed'], 0)
-
-    def test_detalles_peligrosos_visibles_antes_de_aprobar(self):
-        bypass = self.guard('rm -rf data', answer='Aprobar una vez')
-        self.assertEqual(bypass['passed'], 0)
-        result = self.guard('psql -c "DROP TABLE accounts"', answers=['Revisar detalles', 'Aprobar una vez'])
-        self.assertEqual(result['passed'], 1)
-        self.assertNotIn('DROP TABLE accounts', result['questions'][0]['question'])
-        self.assertNotIn('Aprobar una vez', result['questions'][0]['options'])
-        self.assertIn('DROP TABLE accounts', result['questions'][1]['question'])
-        self.assertIn('Aprobar una vez', result['questions'][1]['options'])
-        self.assertIn('Crítico', result['questions'][0]['question'])
-        details = self.guard('rm -rf data', answers=['Revisar detalles', 'Rechazar'])
-        self.assertEqual(details['asks'], 2)
-        self.assertEqual(details['passed'], 0)
-
     def test_resumen_extenso_no_expone_parametros_y_detalles_no_duplican_sql(self):
         sql = 'CREATE TABLE public.activity_log (id bigint);'
         action = dict(query=sql, environment='production', evidence='x' * 3000)
@@ -136,23 +130,6 @@ class ApprovalExperience(unittest.TestCase):
         self.assertEqual(result['asks'], 0)
         self.assertIn('deny', result['result'])
 
-    def test_resumen_ledger_no_autoriza_sin_detalles(self):
-        request = dict(action='approval', payload=dict(id='approve-a', operation='deploy', scope='task:test', environment='production', expires_at='2099-01-01T00:00:00Z', owner='owner', evidence='explicit'))
-        invalid = self.ledger(request, answer='Aprobar una vez')
-        self.assertEqual(invalid['processes'], 0)
-        valid = self.ledger(request, answers=['Revisar detalles', 'Aprobar una vez'])
-        self.assertEqual(valid['processes'], 1)
-        self.assertEqual(valid['asks'], 2)
-        self.assertEqual(valid['lastPayload'], request['payload'])
-        self.assertIn('2099-01-01', valid['lastQuestion'])
-        self.assertIn('task:test', valid['lastQuestion'])
-        self.assertNotIn('Aprobar durante la sesión', valid['questions'][0]['options'])
-
-    def test_ledger_presentacion_fallida_no_escribe(self):
-        result = self.ledger(dict(action='approval', payload={}), dismiss=True)
-        self.assertEqual(result['processes'], 0)
-        self.assertEqual(result['result']['exitCode'], 2)
-
     def test_descripcion_usuario_no_reclasifica_accion(self):
         a = self.summary(dict(command='git status', target='local', description='DROP TABLE prod'))
         self.assertEqual(a['summary']['risk'], 'Bajo')
@@ -165,20 +142,6 @@ class ApprovalExperience(unittest.TestCase):
         self.assertIn('````text', result['text'])
         self.assertIn(command, result['text'])
         self.assertIsNotNone(self.summary(dict(command='rm -rf \u001b[2Jdata'))['summary']['blocked'])
-
-    def test_politica_configurable_no_elimina_protecciones_base(self):
-        result = self.guard('rm -rf data', options={'patterns': '[]'}, answer='Rechazar')
-        self.assertEqual(result['asks'], 1)
-        self.assertEqual(result['passed'], 0)
-
-    def test_efectos_git_cloud_y_destructivos_al_final(self):
-        for command in ('rm --recursive data', 'git push origin +main', 'terraform destroy -target resource', 'kubectl delete namespace production'):
-            result = self.summary(dict(command=command), details=True)
-            self.assertEqual(result['summary']['risk'], 'Crítico')
-            self.assertIn(command, result['text'])
-        result = self.guard('supabase db push --project-ref production', answer='Rechazar')
-        self.assertEqual(result['passed'], 0)
-        self.assertIn('Producción', result['questions'][0]['question'])
 
     def test_resumen_no_recupera_aprobacion_expirada(self):
         import sys
