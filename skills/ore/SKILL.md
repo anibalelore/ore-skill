@@ -43,6 +43,7 @@ Use this default on every model, including high-capability models; retain the us
 ## Startup protocol
 
 1. Inspect version-control status and relevant repository files; preserve unrelated changes.
+   Consult developer identity using [Developer Identity](references/developer-identity.md); on first activation with no profile, request the developer's name and persist only supplied values. Project identity takes priority. Do not repeat onboarding when configured.
 2. Run `python <ore-skill>/scripts/ore_state.py resume --repo <workspace>`.
 3. If no active task matches the request, create one with `start`, giving acceptance criteria plus concrete deliverables and weights that total 100.
 4. Confirm risk level, acceptance evidence, required specialists, and gates in the task record.
@@ -56,6 +57,7 @@ Do not silently inherit a stale task. Resume only when its objective matches; ot
 2. Give each specialist a compact context pack: objective, relevant paths, constraints, acceptance evidence, owned output, and return format.
 3. Implement or analyze within scope.
 4. Run targeted validation, then broader gates proportional to risk.
+   Run **ORE Identity Audit** for generated artifacts/metadata at project creation, documentation generation, ORE-assisted commit preparation, production artifact preparation and explicit audit requests. Review incrementally; preserve legal/technical attribution, collaborators and Git/audit history. Follow [Developer Identity](references/developer-identity.md) for safe cleanup and privacy.
 5. Mark progress only from completed deliverables or verified sub-deliverables; never from elapsed time, effort, or tool-call count.
 6. Persist decisions, evidence, blockers, percentage, and next action after every phase transition, completed repair batch, user correction, and before yielding.
 7. Route a failed gate to the specialist able to repair it, then rerun that gate and any invalidated dependent gates. Do not restart the whole workflow.
@@ -120,6 +122,7 @@ Before reporting completion:
 - relevant form, accessibility, security, data, performance, and release risks are resolved or disclosed;
 - the durable task contains the final status, evidence, decisions, remaining risks, and next action;
 - progress and token-efficiency lines use the required format.
+- applicable identity checks have evidence, with contextual review and coverage limitations recorded; generated content contains no unsolicited promotional assistant credits.
 
 Never say “done,” “production ready,” or equivalent from code inspection alone when runnable verification was available.
 

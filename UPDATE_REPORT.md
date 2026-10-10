@@ -550,3 +550,49 @@ Official [permissions](https://code.claude.com/docs/en/permissions),
 2026-10-09; unavailable mods documentation was supplemented by checked-in native SDK
 declarations and actual local plugin validation. See
 [the approval guide](docs/ore-4.2.1-approval-experience.md) for UX, examples and scope.
+
+## ORE Developer Identity — 2026-10-10 (Unreleased)
+
+Integrated the module into `skills/ore/SKILL.md` startup, development loop and
+completion checks without creating a skill or changing `4.2.1-alpha.3`.
+The root entrypoint already delegates to this canonical protocol.
+
+Files: `skills/ore/scripts/ore_identity.py` (profile persistence and read-only
+audit), `skills/ore/references/developer-identity.md` (onboarding, command mapping,
+generation, authorship, privacy and contextual audit rules),
+`evals/test_ore_identity.py` (eight behavioral tests), plus the canonical skill,
+README, CHANGELOG and this report.
+
+Profiles support required supplied names, optional professional name/email/site/team,
+multiple developers, global/local persistence, complete project override and removal.
+No real developer profile was inferred or created during this implementation.
+The auditor supports incremental file paths, five conservative classifications,
+read-only reports without profile values/source snippets and visible skipped files.
+Cleanup uses context-reviewed agent edits under existing authorization; there is
+no blind removal command. Mandatory technical/legal credits, collaborators and
+Git/audit history remain protected. `ore-signature-guard` retains its existing
+regulatory purpose.
+
+Validation:
+
+- Eight new identity tests passed, including cross-process Unicode persistence,
+  project precedence, collaborators/removal, invalid input preservation, corrupt
+  configuration, classification/read-only behavior, incremental scope/path escape,
+  coverage limits and profile privacy.
+- Full suite: 146 tests, 143 passed and three pre-existing failures. The same three
+  failures were reproduced on a clean archive of HEAD under `.ore/identity-baseline`:
+  `ModelContracts.test_writer_confirmation_revision_and_readonly` rejects a stale
+  registry timestamp; `RouterHandlerContracts.test_confirmation_cancel_and_failure`
+  and `NativeRuntimeAdapters.test_durable_rule_requires_ui_confirmation` expect
+  dialogs inconsistent with current host-managed behavior. Existing runtime/tests
+  were not changed as part of identity integration.
+- `python scripts/validate_package.py` passed: 29 skills, 28 mods, unchanged version.
+- Skill Creator quick validation passed using existing local PyYAML and UTF-8 mode.
+- `git diff --check` passed. Incremental audit of the identity reference correctly
+  retained quoted promotional examples as human-review candidates.
+
+Limits: host portability is instruction/Python based, not newly installed native
+commands or independently tested sessions on every assistant. Text detection is
+heuristic; metadata/UI/legal/history checks require contextual review. Persistent
+configuration needs real filesystem access. Full-suite baseline failures remain
+visible and do not constitute a passing complete compatibility suite.

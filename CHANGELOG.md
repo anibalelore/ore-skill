@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — ORE Developer Identity — 2026-10-10
+
+- Integrate identity in existing ORE startup, development loop and delivery; no new skill or version change.
+- Add local/global and project profiles, collaborator lists, show/change/remove commands and first-use onboarding.
+- Add read-only incremental identity auditing with five categories and explicit contextual/coverage checks.
+- Prevent unsolicited assistant credits while preserving legal/technical attribution, collaborators, Git history and privacy.
+
 ## Unreleased ? Host-managed approvals
 
 - Remove extra ORE confirmation dialogs by default; retain optional `approvalMode: "ask"`.

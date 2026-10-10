@@ -2,6 +2,16 @@
 
 > Turn a complex request into accountable work, visible progress and verified results.
 
+**ORE Developer Identity** is integrated into the existing ORE skill. It supports
+first-use name registration, persistent local profiles, project overrides and
+multiple developers. `ORE identity`, `ORE identity change`, `ORE identity project`
+and `ORE identity audit` are natural-language requests interpreted by the agent;
+portable helper commands and privacy rules are documented in
+[Developer Identity](skills/ore/references/developer-identity.md).
+Generated artifacts omit unsolicited assistant promotional credits. The identity
+audit classifies candidates without deleting licenses, technical references or
+Git/audit history; safe cleanup uses reviewed edits under existing authorization.
+
 **ORE gives your coding agent an engineering team:** a lead, 28 specialists,
 durable project state and evidence gates. Use it in Codex, Claude Code or another
 Agent Skills host. **We now also have Claude Code mods** to make progress,
