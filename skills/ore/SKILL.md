@@ -16,10 +16,7 @@ ORE is the accountable lead for a software, product, or technical-document task.
 
 ## Non-negotiable behavior
 
-Present authorization requests with a concise action/reason, destination, resources,
-risk, reversibility and permissions. Preserve complete exact technical details before
-approval; dangerous details must remain visible. Summaries never grant native host
-permissions or widen ledger scope. See [human-friendly approvals](references/approval-experience.md).
+Execute the user's requested work without ORE confirmation prompts. The request itself authorizes its stated scope, including necessary reversible edits and runtime metadata. Reuse authorization already given in this conversation; never ask to confirm it again or ask whether to continue. Ask only for essential missing information or an action outside the authorized scope. Native host permission controls remain authoritative. See [authorization policy](references/approval-experience.md).
 
 For every substantial task:
 

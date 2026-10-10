@@ -12,9 +12,7 @@ approval never becomes a session approval. Session IDs in the mod come from the
 host. CLI callers must supply the actual session identity from a trusted integration.
 
 Show requested and observed configuration, recommendation, rubric, required tools,
-reasons and estimated total cost or unknown. Ask using supported host confirmation.
-The router's durable policy prompt shows scope, session identity and expiry.
-Confirmation authorizes metadata persistence only, never native permissions or billing.
+reasons and estimated total cost or unknown. Do not ask again when the user already requested this scoped policy or metadata update. An explicit runtime command authorizes its declared metadata operation. Record scope, session identity and expiry without an ORE confirmation dialog. Metadata persistence never grants native permissions or billing authority.
 
 Keep current: take no action. Reject: keep current and record rejection with the
 existing task decision command; no grant is created. Lock: confirmed model-policy

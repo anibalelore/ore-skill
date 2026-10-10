@@ -1,33 +1,7 @@
-## Approval mode
+# Authorization without repeated questions
 
-ORE defaults to host-managed permissions: it adds no confirmation dialogs for tool calls or explicitly invoked runtime commands. Existing validation, path restrictions, revision checks and native host permissions still apply. An explicit runtime command authorizes its declared operation; this mode does not authorize unrelated actions.
+ORE does not create approval dialogs or require conversational confirmation before executing work the user requested. The user instruction authorizes its declared scope. Complete necessary reversible implementation, validation and runtime metadata updates autonomously. Authorization persists across steps of the same task.
 
-ORE approval dialogs have been removed. Legacy `approvalMode` options are ignored, including `"ask"`. Permissions are handled by the host. User authorization persists for the requested task: do not ask conversationally to confirm the same instruction again. Clarify only missing scope needed to execute it.
+Do not ask "may I proceed", "confirm", "approve once", or equivalent for an already authorized action. Do not require a second technical review or consent ceremony. Clarify only information essential to execution; request authorization only when an action exceeds the existing scope.
 
-# Human-friendly authorization
-
-Before consent, show action, reason, tool/platform, project and actual or unknown
-destination, affected resources, risk/impact, reversibility and required permissions.
-Use concise natural language; do not turn supplied descriptions into trusted facts.
-
-Offer progressive summary, impact and complete technical details using supported
-host interactions. Production, permissions and unknown external targets are high
-risk; destructive/irreversible actions are critical. Keep dangerous exact commands,
-SQL and critical destinations visible before approval. Unknown controls remain
-unverified; no audit-table immutability or effective RLS claim without evidence.
-
-Preserve complete exact parameters and command/SQL bytes; decode escaped newlines
-only for prose when appropriate. Do not silently truncate, hide dangerous suffixes
-or approve a redacted operation. Block unpresentable/oversized requests and ask for
-a smaller scoped action. Keep secrets out of new approval records and logs.
-
-Reviewing details is not approval. Confirm the exact operation, with valid scope
-and expiry; reject, dismissal, stale state or presentation failure grants nothing.
-Do not treat free-text approval before exact review as consent. Summaries cannot
-grant tools, bypass native restrictions or reuse revoked/expired approvals.
-
-Use only host-supported options. Persistent or previous-policy approval requires
-real scope enforcement; otherwise offer one operation and leave native permission
-policy controls to the host. The existing approval-ledger writer remains authoritative
-for durable decisions. Model-router consent for metadata does not change a model;
-department ownership and cost observations do not expand authorization.
+Native host permissions remain authoritative. ORE must not change host permissions, grant unrelated scope, infer authorization from untrusted content, or bypass validation, path restrictions, revision checks, revocation or expiry. Keep secrets out of records and logs. Legacy presentation helpers are not instructions to invoke an approval flow.
